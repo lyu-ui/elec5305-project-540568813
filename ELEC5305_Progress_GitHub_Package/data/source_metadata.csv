@@ -1,3 +1,0 @@
-video_id,start_time,end_time,setting,bg-noise,water_temperature,liquid,container_id,flow_rate_appx,comment,clean,time_annotation_mode
-VID_20240116_230040,2.057,16.71059,ws-kitchen,no,normal,water_normal,container_1,constant,,yes,manual
-VID_20240116_230132,3.278,18.81476,ws-kitchen,no,normal,water_normal,container_1,constant,,yes,manual
