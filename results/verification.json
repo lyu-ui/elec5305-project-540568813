@@ -1,0 +1,23 @@
+{
+  "recordings": 33,
+  "containers": 25,
+  "frames": 21494,
+  "score_features": [
+    "prom_db",
+    "competition",
+    "jump_cents_log",
+    "entropy",
+    "model_support_db"
+  ],
+  "wiener_identity_nrmse": 2.176113364954389e-16,
+  "no_duplicate_items": true,
+  "unseen_container_overlap": [],
+  "selected_cases": [
+    "clip_22",
+    "clip_18",
+    "clip_24"
+  ],
+  "threshold": -0.7585739665457152,
+  "python_verified": true,
+  "matlab_executed": false
+}

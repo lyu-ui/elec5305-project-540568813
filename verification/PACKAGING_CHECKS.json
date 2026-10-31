@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-30",
+  "report_files_included": false,
+  "matlab_helpers_identical_to_verified_run": true,
+  "MATLAB_version_of_recorded_run": "R2025b Update 6 (25.2.0.3312555)",
+  "recorded_analysis_time": "2026-10-30 10:21:04",
+  "new_run_project_entry_executed_in_matlab": false,
+  "static_MATLAB_lint": "10 project MATLAB files passed MISS_HIT; 14 report MATLAB files passed; UTF-8 encoding",
+  "input_audio_hashes": "33 of 33 passed",
+  "metadata_selection": "33 of 33 matched frozen manifest",
+  "python_reproduction": [
+    {
+      "file": "auditory_control.csv",
+      "rows": 20,
+      "max_difference": 0.0
+    },
+    {
+      "file": "clip_summary.csv",
+      "rows": 33,
+      "max_difference": 0.0
+    },
+    {
+      "file": "development_grouped_oof.csv",
+      "rows": 7017,
+      "max_difference": 0.0
+    },
+    {
+      "file": "endpoint_diagnostic.csv",
+      "rows": 3,
+      "max_difference": 0.0
+    },
+    {
+      "file": "fixed_threshold.csv",
+      "rows": 16,
+      "max_difference": 0.0
+    },
+    {
+      "file": "frame_features.csv",
+      "rows": 21494,
+      "max_difference": 0.0
+    },
+    {
+      "file": "lpc_control.csv",
+      "rows": 3,
+      "max_difference": 0.0
+    },
+    {
+      "file": "paired_container_bootstrap.csv",
+      "rows": 6,
+      "max_difference": 0.0
+    },
+    {
+      "file": "recording_correlations.csv",
+      "rows": 18,
+      "max_difference": 0.0
+    },
+    {
+      "file": "score_coefficients.csv",
+      "rows": 6,
+      "max_difference": 0.0
+    },
+    {
+      "file": "selective_by_clip.csv",
+      "rows": 320,
+      "max_difference": 0.0
+    },
+    {
+      "file": "selective_summary.csv",
+      "rows": 40,
+      "max_difference": 0.0
+    },
+    {
+      "file": "wiener_summary.csv",
+      "rows": 9,
+      "max_difference": 0.0
+    },
+    {
+      "file": "wiener_trials.csv",
+      "rows": 27,
+      "max_difference": 0.0
+    }
+  ],
+  "matlab_csv_comparison": "Four CSVs passed: rtol=1e-9, atol=1e-7; text and missing-value positions matched",
+  "local_document_links": "all resolved",
+  "python_source_compilation": "passed",
+  "scope": "Numerical and packaging checks of the standalone project before GitHub integration. Repository integration is documented in CHANGELOG.md.",
+  "publication_packaging": {
+    "date": "2026-11-01",
+    "recordings": "Fetched directly from the original public host by python/setup_project.py",
+    "generated_assets": "Control MAT files, processed audio and full frame tables are produced locally",
+    "new_preparation_validation": "verification/SETUP_VALIDATION.json"
+  }
+}

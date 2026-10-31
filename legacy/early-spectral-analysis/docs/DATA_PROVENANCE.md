@@ -1,6 +1,6 @@
 # Audio provenance
 
-The two WAVs are unmodified source audio files downloaded on 4 September 2026 from the publicly accessible Sound of Water dataset associated with Bagad et al. (2025). Local names were shortened for portability. No audio sample values were edited on disk. Mean removal is performed in the analysis code. The source files are already segmented: do not trim them again using the original video timestamps. Durations in this report are measured from the WAV sample count and can differ slightly from annotated video intervals.
+The two WAVs are unmodified source audio files downloaded on 4 September 2026 from the publicly accessible Sound of Water dataset associated with Bagad et al. (2025). Local names were shortened for portability. No audio sample values were edited on disk. Mean removal is performed in the analysis code. The source files are already segmented: do not trim them again using the original video timestamps. Durations in the early analysis are measured from the WAV sample count and can differ slightly from annotated video intervals.
 
 Dataset: https://huggingface.co/datasets/bpiyush/sound-of-water
 

@@ -1,75 +1,183 @@
-# When Can Pouring-Sound Fill-Level Estimates Be Trusted?
+# Pouring-Sound Reliability
 
-**ELEC5305 project progress submission | 9 October 2026**  
-**Student:** Yueyao Lyu  
-**Project website:** https://lyu-ui.github.io/elec5305-project-540568813/  
-**Repository:** https://github.com/lyu-ui/elec5305-project-540568813
+Acoustic diagnostics for physical estimates from pouring sounds.
 
-## Revised question
-**Can interpretable spectro-temporal features indicate when physics-based pouring-sound fill-level estimates are reliable or unreliable, particularly for unseen container geometries and competing resonances?**
+**[Project website](https://lyu-ui.github.io/elec5305-project-540568813/)** ·
+[Methods](docs/METHODS.md) · [Results](docs/RESULTS.md) ·
+[Reproduce the experiments](docs/REPRODUCIBILITY.md)
 
-The original proposal compared audio representations for four fill classes. After feedback, this work instead investigates the acoustics behind estimator failures, building on Bagad et al. (2026), rather than duplicating a generic classifier.
+**Question:** can acoustic evidence identify when a pretrained model's
+air-column estimate is unreliable?
 
-## Progress so far (verified existing work)
-- Obtained two public *Sound of Water* pouring recordings, A and B, from the **same annotated container**; provenance and original filenames are in `docs/DATA_PROVENANCE.md`.
-- Implemented FFT and a base-MATLAB STFT with a periodic Hann window and explicit power spectral density scaling (`matlab/ap_stft.m`).
-- Compared 10, 40 and 100 ms windows, 0%, 50% and 75% overlap, zero-padding, resampling/anti-aliasing, noise filtering, and STFT reconstruction in Report 1.
-- Extracted descriptive frame features: band maximum (not a validated pitch), spectral centroid, spread, 90%-energy roll-off, and RMS energy. Results are saved under `results/`.
-- **New progress diagnostic:** `matlab/run_reliability_features.m` calculates band-peak prominence, ratio of a second spectral peak, peak-frequency jumps, and normalized spectral entropy. These are hypotheses to test against future *physical-estimation error*, not yet established reliability predictors.
+This project evaluates a frozen [Sound of Water](https://github.com/bpiyush/SoundOfWater)
+model on 33 recordings from 25 containers. It combines spectral diagnostics,
+a development-only reliability model, held-out selective prediction, and
+focused Wiener/LPC controls. The MATLAB experiment helpers have been run and
+checked against an independent Python implementation.
 
-## Early descriptive results (existing Report 1)
-The original baseline used a 40 ms Hann window, 50% overlap and 8192-point FFT. Within the 300–5000 Hz search band, median spectral-maximum frequency rose from **503.9 to 1593.8 Hz (A)** and **468.8 to 996.1 Hz (B)** between the early and late thirds. The peak is **not equivalent to fundamental pitch**; thirds are **not actual liquid-level ground truth**. Recording A's median spectral centroid changed from 1946.2 to 1832.1 Hz and B's from 1727.4 to 1467.0 Hz. These comparisons support a time-varying spectral analysis only; they do **not** establish air-column/fill-height accuracy.
+**Scope:** errors are measured against an assumption-derived filling curve.
+There are no independently measured liquid-level trajectories in this project.
+Results therefore describe agreement with that reference, not validated
+liquid-level accuracy.
 
-| Recording | Early band maximum (Hz) | Late band maximum (Hz) | Early centroid (Hz) | Late centroid (Hz) |
-|:--|--:|--:|--:|--:|
-| A | 503.9 | 1593.8 | 1946.2 | 1832.1 |
-| B | 468.8 | 996.1 | 1727.4 | 1467.0 |
+![Processing pipeline](figures/fig01_pipeline.png)
 
-## New diagnostic figures and frame-level data
-The GitHub Pages [project site](https://lyu-ui.github.io/elec5305-project-540568813/) shows both newly generated MATLAB diagnostic figures directly. The images are saved in `results/` and are also embedded below.
+## Main findings
 
-![Recording A: STFT and preliminary acoustic diagnostics](results/preliminary_diagnostics_pour_A.png)
+| Evaluation group | Full-coverage MAE | MAE at 70% retention | Paired change and 95% interval |
+| --- | ---: | ---: | --- |
+| Seen containers, 8 recordings | 1.742 cm | 1.538 cm | -0.204 cm [-0.274, -0.134] |
+| Unseen containers, 8 recordings | 2.479 cm | 2.414 cm | -0.065 cm [-0.158, +0.031] |
 
-*Figure 1. Recording A: STFT, white band-maximum track, and exploratory acoustic diagnostics. The band maximum is not validated pitch.*
+Values are equal-recording means. Selection uses acoustic scores; the paired
+interval resamples containers 2,000 times. The unseen interval includes zero,
+so generalization is inconclusive. A simple prominence baseline outperforms
+the combined score on the unseen subset at 70% retention (2.235 cm).
 
-![Recording B: STFT and preliminary acoustic diagnostics](results/preliminary_diagnostics_pour_B.png)
+![Coverage and reference error](matlab_results/figure_05.png)
 
-*Figure 2. Recording B: frequency tracking includes sudden jumps, but these have not yet been linked to physical estimation error.*
+An endpoint pitch switch can shift the entire physical trajectory even when
+most of the recording has a plausible spectral ridge. This is a stronger
+diagnostic finding than the small unseen-group improvement. See
+[results and interpretation](docs/RESULTS.md).
 
-Frame-level outputs: [`results/preliminary_reliability_features.csv`](results/preliminary_reliability_features.csv). The competing-mode ratio and spectral entropy curves are multiplied by 20 for display, whereas the CSV retains their original scales.
+## Quick start
 
-## Official reproduction progress (in progress)
-In the authors' `playground.ipynb` example, I loaded the supplied example video and metadata, produced the Log-Mel spectrogram, and plotted the physics-derived *reference* pitch trajectory. I also downloaded the official real-finetuned checkpoint and prepared local/Colab Python GPU environments. **Pretrained model inference has not yet produced a verified predicted-pitch trajectory.** The reference curve from the notebook is computed using metadata/physics, **not** the neural network's output and not an independently measured pitch trace. No model inference plots are claimed in this repository yet.
+### Prepare the inputs once
 
-## What is not yet completed
-The official pretrained inference pipeline has **not been reproduced** in the supplied Report 1 materials. No reference air-column lengths, continuous prediction MAE, seen/unseen-container comparison, or reliability-score/selective-prediction validation is yet available. The two recordings are from the same container, so they cannot measure cross-container generalisation. Do not interpret any plot here as validated error prediction.
+Download or clone the project. In a terminal at the project root, use Python
+3.12 and the pinned analysis dependencies:
 
-## Next technical milestones
-1. Reproduce the authors' pretrained Python inference pipeline on selected clean and difficult clips; save its estimated pitch/air-column trajectory and align it with reference values where supplied.
-2. Use official seen/unseen container splits (no leakage between segments of a recording), add shape metadata, and calculate true physical estimation error.
-3. Relate peak prominence, competing modes, ridge continuity, and entropy to observed error. Inspect failures and model mismatch rather than just comparing pitch algorithms.
-4. Train/tune a simple, interpretable reliability threshold **on development data only**, freeze it, and evaluate selective prediction (100%, 90%, 80%, 70% coverage) with retained-subset MAE and container-level comparisons.
-5. Produce representative successful/ambiguous/failed spectrograms, limitations, and an entirely reproducible final report.
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r python/requirements-analysis.txt
+python python/setup_project.py
+```
 
-## Repository layout
-- `index.html`: GitHub Pages progress website (configure Pages from **main / root**).
-- `matlab/ap_*.m`: tested-in-prior-report MATLAB analysis helpers; `matlab/run_reliability_features.m`: new preliminary feature script.
-- `data/`: the two public example WAVs and annotation rows.
-- `results/`: saved Report 1 CSV outputs, two verified acoustic-diagnostic PNG figures, and frame-level CSV from a successful MATLAB run.
-- `docs/`: prior report, original proposal, data provenance, and separate project progress PDF.
+On Windows, use `.venv\Scripts\activate` for activation. The setup script
+fetches the 33 recordings directly from the original public dataset, verifies
+the source and resampled WAV hashes, and recreates the fixed control inputs,
+listening examples and complete Python result tables. It then checks all
+14 generated CSVs against their recorded hashes. Internet access is required
+for this preparation; no neural-network checkpoint is downloaded.
 
-## Reproduction
-1. In MATLAB, open the repository root as **Current Folder** and run `run('matlab/run_reliability_features.m')`. The script resolves its input and output paths relative to its own file, so it can also be run from any working directory using its absolute path.
-2. Inputs are `data/pour_A.wav` and `data/pour_B.wav`; outputs are saved under the repository-root `results/` folder (two figures and one diagnostic CSV). The script requires `matlab/ap_stft.m` beside it.
-3. To reproduce every existing Report 1 experiment, use the original submitted Report 1 ZIP, which contains its Live Script and fixed `noise_bank.mat`; the compact GitHub package provides its helper functions and recorded outputs, but does **not** claim full re-execution of the Live Script from these files alone.
-4. Official model inference requires a separate Python/PyTorch environment per the upstream repository. No model weights are bundled here.
+### Run MATLAB
 
-## Sources and credit
-- Bagad, P., Tapaswi, M., Snoek, C. G. M., & Zisserman, A. (2026). *The sound of water: Inferring physical properties from pouring liquids*. **IEEE TPAMI**. https://doi.org/10.1109/TPAMI.2026.3690989
-- Original 2025 ICASSP version: https://doi.org/10.1109/ICASSP49660.2025.10889950
-- Official code: https://github.com/bpiyush/SoundOfWater
-- Official dataset: https://huggingface.co/datasets/bpiyush/sound-of-water
-- Pretrained models: https://huggingface.co/bpiyush/sound-of-water-models
-- Data creator credits, exact original WAV links and SHA-256 checksums: `docs/DATA_PROVENANCE.md`.
+Select the project root as MATLAB Current Folder, then run:
 
-This is **work in progress**, prepared for formative feedback, not a claim of final project performance.
+```matlab
+R = run_project;
+```
+
+This recomputes the analysis, checks it against the prepared Python reference
+tables, and writes the complete MATLAB figures and CSVs to `matlab_results/`.
+After setup this route runs offline. For listening:
+
+```matlab
+R = run_project(true);
+```
+
+For a numerical run without opening figure windows:
+
+```matlab
+R = run_project(false, false);
+```
+
+Tested computation environment: **MATLAB R2025b Update 6**, base MATLAB.
+The `run_project` entry point calls the unchanged, previously executed
+numerical helpers. The wrapper has passed static checks; it has not itself
+been executed in MATLAB in the packaging environment.
+
+Expected core output:
+
+```text
+MATLAB checks passed: 33 recordings, 21494 frames. Maximum mismatch 3.32e-10.
+```
+
+The last value can vary slightly by platform. The code checks explicit numeric
+tolerances. Use a comfortable listening volume; playback is disabled by default.
+
+## Experiments
+
+| Component | Purpose | Evidence |
+| --- | --- | --- |
+| Spectral diagnostics | Quantify prominence, competition, continuity, entropy and model support | `results/frame_features.csv` (generated by setup) |
+| Reliability scoring | Fit only on development containers, then rank held-out frames | `results/score_coefficients.csv`, `results/selective_by_clip.csv` |
+| Held-out evaluation | Separate seen and unseen container tests | `results/selective_summary.csv`, `results/paired_container_bootstrap.csv` |
+| Endpoint diagnosis | Explain a global error caused by the final pitch sample | `results/endpoint_diagnostic.csv` |
+| Geometry sensitivity | Change the filling reference for tapered vessels | `results/clip_summary.csv` |
+| Wiener comparison | Compare noise removal with spectral distortion and audition | `results/wiener_trials.csv`, `audio_comparisons/` |
+| LPC control | Check estimated resonances on a known two-resonator signal | `results/lpc_control.csv` |
+| Frequency pooling control | Show how coarse bands weaken evidence of competing peaks | `results/auditory_control.csv` |
+
+## Project layout
+
+| Path | Contents |
+| --- | --- |
+| `run_project.m` | MATLAB entry point |
+| `r2_*.m` | Modular analysis, plotting and playback helpers |
+| `data/` | Analysis WAVs and fixed controls created by setup |
+| `reference/` | Official metadata, selection manifest, cached predictions and provenance |
+| `results/` | Reference summaries; full frame tables regenerated by setup |
+| `matlab_results/` | Recorded summary tables, selected scientific figures and execution log; full outputs regenerated in MATLAB |
+| `figures/` | Scientific figures and pipeline; setup regenerates the complete figure set |
+| `audio_comparisons/` | Shared-gain listening examples generated locally |
+| `python/` | Independent analysis and optional pretrained-model inference |
+| `verification/` | Numerical comparison evidence and listening observations |
+| `docs/` | Methods, data, results and reproduction documentation |
+| `legacy/early-spectral-analysis/` | Original two-recording exploratory code, data and outputs |
+
+The [early two-recording analysis](legacy/early-spectral-analysis/README.md) is
+retained separately as project history. Its exploratory features are not the
+fitted reliability score evaluated in the current experiment.
+
+The historical `r2_` helper prefix is retained to keep the checked numerical
+implementation unchanged. After the one-time preparation, the project runs
+from MATLAB without a course report or Live Script. The source recording
+manifest, cached model predictions, summary results and analysis code are
+tracked; new recording copies and generated control/audio assets stay local.
+
+## Verification of preparation
+
+A clean-input test fetched and verified all 33 recordings, reproduced all
+14 Python CSV tables exactly, and recreated both fixed control arrays and
+all four listening WAVs without changes. See
+[setup validation](verification/SETUP_VALIDATION.json). This test did not
+execute MATLAB; the original MATLAB execution and four-table comparison
+are documented separately.
+
+## Documentation
+
+- [Methods and parameter choices](docs/METHODS.md)
+- [Results, failures and interpretation](docs/RESULTS.md)
+- [Data selection and provenance](docs/DATA.md)
+- [Reproduction and verification](docs/REPRODUCIBILITY.md)
+- [Third-party sources and notices](THIRD_PARTY_NOTICES.md)
+
+## Known limitations
+
+- Reference trajectories assume filling behavior; they are not measured truth.
+- Only 8 seen and 8 unseen recordings enter the principal held-out comparison.
+- Ranking uses complete recordings, and physical endpoint correction uses the
+  last model sample. The current workflow is offline.
+- Bottleneck cases diagnose physical-model mismatch and are excluded from the
+  principal cylindrical/semiconical accuracy summary.
+- Listening observations come from one informal, unblinded comparison.
+- The combined score is not a calibrated confidence probability and does not
+  outperform every baseline on every split.
+
+## Attribution
+
+Project author: **Yueyao Lyu**, University of Sydney, ELEC5305, 2026.
+
+This project builds on Bagad et al., *The Sound of Water: Inferring Physical
+Properties from Pouring Liquids*, IEEE TPAMI, 2026,
+[DOI: 10.1109/TPAMI.2026.3690989](https://doi.org/10.1109/TPAMI.2026.3690989).
+The pretrained network and source recordings are upstream contributions.
+This project's contribution is the acoustic reliability analysis, controlled
+experiments, diagnosis and reproducible evaluation.
+
+[Upstream code](https://github.com/bpiyush/SoundOfWater) ·
+[Dataset](https://huggingface.co/datasets/bpiyush/sound-of-water) ·
+[Model weights](https://huggingface.co/bpiyush/sound-of-water-models)

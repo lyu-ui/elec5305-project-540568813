@@ -1,0 +1,11 @@
+{
+  "torch": "2.14.1+cpu",
+  "transformers": "4.46.3",
+  "numpy": "2.5.4",
+  "scipy": "1.17.0",
+  "checkpoint_sha256": "2fa3d8cec1488ee65bb5a6e30f1b79716d8243bbe4ddc4c0687ce2a02c84303c",
+  "strict_checkpoint_keys": 215,
+  "eval_mode": true,
+  "reference": "H * (1 - t / WAV duration); assumption-derived, not independent level measurements",
+  "upstream_commit": "9253107392c8168396f8e7cf405a88dd9b6b6d82"
+}

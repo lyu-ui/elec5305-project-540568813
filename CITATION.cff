@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "Please cite this project and the upstream Sound of Water work when using this analysis."
+title: "Pouring-Sound Reliability: Acoustic Diagnostics for Physical Estimates"
+type: software
+authors:
+  - family-names: Lyu
+    given-names: Yueyao
+repository-code: "https://github.com/lyu-ui/elec5305-project-540568813"
+abstract: "Reproducible MATLAB and Python experiments on acoustic reliability, selective prediction, endpoint failures, Wiener masking and LPC controls."
+keywords:
+  - audio signal processing
+  - acoustic reliability
+  - selective prediction
+  - MATLAB
+  - pouring sounds

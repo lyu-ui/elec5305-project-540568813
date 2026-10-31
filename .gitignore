@@ -1,0 +1,31 @@
+.DS_Store
+._*
+__pycache__/
+*.py[cod]
+.venv/
+.env
+*.asv
+matlab.mat
+python/checkpoint.pth
+*.zip
+*.mlx
+*.pdf
+Report2_*
+Report2 */
+FEEDBACK_RESPONSE_ZH.txt
+START_HERE_ZH.txt
+PACKAGE_VERIFICATION.json
+report_assets/
+
+# Fetch source recordings from their original public host; generate these locally.
+.cache/
+data/*.wav
+data/*.mat
+audio_comparisons/*.wav
+results/frame_features.csv
+results/development_grouped_oof.csv
+matlab_results/frame_features.csv
+figures/fig07_shape_failures.png
+matlab_results/figure_02.png
+matlab_results/figure_03.png
+matlab_results/figure_07.png

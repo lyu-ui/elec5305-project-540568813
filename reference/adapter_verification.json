@@ -1,0 +1,6 @@
+{
+  "max_abs_probability_difference": 0.0,
+  "checkpoint_keys": 215,
+  "input": "fixed-seed one-second standard-normal waveform",
+  "scope": "forward-pass equivalence; resampling/backend is separately documented"
+}

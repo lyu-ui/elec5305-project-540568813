@@ -1,0 +1,20 @@
+{
+  "environment": "python/requirements-analysis.txt",
+  "scope": "Exact CSV bytes from the recorded, pinned Python analysis; generated locally during setup.",
+  "files": {
+    "results/auditory_control.csv": "4a7138dace12c1b3d8e6e8d3f575dbf20138ab64d1151b6c46cbf39655fa7eb3",
+    "results/clip_summary.csv": "66ebe75dc50e59064e291a0b82b623411d95578f3db5340b9258c0e4a6bf92e9",
+    "results/development_grouped_oof.csv": "094604484673da7305d572271928287543441d5e65fe5686dade44333344f1f7",
+    "results/endpoint_diagnostic.csv": "b9521589cc6f73787a60153e00735a6ae50b517e191698a629cc6df2b3b2134c",
+    "results/fixed_threshold.csv": "a1b08c97f7394e8d07d271c09e10f54761674653b70c60993aebd0fe0a7eec9f",
+    "results/frame_features.csv": "be56409afa1f2e21e538265f0d907614b1c6b754123df90774a08030ad26ae85",
+    "results/lpc_control.csv": "59f150f3ee2b23347e1c677f142a1275f3491063dbc44802e5949c659471817c",
+    "results/paired_container_bootstrap.csv": "4790fe639f217974ea2e3cecd7d64d6288b39c2c7243352dcb66791a52523a1e",
+    "results/recording_correlations.csv": "7ed1df0372d518b715934214e10cc5cadb4a051216f7c9bbdd4374ae7ad901e0",
+    "results/score_coefficients.csv": "74083abc05e505bcd48a04f0a788ed5ee86c6dfccb702795fe7c2d84b736769d",
+    "results/selective_by_clip.csv": "2bce717299cbc36f5df1a49223432262700dd49d560c2b9f37d8edda23641dd8",
+    "results/selective_summary.csv": "efd620fc7a3b27d38fa463a5b52121c590b95db4a2f7191e00565f5849cfcb9f",
+    "results/wiener_summary.csv": "44f22604af51a20f5ee3e9a0ef70e37d92d7ed6194fceb9499b6a6fa7f6677ef",
+    "results/wiener_trials.csv": "03051c0a6d495ab374ac721689aa93d96d2107cadc71d27cc52565fe76301a00"
+  }
+}

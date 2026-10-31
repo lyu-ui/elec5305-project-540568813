@@ -1,0 +1,321 @@
+clip,role,container_id,coverage,realized_coverage,method,mae_cm
+clip_11,seen_test,container_1,1,1,Combined,1.67743696203363
+clip_11,seen_test,container_1,1,1,Prominence,1.67743696203362
+clip_11,seen_test,container_1,1,1,Model support,1.67743696203362
+clip_11,seen_test,container_1,1,1,Random expectation,1.67743696203362
+clip_11,seen_test,container_1,1,1,Error oracle,1.67743696203362
+clip_11,seen_test,container_1,0.9,0.900163666121113,Combined,1.63644416819413
+clip_11,seen_test,container_1,0.9,0.900163666121113,Prominence,1.76952650879118
+clip_11,seen_test,container_1,0.9,0.900163666121113,Model support,1.76375016977298
+clip_11,seen_test,container_1,0.9,0.900163666121113,Random expectation,1.67743696203362
+clip_11,seen_test,container_1,0.9,0.900163666121113,Error oracle,1.56881309743249
+clip_11,seen_test,container_1,0.8,0.800327332242226,Combined,1.59710940342678
+clip_11,seen_test,container_1,0.8,0.800327332242226,Prominence,1.81588604505444
+clip_11,seen_test,container_1,0.8,0.800327332242226,Model support,1.82410867600565
+clip_11,seen_test,container_1,0.8,0.800327332242226,Random expectation,1.67743696203362
+clip_11,seen_test,container_1,0.8,0.800327332242226,Error oracle,1.48799967649782
+clip_11,seen_test,container_1,0.7,0.700490998363339,Combined,1.55603963851273
+clip_11,seen_test,container_1,0.7,0.700490998363339,Prominence,1.85944500229992
+clip_11,seen_test,container_1,0.7,0.700490998363339,Model support,1.86450867407601
+clip_11,seen_test,container_1,0.7,0.700490998363339,Random expectation,1.67743696203362
+clip_11,seen_test,container_1,0.7,0.700490998363339,Error oracle,1.42247687739003
+clip_12,seen_test,container_6,1,1,Combined,0.500538471631255
+clip_12,seen_test,container_6,1,1,Prominence,0.500538471631256
+clip_12,seen_test,container_6,1,1,Model support,0.500538471631256
+clip_12,seen_test,container_6,1,1,Random expectation,0.500538471631256
+clip_12,seen_test,container_6,1,1,Error oracle,0.500538471631255
+clip_12,seen_test,container_6,0.9,0.901298701298701,Combined,0.487230949307367
+clip_12,seen_test,container_6,0.9,0.901298701298701,Prominence,0.505955562970415
+clip_12,seen_test,container_6,0.9,0.901298701298701,Model support,0.533263159342775
+clip_12,seen_test,container_6,0.9,0.901298701298701,Random expectation,0.500538471631256
+clip_12,seen_test,container_6,0.9,0.901298701298701,Error oracle,0.470598930825582
+clip_12,seen_test,container_6,0.8,0.8,Combined,0.478852541079858
+clip_12,seen_test,container_6,0.8,0.8,Prominence,0.508168360002693
+clip_12,seen_test,container_6,0.8,0.8,Model support,0.544509344040433
+clip_12,seen_test,container_6,0.8,0.8,Random expectation,0.500538471631256
+clip_12,seen_test,container_6,0.8,0.8,Error oracle,0.4419699114856
+clip_12,seen_test,container_6,0.7,0.701298701298701,Combined,0.465748750419109
+clip_12,seen_test,container_6,0.7,0.701298701298701,Prominence,0.516808235141747
+clip_12,seen_test,container_6,0.7,0.701298701298701,Model support,0.565675810396325
+clip_12,seen_test,container_6,0.7,0.701298701298701,Random expectation,0.500538471631256
+clip_12,seen_test,container_6,0.7,0.701298701298701,Error oracle,0.414021279868782
+clip_13,seen_test,container_7,1,1,Combined,1.97629269415645
+clip_13,seen_test,container_7,1,1,Prominence,1.97629269415645
+clip_13,seen_test,container_7,1,1,Model support,1.97629269415645
+clip_13,seen_test,container_7,1,1,Random expectation,1.97629269415645
+clip_13,seen_test,container_7,1,1,Error oracle,1.97629269415645
+clip_13,seen_test,container_7,0.9,0.901333333333333,Combined,1.85414572690318
+clip_13,seen_test,container_7,0.9,0.901333333333333,Prominence,2.00017952135914
+clip_13,seen_test,container_7,0.9,0.901333333333333,Model support,2.07295188039658
+clip_13,seen_test,container_7,0.9,0.901333333333333,Random expectation,1.97629269415645
+clip_13,seen_test,container_7,0.9,0.901333333333333,Error oracle,1.78671043147033
+clip_13,seen_test,container_7,0.8,0.8,Combined,1.73745056287043
+clip_13,seen_test,container_7,0.8,0.8,Prominence,2.05468287253784
+clip_13,seen_test,container_7,0.8,0.8,Model support,2.20221989187144
+clip_13,seen_test,container_7,0.8,0.8,Random expectation,1.97629269415645
+clip_13,seen_test,container_7,0.8,0.8,Error oracle,1.62875471284834
+clip_13,seen_test,container_7,0.7,0.701333333333333,Combined,1.63703380053887
+clip_13,seen_test,container_7,0.7,0.701333333333333,Prominence,2.10193049498207
+clip_13,seen_test,container_7,0.7,0.701333333333333,Model support,2.32518657048031
+clip_13,seen_test,container_7,0.7,0.701333333333333,Random expectation,1.97629269415645
+clip_13,seen_test,container_7,0.7,0.701333333333333,Error oracle,1.48336182447594
+clip_14,seen_test,container_18,1,1,Combined,1.32637827781487
+clip_14,seen_test,container_18,1,1,Prominence,1.32637827781487
+clip_14,seen_test,container_18,1,1,Model support,1.32637827781487
+clip_14,seen_test,container_18,1,1,Random expectation,1.32637827781487
+clip_14,seen_test,container_18,1,1,Error oracle,1.32637827781487
+clip_14,seen_test,container_18,0.9,0.900237529691211,Combined,1.271359861712
+clip_14,seen_test,container_18,0.9,0.900237529691211,Prominence,1.37026896743244
+clip_14,seen_test,container_18,0.9,0.900237529691211,Model support,1.43627443906071
+clip_14,seen_test,container_18,0.9,0.900237529691211,Random expectation,1.32637827781487
+clip_14,seen_test,container_18,0.9,0.900237529691211,Error oracle,1.22243732750116
+clip_14,seen_test,container_18,0.8,0.800475059382423,Combined,1.20855463779548
+clip_14,seen_test,container_18,0.8,0.800475059382423,Prominence,1.41075673433272
+clip_14,seen_test,container_18,0.8,0.800475059382423,Model support,1.50565627819449
+clip_14,seen_test,container_18,0.8,0.800475059382423,Random expectation,1.32637827781487
+clip_14,seen_test,container_18,0.8,0.800475059382423,Error oracle,1.11890451674002
+clip_14,seen_test,container_18,0.7,0.700712589073634,Combined,1.14595289656488
+clip_14,seen_test,container_18,0.7,0.700712589073634,Prominence,1.4411955262553
+clip_14,seen_test,container_18,0.7,0.700712589073634,Model support,1.55130015216733
+clip_14,seen_test,container_18,0.7,0.700712589073634,Random expectation,1.32637827781487
+clip_14,seen_test,container_18,0.7,0.700712589073634,Error oracle,1.00941052925421
+clip_15,seen_test,container_25,1,1,Combined,1.99424518891317
+clip_15,seen_test,container_25,1,1,Prominence,1.99424518891317
+clip_15,seen_test,container_25,1,1,Model support,1.99424518891317
+clip_15,seen_test,container_25,1,1,Random expectation,1.99424518891317
+clip_15,seen_test,container_25,1,1,Error oracle,1.99424518891317
+clip_15,seen_test,container_25,0.9,0.900473933649289,Combined,1.89444580579013
+clip_15,seen_test,container_25,0.9,0.900473933649289,Prominence,2.01986353990085
+clip_15,seen_test,container_25,0.9,0.900473933649289,Model support,2.06328418075762
+clip_15,seen_test,container_25,0.9,0.900473933649289,Random expectation,1.99424518891317
+clip_15,seen_test,container_25,0.9,0.900473933649289,Error oracle,1.75217763012793
+clip_15,seen_test,container_25,0.8,0.800947867298578,Combined,1.76967058771212
+clip_15,seen_test,container_25,0.8,0.800947867298578,Prominence,2.02289174788753
+clip_15,seen_test,container_25,0.8,0.800947867298578,Model support,2.17780305530246
+clip_15,seen_test,container_25,0.8,0.800947867298578,Random expectation,1.99424518891317
+clip_15,seen_test,container_25,0.8,0.800947867298578,Error oracle,1.46281956576944
+clip_15,seen_test,container_25,0.7,0.701421800947867,Combined,1.67598649853259
+clip_15,seen_test,container_25,0.7,0.701421800947867,Prominence,2.0280287040213
+clip_15,seen_test,container_25,0.7,0.701421800947867,Model support,2.29162532282607
+clip_15,seen_test,container_25,0.7,0.701421800947867,Random expectation,1.99424518891317
+clip_15,seen_test,container_25,0.7,0.701421800947867,Error oracle,1.14765371218526
+clip_16,seen_test,container_30,1,1,Combined,1.50678709862262
+clip_16,seen_test,container_30,1,1,Prominence,1.50678709862262
+clip_16,seen_test,container_30,1,1,Model support,1.50678709862262
+clip_16,seen_test,container_30,1,1,Random expectation,1.50678709862262
+clip_16,seen_test,container_30,1,1,Error oracle,1.50678709862262
+clip_16,seen_test,container_30,0.9,0.901408450704225,Combined,1.42410857382114
+clip_16,seen_test,container_30,0.9,0.901408450704225,Prominence,1.5975754628897
+clip_16,seen_test,container_30,0.9,0.901408450704225,Model support,1.61222901419681
+clip_16,seen_test,container_30,0.9,0.901408450704225,Random expectation,1.50678709862262
+clip_16,seen_test,container_30,0.9,0.901408450704225,Error oracle,1.34553945575381
+clip_16,seen_test,container_30,0.8,0.8,Combined,1.37025490591776
+clip_16,seen_test,container_30,0.8,0.8,Prominence,1.68510102984001
+clip_16,seen_test,container_30,0.8,0.8,Model support,1.70023835753007
+clip_16,seen_test,container_30,0.8,0.8,Random expectation,1.50678709862262
+clip_16,seen_test,container_30,0.8,0.8,Error oracle,1.16209977058459
+clip_16,seen_test,container_30,0.7,0.701408450704225,Combined,1.33507882454206
+clip_16,seen_test,container_30,0.7,0.701408450704225,Prominence,1.72442095801233
+clip_16,seen_test,container_30,0.7,0.701408450704225,Model support,1.81056879455801
+clip_16,seen_test,container_30,0.7,0.701408450704225,Random expectation,1.50678709862262
+clip_16,seen_test,container_30,0.7,0.701408450704225,Error oracle,0.992937029611872
+clip_17,seen_test,container_31,1,1,Combined,3.15751789723446
+clip_17,seen_test,container_31,1,1,Prominence,3.15751789723446
+clip_17,seen_test,container_31,1,1,Model support,3.15751789723446
+clip_17,seen_test,container_31,1,1,Random expectation,3.15751789723446
+clip_17,seen_test,container_31,1,1,Error oracle,3.15751789723446
+clip_17,seen_test,container_31,0.9,0.901234567901235,Combined,3.07939941402573
+clip_17,seen_test,container_31,0.9,0.901234567901235,Prominence,3.16199762777715
+clip_17,seen_test,container_31,0.9,0.901234567901235,Model support,3.28493069682395
+clip_17,seen_test,container_31,0.9,0.901234567901235,Random expectation,3.15751789723446
+clip_17,seen_test,container_31,0.9,0.901234567901235,Error oracle,3.03209781001492
+clip_17,seen_test,container_31,0.8,0.800925925925926,Combined,2.99031194803276
+clip_17,seen_test,container_31,0.8,0.800925925925926,Prominence,3.16612021825453
+clip_17,seen_test,container_31,0.8,0.800925925925926,Model support,3.36627277076711
+clip_17,seen_test,container_31,0.8,0.800925925925926,Random expectation,3.15751789723446
+clip_17,seen_test,container_31,0.8,0.800925925925926,Error oracle,2.8931323171395
+clip_17,seen_test,container_31,0.7,0.700617283950617,Combined,2.87240910784524
+clip_17,seen_test,container_31,0.7,0.700617283950617,Prominence,3.15387646795579
+clip_17,seen_test,container_31,0.7,0.700617283950617,Model support,3.3990871174071
+clip_17,seen_test,container_31,0.7,0.700617283950617,Random expectation,3.15751789723446
+clip_17,seen_test,container_31,0.7,0.700617283950617,Error oracle,2.72445705371906
+clip_18,seen_test,container_40,1,1,Combined,1.79983340884111
+clip_18,seen_test,container_40,1,1,Prominence,1.79983340884111
+clip_18,seen_test,container_40,1,1,Model support,1.79983340884111
+clip_18,seen_test,container_40,1,1,Random expectation,1.79983340884111
+clip_18,seen_test,container_40,1,1,Error oracle,1.79983340884111
+clip_18,seen_test,container_40,0.9,0.90174672489083,Combined,1.7398229424659
+clip_18,seen_test,container_40,0.9,0.90174672489083,Prominence,1.82950577442127
+clip_18,seen_test,container_40,0.9,0.90174672489083,Model support,1.8902062728965
+clip_18,seen_test,container_40,0.9,0.90174672489083,Random expectation,1.79983340884111
+clip_18,seen_test,container_40,0.9,0.90174672489083,Error oracle,1.71213154905677
+clip_18,seen_test,container_40,0.8,0.801310043668122,Combined,1.67668252095215
+clip_18,seen_test,container_40,0.8,0.801310043668122,Prominence,1.84366167771827
+clip_18,seen_test,container_40,0.8,0.801310043668122,Model support,1.96681553950066
+clip_18,seen_test,container_40,0.8,0.801310043668122,Random expectation,1.79983340884111
+clip_18,seen_test,container_40,0.8,0.801310043668122,Error oracle,1.61394467059316
+clip_18,seen_test,container_40,0.7,0.700873362445415,Combined,1.6151220834804
+clip_18,seen_test,container_40,0.7,0.700873362445415,Prominence,1.84989174974546
+clip_18,seen_test,container_40,0.7,0.700873362445415,Model support,2.0325273460647
+clip_18,seen_test,container_40,0.7,0.700873362445415,Random expectation,1.79983340884111
+clip_18,seen_test,container_40,0.7,0.700873362445415,Error oracle,1.49667712147568
+clip_19,unseen_test,container_2,1,1,Combined,0.842332600460069
+clip_19,unseen_test,container_2,1,1,Prominence,0.842332600460069
+clip_19,unseen_test,container_2,1,1,Model support,0.842332600460069
+clip_19,unseen_test,container_2,1,1,Random expectation,0.842332600460069
+clip_19,unseen_test,container_2,1,1,Error oracle,0.842332600460069
+clip_19,unseen_test,container_2,0.9,0.900191938579655,Combined,0.839073627069545
+clip_19,unseen_test,container_2,0.9,0.900191938579655,Prominence,0.837083551538918
+clip_19,unseen_test,container_2,0.9,0.900191938579655,Model support,0.849552076982279
+clip_19,unseen_test,container_2,0.9,0.900191938579655,Random expectation,0.842332600460069
+clip_19,unseen_test,container_2,0.9,0.900191938579655,Error oracle,0.723903566629493
+clip_19,unseen_test,container_2,0.8,0.800383877159309,Combined,0.837537085361778
+clip_19,unseen_test,container_2,0.8,0.800383877159309,Prominence,0.836554081019466
+clip_19,unseen_test,container_2,0.8,0.800383877159309,Model support,0.837762403164438
+clip_19,unseen_test,container_2,0.8,0.800383877159309,Random expectation,0.842332600460069
+clip_19,unseen_test,container_2,0.8,0.800383877159309,Error oracle,0.663870302170027
+clip_19,unseen_test,container_2,0.7,0.700575815738964,Combined,0.834680163813276
+clip_19,unseen_test,container_2,0.7,0.700575815738964,Prominence,0.841663099029656
+clip_19,unseen_test,container_2,0.7,0.700575815738964,Model support,0.834279803200153
+clip_19,unseen_test,container_2,0.7,0.700575815738964,Random expectation,0.842332600460069
+clip_19,unseen_test,container_2,0.7,0.700575815738964,Error oracle,0.60981358829585
+clip_20,unseen_test,container_11,1,1,Combined,3.20909917850373
+clip_20,unseen_test,container_11,1,1,Prominence,3.20909917850373
+clip_20,unseen_test,container_11,1,1,Model support,3.20909917850373
+clip_20,unseen_test,container_11,1,1,Random expectation,3.20909917850373
+clip_20,unseen_test,container_11,1,1,Error oracle,3.20909917850373
+clip_20,unseen_test,container_11,0.9,0.900780379041249,Combined,3.22065550861636
+clip_20,unseen_test,container_11,0.9,0.900780379041249,Prominence,2.7500809732197
+clip_20,unseen_test,container_11,0.9,0.900780379041249,Model support,2.81332335711504
+clip_20,unseen_test,container_11,0.9,0.900780379041249,Random expectation,3.20909917850373
+clip_20,unseen_test,container_11,0.9,0.900780379041249,Error oracle,2.36152711391159
+clip_20,unseen_test,container_11,0.8,0.800445930880713,Combined,3.29811822628797
+clip_20,unseen_test,container_11,0.8,0.800445930880713,Prominence,2.27391852272908
+clip_20,unseen_test,container_11,0.8,0.800445930880713,Model support,2.37207812084732
+clip_20,unseen_test,container_11,0.8,0.800445930880713,Random expectation,3.20909917850373
+clip_20,unseen_test,container_11,0.8,0.800445930880713,Error oracle,1.64569468751068
+clip_20,unseen_test,container_11,0.7,0.700111482720178,Combined,3.4067507115442
+clip_20,unseen_test,container_11,0.7,0.700111482720178,Prominence,1.86209378648594
+clip_20,unseen_test,container_11,0.7,0.700111482720178,Model support,2.04070979391353
+clip_20,unseen_test,container_11,0.7,0.700111482720178,Random expectation,3.20909917850373
+clip_20,unseen_test,container_11,0.7,0.700111482720178,Error oracle,1.2379845133026
+clip_21,unseen_test,container_20,1,1,Combined,0.986758939141222
+clip_21,unseen_test,container_20,1,1,Prominence,0.986758939141223
+clip_21,unseen_test,container_20,1,1,Model support,0.986758939141222
+clip_21,unseen_test,container_20,1,1,Random expectation,0.986758939141222
+clip_21,unseen_test,container_20,1,1,Error oracle,0.986758939141223
+clip_21,unseen_test,container_20,0.9,0.900414937759336,Combined,0.93772179248834
+clip_21,unseen_test,container_20,0.9,0.900414937759336,Prominence,0.985901280856175
+clip_21,unseen_test,container_20,0.9,0.900414937759336,Model support,1.02330135134753
+clip_21,unseen_test,container_20,0.9,0.900414937759336,Random expectation,0.986758939141222
+clip_21,unseen_test,container_20,0.9,0.900414937759336,Error oracle,0.829534473063085
+clip_21,unseen_test,container_20,0.8,0.800829875518672,Combined,0.904282473062681
+clip_21,unseen_test,container_20,0.8,0.800829875518672,Prominence,0.998572489902759
+clip_21,unseen_test,container_20,0.8,0.800829875518672,Model support,1.04257880139117
+clip_21,unseen_test,container_20,0.8,0.800829875518672,Random expectation,0.986758939141222
+clip_21,unseen_test,container_20,0.8,0.800829875518672,Error oracle,0.664784804840072
+clip_21,unseen_test,container_20,0.7,0.701244813278008,Combined,0.871043709706771
+clip_21,unseen_test,container_20,0.7,0.701244813278008,Prominence,1.03107513974287
+clip_21,unseen_test,container_20,0.7,0.701244813278008,Model support,1.08158435624874
+clip_21,unseen_test,container_20,0.7,0.701244813278008,Random expectation,0.986758939141222
+clip_21,unseen_test,container_20,0.7,0.701244813278008,Error oracle,0.531428460491509
+clip_22,unseen_test,container_21,1,1,Combined,0.431086088639009
+clip_22,unseen_test,container_21,1,1,Prominence,0.431086088639009
+clip_22,unseen_test,container_21,1,1,Model support,0.431086088639009
+clip_22,unseen_test,container_21,1,1,Random expectation,0.431086088639009
+clip_22,unseen_test,container_21,1,1,Error oracle,0.431086088639009
+clip_22,unseen_test,container_21,0.9,0.90036231884058,Combined,0.416854559322976
+clip_22,unseen_test,container_21,0.9,0.90036231884058,Prominence,0.417236941615105
+clip_22,unseen_test,container_21,0.9,0.90036231884058,Model support,0.450294773927213
+clip_22,unseen_test,container_21,0.9,0.90036231884058,Random expectation,0.431086088639009
+clip_22,unseen_test,container_21,0.9,0.90036231884058,Error oracle,0.34728286673749
+clip_22,unseen_test,container_21,0.8,0.800724637681159,Combined,0.405176881249003
+clip_22,unseen_test,container_21,0.8,0.800724637681159,Prominence,0.410799444630096
+clip_22,unseen_test,container_21,0.8,0.800724637681159,Model support,0.455098892747204
+clip_22,unseen_test,container_21,0.8,0.800724637681159,Random expectation,0.431086088639009
+clip_22,unseen_test,container_21,0.8,0.800724637681159,Error oracle,0.257903240825526
+clip_22,unseen_test,container_21,0.7,0.701086956521739,Combined,0.389729415180177
+clip_22,unseen_test,container_21,0.7,0.701086956521739,Prominence,0.420552445901593
+clip_22,unseen_test,container_21,0.7,0.701086956521739,Model support,0.453833631074308
+clip_22,unseen_test,container_21,0.7,0.701086956521739,Random expectation,0.431086088639009
+clip_22,unseen_test,container_21,0.7,0.701086956521739,Error oracle,0.178162863695218
+clip_23,unseen_test,container_9,1,1,Combined,4.09254674185215
+clip_23,unseen_test,container_9,1,1,Prominence,4.09254674185215
+clip_23,unseen_test,container_9,1,1,Model support,4.09254674185215
+clip_23,unseen_test,container_9,1,1,Random expectation,4.09254674185215
+clip_23,unseen_test,container_9,1,1,Error oracle,4.09254674185215
+clip_23,unseen_test,container_9,0.9,0.900552486187845,Combined,3.94396935909015
+clip_23,unseen_test,container_9,0.9,0.900552486187845,Prominence,3.82980643645329
+clip_23,unseen_test,container_9,0.9,0.900552486187845,Model support,4.21253999499484
+clip_23,unseen_test,container_9,0.9,0.900552486187845,Random expectation,4.09254674185215
+clip_23,unseen_test,container_9,0.9,0.900552486187845,Error oracle,3.51134783110578
+clip_23,unseen_test,container_9,0.8,0.800184162062615,Combined,3.85394522956235
+clip_23,unseen_test,container_9,0.8,0.800184162062615,Prominence,3.63511226230958
+clip_23,unseen_test,container_9,0.8,0.800184162062615,Model support,4.40170473884747
+clip_23,unseen_test,container_9,0.8,0.800184162062615,Random expectation,4.09254674185215
+clip_23,unseen_test,container_9,0.8,0.800184162062615,Error oracle,3.22686015114371
+clip_23,unseen_test,container_9,0.7,0.70073664825046,Combined,3.77007274772539
+clip_23,unseen_test,container_9,0.7,0.70073664825046,Prominence,3.4199969425096
+clip_23,unseen_test,container_9,0.7,0.70073664825046,Model support,4.58997143061294
+clip_23,unseen_test,container_9,0.7,0.70073664825046,Random expectation,4.09254674185215
+clip_23,unseen_test,container_9,0.7,0.70073664825046,Error oracle,2.90691338276913
+clip_24,unseen_test,container_13,1,1,Combined,5.95012702100874
+clip_24,unseen_test,container_13,1,1,Prominence,5.95012702100874
+clip_24,unseen_test,container_13,1,1,Model support,5.95012702100874
+clip_24,unseen_test,container_13,1,1,Random expectation,5.95012702100874
+clip_24,unseen_test,container_13,1,1,Error oracle,5.95012702100874
+clip_24,unseen_test,container_13,0.9,0.900318133616119,Combined,5.94117182053115
+clip_24,unseen_test,container_13,0.9,0.900318133616119,Prominence,5.97422999861982
+clip_24,unseen_test,container_13,0.9,0.900318133616119,Model support,5.95514187863661
+clip_24,unseen_test,container_13,0.9,0.900318133616119,Random expectation,5.95012702100874
+clip_24,unseen_test,container_13,0.9,0.900318133616119,Error oracle,5.898826123679
+clip_24,unseen_test,container_13,0.8,0.800636267232238,Combined,5.93733464722607
+clip_24,unseen_test,container_13,0.8,0.800636267232238,Prominence,5.9738942076912
+clip_24,unseen_test,container_13,0.8,0.800636267232238,Model support,5.95262470062432
+clip_24,unseen_test,container_13,0.8,0.800636267232238,Random expectation,5.95012702100874
+clip_24,unseen_test,container_13,0.8,0.800636267232238,Error oracle,5.85354339143197
+clip_24,unseen_test,container_13,0.7,0.700954400848356,Combined,5.92311689974031
+clip_24,unseen_test,container_13,0.7,0.700954400848356,Prominence,5.97238185640572
+clip_24,unseen_test,container_13,0.7,0.700954400848356,Model support,5.96690891438382
+clip_24,unseen_test,container_13,0.7,0.700954400848356,Random expectation,5.95012702100874
+clip_24,unseen_test,container_13,0.7,0.700954400848356,Error oracle,5.80832697801784
+clip_25,unseen_test,container_28,1,1,Combined,1.71531723137251
+clip_25,unseen_test,container_28,1,1,Prominence,1.71531723137251
+clip_25,unseen_test,container_28,1,1,Model support,1.71531723137251
+clip_25,unseen_test,container_28,1,1,Random expectation,1.71531723137251
+clip_25,unseen_test,container_28,1,1,Error oracle,1.71531723137251
+clip_25,unseen_test,container_28,0.9,0.900406504065041,Combined,1.6882122074502
+clip_25,unseen_test,container_28,0.9,0.900406504065041,Prominence,1.7473945986649
+clip_25,unseen_test,container_28,0.9,0.900406504065041,Model support,1.8152102077169
+clip_25,unseen_test,container_28,0.9,0.900406504065041,Random expectation,1.71531723137251
+clip_25,unseen_test,container_28,0.9,0.900406504065041,Error oracle,1.60674726433295
+clip_25,unseen_test,container_28,0.8,0.800813008130081,Combined,1.63841645106484
+clip_25,unseen_test,container_28,0.8,0.800813008130081,Prominence,1.74441555960576
+clip_25,unseen_test,container_28,0.8,0.800813008130081,Model support,1.87065637840809
+clip_25,unseen_test,container_28,0.8,0.800813008130081,Random expectation,1.71531723137251
+clip_25,unseen_test,container_28,0.8,0.800813008130081,Error oracle,1.50799360084296
+clip_25,unseen_test,container_28,0.7,0.701219512195122,Combined,1.58017859404314
+clip_25,unseen_test,container_28,0.7,0.701219512195122,Prominence,1.73842177782886
+clip_25,unseen_test,container_28,0.7,0.701219512195122,Model support,1.92320996210497
+clip_25,unseen_test,container_28,0.7,0.701219512195122,Random expectation,1.71531723137251
+clip_25,unseen_test,container_28,0.7,0.701219512195122,Error oracle,1.39667097049737
+clip_26,unseen_test,container_37,1,1,Combined,2.60745716188776
+clip_26,unseen_test,container_37,1,1,Prominence,2.60745716188777
+clip_26,unseen_test,container_37,1,1,Model support,2.60745716188777
+clip_26,unseen_test,container_37,1,1,Random expectation,2.60745716188777
+clip_26,unseen_test,container_37,1,1,Error oracle,2.60745716188777
+clip_26,unseen_test,container_37,0.9,0.900351699882767,Combined,2.58817897285764
+clip_26,unseen_test,container_37,0.9,0.900351699882767,Prominence,2.52974052195225
+clip_26,unseen_test,container_37,0.9,0.900351699882767,Model support,2.48798096878807
+clip_26,unseen_test,container_37,0.9,0.900351699882767,Random expectation,2.60745716188777
+clip_26,unseen_test,container_37,0.9,0.900351699882767,Error oracle,2.09513005537908
+clip_26,unseen_test,container_37,0.8,0.800703399765533,Combined,2.55571818874617
+clip_26,unseen_test,container_37,0.8,0.800703399765533,Prominence,2.54295066775237
+clip_26,unseen_test,container_37,0.8,0.800703399765533,Model support,2.41813100915972
+clip_26,unseen_test,container_37,0.8,0.800703399765533,Random expectation,2.60745716188777
+clip_26,unseen_test,container_37,0.8,0.800703399765533,Error oracle,1.9382418066181
+clip_26,unseen_test,container_37,0.7,0.7010550996483,Combined,2.53733314722104
+clip_26,unseen_test,container_37,0.7,0.7010550996483,Prominence,2.59692173724334
+clip_26,unseen_test,container_37,0.7,0.7010550996483,Model support,2.42006338310303
+clip_26,unseen_test,container_37,0.7,0.7010550996483,Random expectation,2.60745716188777
+clip_26,unseen_test,container_37,0.7,0.7010550996483,Error oracle,1.81687312775744

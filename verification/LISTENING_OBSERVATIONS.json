@@ -1,0 +1,31 @@
+{
+  "listener": "Yueyao Lyu",
+  "listening_date": "2026-10-29",
+  "status": "User-reported observations, not assistant audition or blind ratings",
+  "original_pours": {
+    "command": "r2_listen(R,'pours')",
+    "user_words_zh": "听到水位声渐渐升高直到听不见",
+    "interpretation": "A rising tone became hard to hear near the end. No hearing threshold or ultrasound claim.",
+    "normalization": "Each whole original recording normalized separately"
+  },
+  "processed_comparison": {
+    "command": "r2_listen(R,'comparison')",
+    "input_snr_db": 10,
+    "noise_realization": 1,
+    "shared_gain": true,
+    "user_words_zh": "第四段有断断续续的 第二段明显有噪声 第三个水声很清晰 13没有听出明显区别",
+    "order": [
+      "original",
+      "noisy",
+      "estimated",
+      "oracle"
+    ],
+    "observations": [
+      "No obvious audible difference from the estimated-Wiener version",
+      "Obvious noise",
+      "Clear water sound; no obvious difference from original",
+      "Intermittent or choppy sound"
+    ],
+    "limits": "One informal unblinded comparison; does not establish zero distortion or population-level preference"
+  }
+}

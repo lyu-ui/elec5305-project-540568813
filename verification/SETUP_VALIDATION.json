@@ -1,0 +1,53 @@
+{
+  "validation_date": "2026-11-01",
+  "setup_started_without_analysis_WAVs": true,
+  "source": "Official public Sound of Water URLs in the manifest",
+  "source_hashes_verified": 33,
+  "analysis_audio_hashes_verified": 33,
+  "metadata_selection_verified": 33,
+  "generated_CSV_hashes_verified": 14,
+  "controls": [
+    {
+      "file": "lpc_control.mat",
+      "array_fields_matched": [
+        "a_true",
+        "control",
+        "fs"
+      ]
+    },
+    {
+      "file": "wiener_inputs.mat",
+      "array_fields_matched": [
+        "calibration_bank",
+        "clean",
+        "fs",
+        "noise_bank"
+      ]
+    }
+  ],
+  "processed_audio_matches_recorded_outputs": [
+    {
+      "file": "Estimated_Wiener.wav",
+      "sha256": "66890a296a34c2d10323e12c6b57b876b4e0a999223f94162b9a487fcba3d3c1"
+    },
+    {
+      "file": "Noisy.wav",
+      "sha256": "d5f0cdb28f8912ff3ea6a654f8546e8871df16f933b4102a79e6a25d573865e8"
+    },
+    {
+      "file": "Oracle_Wiener.wav",
+      "sha256": "7457159f0181f08109656fbcf9330dae6e00c2e28682a913e467be013317b211"
+    },
+    {
+      "file": "Original_segment.wav",
+      "sha256": "f83833b939e7e649210b59018b65ee9ddd8e1ce217d9b5145634e455802f26f2"
+    }
+  ],
+  "recorded_MATLAB_CSVs_compared": 4,
+  "MATLAB_comparison_rtol": 1e-09,
+  "MATLAB_comparison_atol": 1e-07,
+  "new_native_MATLAB_execution_here": false,
+  "test_scope": "One-time source download, deterministic preparation and complete Python regeneration were executed. Four previously recorded MATLAB tables were compared; MATLAB itself was not run here.",
+  "MATLAB_static_lint": "10 files passed MISS_HIT",
+  "python_source_compilation": "setup_project.py and verify_generated_results.py passed"
+}

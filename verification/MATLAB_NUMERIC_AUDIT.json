@@ -1,0 +1,100 @@
+{
+  "frame_features.csv": {
+    "uploaded_shape": [
+      21494,
+      27
+    ],
+    "reference_shape": [
+      21494,
+      27
+    ],
+    "max_numeric_differences": {
+      "time_s": 0.0,
+      "wavelength_cm": 0.0,
+      "pitch_hz": 0.0,
+      "length_pred_cm": 0.0,
+      "length_ref_cm": 5.3290705182007514e-14,
+      "abs_error_cm": 5.3290705182007514e-14,
+      "peak_hz": 5.9117155615240335e-12,
+      "prom_db": 3.3239189178857487e-10,
+      "competition": 1.970645868709653e-14,
+      "entropy": 8.881784197001252e-15,
+      "jump_cents": 5.002220859751105e-12,
+      "jump_cents_log": 2.1000007288662914e-12,
+      "model_support_db": 3.3076474892368424e-10,
+      "odd_harmonic_support_db": 3.685891591942436e-10,
+      "height_cm": 0.0,
+      "duration_s": 0.0,
+      "length_geometry_proxy_cm": 5.3290705182007514e-14,
+      "geometry_proxy_error_cm": 5.3290705182007514e-14,
+      "fill_fraction_pred": 4.884981308350689e-15,
+      "fill_fraction_reference": 5.551115123125783e-16,
+      "reliability_score": 1.8554047187535616e-12
+    },
+    "text_column_match": {
+      "clip": true,
+      "role": true,
+      "split": true,
+      "container_id": true,
+      "shape": true,
+      "material": true
+    }
+  },
+  "selective_by_clip.csv": {
+    "uploaded_shape": [
+      320,
+      7
+    ],
+    "reference_shape": [
+      320,
+      7
+    ],
+    "max_numeric_differences": {
+      "coverage": 0.0,
+      "realized_coverage": 4.440892098500626e-16,
+      "mae_cm": 5.329070518200751e-15
+    },
+    "text_column_match": {
+      "clip": true,
+      "role": true,
+      "container_id": true,
+      "method": true
+    }
+  },
+  "wiener_trials.csv": {
+    "uploaded_shape": [
+      27,
+      5
+    ],
+    "reference_shape": [
+      27,
+      5
+    ],
+    "max_numeric_differences": {
+      "input_snr_db": 0.0,
+      "seed": 0.0,
+      "output_snr_db": 4.618527782440651e-14,
+      "peak_deviation_hz": 4.973799150320701e-13
+    },
+    "text_column_match": {
+      "method": true
+    }
+  },
+  "lpc_control.csv": {
+    "uploaded_shape": [
+      3,
+      4
+    ],
+    "reference_shape": [
+      3,
+      4
+    ],
+    "max_numeric_differences": {
+      "order": 0.0,
+      "pole1_hz": 7.762537279631943e-10,
+      "pole2_hz": 1.3428689271677285e-09,
+      "max_pole_radius": 8.890665981198254e-13
+    },
+    "text_column_match": {}
+  }
+}
