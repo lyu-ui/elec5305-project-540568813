@@ -1,0 +1,71 @@
+# Project summary
+
+## Question and contribution
+
+This study asks when pouring-sound physical estimates can be trusted. It
+uses the released Sound of Water model as a fixed predictor, then investigates
+whether interpretable acoustic features identify unreliable frames. The
+contribution is the reliability evaluation and explanation of failure
+mechanisms, together with controlled signal-processing experiments.
+
+The project does not retrain the network. It keeps continuous air-column
+length as the target and separates seen from unseen containers. All errors
+are against an assumption-derived filling reference. No independently
+measured liquid-level trajectory is available in this experiment.
+
+## Completed experimental scope
+
+- 33 recordings from 25 containers, selected from official splits using metadata.
+- Frozen pretrained inference, with checkpoint/adapter provenance and cached trajectories.
+- STFT prominence, mode competition, continuity, spectral entropy and model support.
+- Development-only reliability fitting and leave-one-container-out development diagnostics.
+- Held-out selective prediction at 100%, 90%, 80% and 70% retention, simple baselines, a fixed threshold and container bootstrap intervals.
+- Geometry/reference sensitivity, successful/intermediate/failure examples and endpoint diagnosis.
+- LPC resonator controls, Wiener noise/distortion comparisons, frequency-pooling controls and documented listening observations.
+- Independent Python reproduction and previously executed MATLAB numerical outputs.
+- Standalone batch analysis, single-recording demonstration, input/result verification and public documentation.
+
+## Main findings
+
+At 70% retention, seen macro reference MAE falls from 1.742 to 1.538 cm.
+The paired change is -0.204 cm, with a 95% container-bootstrap interval of
+[-0.274, -0.134] cm. Unseen macro reference MAE falls from 2.479 to 2.414 cm;
+its -0.065 cm change has an interval of [-0.158, +0.031] cm. The unseen
+improvement is therefore inconclusive. Prominence alone performs better on
+that unseen subset, reaching 2.235 cm.
+
+The clearest failure mechanism is global endpoint correction. In clip 24,
+a final pitch switch shifts the entire physical estimate. Replacing that
+correction using known geometry reduces reference disagreement, but that
+post-hoc diagnostic uses extra information and is not a validated replacement
+for unknown-container inference.
+
+Noise masking provides a separate processing lesson: the estimated mask
+improves output SNR, while at 20 dB it slightly worsens mean peak deviation.
+The single listener also heard intermittent sound in the oracle example.
+Numerical noise reduction does not guarantee preserved resonances or natural
+audio quality.
+
+## Evidence and demonstration
+
+Use [Methods](METHODS.md), [Results](RESULTS.md), [Data](DATA.md) and
+[Reproduction](REPRODUCIBILITY.md) for the full reasoning and numeric sources.
+The [demonstration guide](DEMONSTRATION.md) gives a short walkthrough and
+single-recording commands. Verification records distinguish executed Python
+checks, historical MATLAB execution, and static checks.
+
+The existing numerical benchmark is frozen. The November completion work
+adds usability and verification; it does not count repeated analysis as new
+experimental evidence or change the reported scientific results.
+
+## Boundaries of the conclusion
+
+The selected subset supports a substantial reliability and failure study.
+It does not establish deployment accuracy. Eight recordings in each main
+test group, correlated frames, geometry assumptions and confounded material/
+opacity labels limit generalisation. A fixed score can help rank some local
+observations while missing a global physical-model failure.
+
+Fresh containers with independently measured level traces would be a new
+validation study. Reassigned spectrograms, network retraining and additional
+unrelated algorithms are not required to interpret the completed experiment.

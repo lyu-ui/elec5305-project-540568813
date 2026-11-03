@@ -19,6 +19,7 @@ report_assets/
 
 # Fetch source recordings from their original public host; generate these locally.
 .cache/
+outputs/
 data/*.wav
 data/*.mat
 audio_comparisons/*.wav

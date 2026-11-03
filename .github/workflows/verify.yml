@@ -1,0 +1,22 @@
+name: Verify research project
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: python/requirements-analysis.txt
+      - name: Install analysis dependencies
+        run: python -m pip install -r python/requirements-analysis.txt
+      - name: Verify fixed inputs and evaluation logic
+        run: python python/verify_project.py

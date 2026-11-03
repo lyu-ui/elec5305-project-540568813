@@ -74,6 +74,12 @@ analysis and the endpoint diagnostic. These scopes are documented separately.
 
 ## Optional neural-network inference
 
+Keep a separate working copy for this optional route: the released inference
+adapter writes predictions and provenance under `reference/`. Regenerated
+predictions can differ slightly by platform and will no longer match the
+frozen checkout checksums. The normal analysis and demonstration use the
+recorded predictions and do not require this step.
+
 The approximately 378 MB checkpoint is not bundled. The normal MATLAB and
 Python analysis routes do not download it. To reproduce neural inference,
 create a separate environment using `python/requirements-inference.txt`,

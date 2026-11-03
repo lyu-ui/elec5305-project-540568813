@@ -1,5 +1,13 @@
 # Changelog
 
+## Demonstration and acceptance checks - 3 November 2026
+
+- Added a single-recording demonstration with acoustic-only scoring followed by separate reference-error evaluation.
+- Added fixed-input, physical-decoding, split and summary checks, plus five score/selection behavior tests.
+- Added an automated GitHub verification workflow that requires no audio or checkpoint downloads.
+- Added a final project summary and demonstration walkthrough.
+- Kept the original numerical benchmark and its conclusions unchanged.
+
 ## Public project preparation - 1 November 2026
 
 - Added a setup script that obtains source audio directly from the official public dataset and verifies source/analysis hashes.

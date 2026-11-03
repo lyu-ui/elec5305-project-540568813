@@ -98,6 +98,25 @@ MATLAB checks passed: 33 recordings, 21494 frames. Maximum mismatch 3.32e-10.
 The last value can vary slightly by platform. The code checks explicit numeric
 tolerances. Use a comfortable listening volume; playback is disabled by default.
 
+## Demonstrate and verify
+
+After setup, inspect one held-out recording without rerunning the full study:
+
+```bash
+python python/demo_recording.py --clip clip_24
+python python/verify_project.py --with-data
+```
+
+The demo writes a diagnostic plot, frame-level CSV and summary under
+`outputs/demo/clip_24/`. It uses the frozen score; errors are calculated only
+after selection. See the [demonstration guide](docs/DEMONSTRATION.md) for
+the three illustrative cases, listening and a short walkthrough.
+
+`python python/verify_project.py` runs without audio downloads and is also
+used by [automated verification](https://github.com/lyu-ui/elec5305-project-540568813/actions/workflows/verify.yml).
+The [project summary](docs/PROJECT_SUMMARY.md) connects the completed work
+to the main conclusion and remaining scientific limitations.
+
 ## Experiments
 
 | Component | Purpose | Evidence |

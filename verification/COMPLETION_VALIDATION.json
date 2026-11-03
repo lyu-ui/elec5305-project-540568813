@@ -1,0 +1,31 @@
+{
+  "date": "2026-11-03",
+  "original_benchmark_unchanged": true,
+  "matlab_helpers_and_wrapper_unchanged": 10,
+  "native_matlab_executed_this_revision": false,
+  "frozen_score_rows_verified": 21494,
+  "maximum_score_difference": 6.661338147750939e-16,
+  "demonstration_checks": [
+    {
+      "clip": "clip_22",
+      "frames": 552,
+      "retained_reference_mae_difference_cm": 4.585440305238109e-09
+    },
+    {
+      "clip": "clip_18",
+      "frames": 458,
+      "retained_reference_mae_difference_cm": 1.4440360018852516e-10
+    },
+    {
+      "clip": "clip_24",
+      "frames": 943,
+      "retained_reference_mae_difference_cm": 8.686296126825255e-11
+    }
+  ],
+  "reference_error_tolerance_cm": 1e-07,
+  "behavior_tests": 5,
+  "behavior_tests_result": "passed",
+  "analysis_audio_hashes_verified": 33,
+  "reference_result_hashes_verified": 14,
+  "scope": "Completion adds a demonstration and verification workflow. It adds no independent recordings, measured water-level labels or new performance claim."
+}
