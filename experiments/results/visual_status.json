@@ -1,0 +1,20 @@
+{
+  "status": "exploratory_AI_visual_proxy_only",
+  "planned_videos": 8,
+  "planned_frames": 72,
+  "usable_videos": 6,
+  "usable_provisional_frames": 46,
+  "excluded_frames": 26,
+  "human_reviewed_frames": 0,
+  "annotation_sha256": "4eed6de7cbc85ae3109c4916c5e1f16dc9f5251d2decf67150ed9fc43b87ffea",
+  "equal_clip_model_proxy_difference_pp": 11.586124925338998,
+  "equal_clip_assumed_proxy_difference_pp": 6.910987751296763,
+  "unit": "percentage points of image-relative visible filling; not centimetres",
+  "limitations": [
+    "AI annotations have not received independent human review.",
+    "Image-relative fraction can differ systematically from physical height fraction.",
+    "Pixel bounds are sensitivity ranges, not confidence intervals or calibrated metrology.",
+    "This reuses seen-test videos; it adds a modality, not new independent test containers.",
+    "Frames are dependent and missingness is visibility-dependent; no framewise significance test."
+  ]
+}

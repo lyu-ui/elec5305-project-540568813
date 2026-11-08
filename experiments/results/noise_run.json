@@ -1,0 +1,20 @@
+{
+  "protocol_sha256": "13a9dbdabd2526b046a0601e6cbb1a576f661fe107ee138c35ba2440e5b8a75e",
+  "checkpoint_sha256": "2fa3d8cec1488ee65bb5a6e30f1b79716d8243bbe4ddc4c0687ce2a02c84303c",
+  "coefficients_sha256": "74083abc05e505bcd48a04f0a788ed5ee86c6dfccb702795fe7c2d84b736769d",
+  "manifest_sha256": "72829a7506f30e96d210746085706710905b30baebd9d262cb281f4b6d8bd346",
+  "torch": "2.14.1+cpu",
+  "transformers": "4.46.3",
+  "numpy": "2.3.5",
+  "scipy": "1.17.0",
+  "strict_checkpoint_keys": 215,
+  "completed": true,
+  "recordings": 16,
+  "clean_runs": 16,
+  "noisy_runs": 144,
+  "eval_mode": true,
+  "source": "original recorded audio plus generated noise; clean audio can already contain ambient noise",
+  "inference_adapter_sha256": "1e448ac3f7e499f3b52fc53ad6dc219d7e5bbc1823bacec1a636ffe57219488b",
+  "experiment_script_sha256": "3d8762239b2ed41002aacb3bfb7d8eac54253e7d441d7244b6dc22d0cdf6a57a",
+  "reference": "assumed filling curve; not independently measured level accuracy"
+}

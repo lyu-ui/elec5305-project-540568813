@@ -1,5 +1,13 @@
 # Changelog
 
+## Experimental extension - November 2026
+
+- Executed 16 clean controls and 144 Gaussian-noise neural inference conditions with the frozen model and score.
+- Compared fixed terminal medians with the original decoder across all 33 recordings, retaining negative results.
+- Screened all 72 fixed-time paired-video frames; recorded 46 provisional AI visual labels and 26 exclusions.
+- Added stage-wise analysis, mechanism examples, container-level uncertainty, source/alignment audits and reproducible checks.
+- Kept the original benchmark and default decoder unchanged. Visual human review and calibrated physical validation remain open.
+
 ## Demonstration and acceptance checks - 3 November 2026
 
 - Added a single-recording demonstration with acoustic-only scoring followed by separate reference-error evaluation.

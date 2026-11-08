@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "noise_trials": 160,
+  "clean_controls": 16,
+  "noisy_conditions": 144,
+  "endpoint_recording_conditions": 132,
+  "video_frames_accounted_for": 72,
+  "provisional_visual_labels": 46,
+  "visual_exclusions": 26,
+  "human_reviewed_visual_labels": 0,
+  "max_clean_wavelength_difference_cm": 0.0002220000000008,
+  "max_added_snr_error_db": 1.4806641246423169e-08,
+  "scope": "Saved-data consistency, identities and experimental coverage; no new MATLAB execution or calibrated ground truth."
+}

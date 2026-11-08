@@ -18,7 +18,21 @@ checked against an independent Python implementation.
 **Scope:** errors are measured against an assumption-derived filling curve.
 There are no independently measured liquid-level trajectories in this project.
 Results therefore describe agreement with that reference, not validated
-liquid-level accuracy.
+liquid-level accuracy. The extension also includes explicitly provisional,
+AI-assisted image-relative references; these are not calibrated measurements.
+
+## Extended experiments
+
+- **160 model conditions:** 16 clean controls and 144 noisy runs across all test
+  recordings, with the network and reliability score frozen. At 0 dB, the score
+  still retains many high-error frames.
+- **33-recording endpoint comparison:** a fixed terminal median repairs two
+  severe global offsets but worsens several other recordings. Every case is retained.
+- **72 video time points screened:** 46 provisional visual labels and 26 documented
+  exclusions. Independent human review and calibrated physical validation remain open.
+
+[Extension methods, findings and reproduction](docs/EXPERIMENT_EXTENSION.md) ·
+[Per-recording results](experiments/results/)
 
 ![Processing pipeline](figures/fig01_pipeline.png)
 
@@ -145,6 +159,7 @@ to the main conclusion and remaining scientific limitations.
 | `python/` | Independent analysis and optional pretrained-model inference |
 | `verification/` | Numerical comparison evidence and listening observations |
 | `docs/` | Methods, data, results and reproduction documentation |
+| `experiments/` | Fixed extension settings, noise/endpoint results, provisional visual labels and figures |
 | `legacy/early-spectral-analysis/` | Original two-recording exploratory code, data and outputs |
 
 The [early two-recording analysis](legacy/early-spectral-analysis/README.md) is
@@ -170,6 +185,7 @@ are documented separately.
 
 - [Methods and parameter choices](docs/METHODS.md)
 - [Results, failures and interpretation](docs/RESULTS.md)
+- [Noise, endpoint and visual-reference extension](docs/EXPERIMENT_EXTENSION.md)
 - [Data selection and provenance](docs/DATA.md)
 - [Reproduction and verification](docs/REPRODUCIBILITY.md)
 - [Third-party sources and notices](THIRD_PARTY_NOTICES.md)
@@ -177,6 +193,8 @@ are documented separately.
 ## Known limitations
 
 - Reference trajectories assume filling behavior; they are not measured truth.
+- Image-relative visual annotations are AI-assisted and unreviewed; perspective,
+  refraction and visibility selection prevent a centimetre-accuracy claim.
 - Only 8 seen and 8 unseen recordings enter the principal held-out comparison.
 - Ranking uses complete recordings, and physical endpoint correction uses the
   last model sample. The current workflow is offline.

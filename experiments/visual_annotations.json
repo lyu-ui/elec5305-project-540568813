@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "annotator": "OpenAI assistant visual inspection",
+  "human_review_status": "not_reviewed",
+  "units": "original 270 x 480 image pixels; y increases downward",
+  "procedure": "Fixed-time contact sheets and coordinate grids inspected without displaying prediction curves. Existing aggregate project results were known; this is not a fully blinded independent-human study. Bounds include visible rim/base ambiguity and the disturbed water surface, not calibrated statistical confidence intervals.",
+  "freeze_rule": "This file is finalized before running evaluate_visual_reference.py. Do not revise annotations after seeing discrepancies without preserving and disclosing the revision.",
+  "clips": {
+    "clip_11": {
+      "x_region": [100, 160], "rim_y_bounds": [195, 207], "base_y_bounds": [438, 455],
+      "water_y_bounds": [null, [410,429], [376,394], [349,367], [318,335], [293,312], [267,284], [242,260], [216,234]],
+      "excluded": {"1": "Condensation and white base obscure the early water surface."},
+      "caution": "Translucent plastic and condensation; lower-base ambiguity; aerated moving surface."
+    },
+    "clip_12": {
+      "x_region": [90, 150], "rim_y_bounds": [353, 370], "base_y_bounds": [444, 461],
+      "water_y_bounds": [null, [416,437], [407,431], [398,420], [388,409], [382,399], [371,389], [365,383], [359,380]],
+      "excluded": {"1": "Early surface cannot be separated confidently from base reflections and bubbles."},
+      "caution": "Short glass occupies approximately 100 vertical pixels; elliptical surfaces and thick refracting base."
+    },
+    "clip_13": {
+      "x_region": [108, 155], "rim_y_bounds": [344, 355], "base_y_bounds": [461, 473],
+      "water_y_bounds": [null, [419,438], [414,435], [402,422], [397,416], [385,402], [375,392], null, null],
+      "excluded": {"1": "Early bubbles and base reflections make the surface ambiguous.", "8": "Decorative glass bands overlap the surface; no unambiguous waterline.", "9": "Decorative glass bands overlap the surface; no unambiguous waterline."},
+      "caution": "Decorative bands and mild taper; interior base is visible but external base is close to image boundary."
+    },
+    "clip_14": {
+      "x_region": [100, 152], "rim_y_bounds": [274, 282], "base_y_bounds": [427, 441],
+      "water_y_bounds": [null, [398,412], [376,389], [351,370], [335,352], [322,336], [307,323], [296,309], [284,297]],
+      "excluded": {"1": "Low water surface merges with the thick glass base and impact bubbles."},
+      "caution": "Slight camera elevation and thick curved glass base; bounds are image proxies, not calibrated heights."
+    },
+    "clip_15": {
+      "x_region": [90, 150], "rim_y_bounds": [343, 359], "base_y_bounds": [438, 460],
+      "water_y_bounds": [[392,422], [391,419], [387,415], [380,407], [376,403], [364,388], [357,381], [350,372], [344,363]],
+      "excluded": {},
+      "caution": "Tapered glass, large near/far surface separation, refraction, and thick base; deliberately wide bounds."
+    },
+    "clip_16": {
+      "x_region": [65, 135], "rim_y_bounds": null, "base_y_bounds": null,
+      "water_y_bounds": [null, null, null, null, null, null, null, null, null],
+      "excluded_all": "Cup base is outside the image; full-height normalization is unidentifiable.",
+      "caution": "Water rises visibly but no quantitative full-height visual proxy is evaluated."
+    },
+    "clip_17": {
+      "x_region": [90, 155], "rim_y_bounds": [303, 319], "base_y_bounds": [451, 474],
+      "water_y_bounds": [[431,453], [419,443], [414,438], null, null, [345,368], [334,356], [320,344], [312,333]],
+      "excluded": {"4": "Printed sticker occludes the central water surface.", "5": "Printed sticker occludes the central water surface."},
+      "caution": "Printed sticker, aeration, cup taper, and bottom refraction; middle-level visibility is missing."
+    },
+    "clip_18": {
+      "x_region": [105, 165], "rim_y_bounds": null, "base_y_bounds": null,
+      "water_y_bounds": [null, null, null, null, null, null, null, null, null],
+      "excluded_all": "Cup bottom and full internal base are cut by the lower image boundary; full-height normalization is unidentifiable.",
+      "caution": "Surface is often visible, but guessing the cropped base would fabricate the height denominator."
+    }
+  }
+}

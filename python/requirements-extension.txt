@@ -1,0 +1,9 @@
+# Environment used for the robustness extension; historical pins remain separate.
+numpy==2.3.5
+scipy==1.17.0
+pandas==2.2.3
+matplotlib==3.10.8
+torch==2.14.1
+transformers==4.46.3
+# ffmpeg and ffprobe are system executables needed by the visual extraction script.
+# Optional review PDF: pip install reportlab pillow

@@ -19,6 +19,13 @@ notice is not asserted as a blanket license for every dataset asset.
 No new dataset license is granted by this repository. Consult the upstream
 distribution terms when reusing or redistributing those assets.
 
+The visual extension downloads paired public videos from the same dataset.
+Video files and extracted frame images stay local; the repository publishes
+source URLs, hashes, provisional annotation coordinates and derived analysis.
+Optional private review sheets show attributed frame crops for annotation
+inspection. The AI-assisted coordinates are project annotations, not labels
+provided or certified by the dataset authors.
+
 ## Reference
 
 Bagad et al. (2026). *The Sound of Water: Inferring Physical Properties from

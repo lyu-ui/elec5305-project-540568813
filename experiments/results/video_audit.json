@@ -1,0 +1,74 @@
+[
+  {
+    "clip": "clip_11",
+    "url": "https://huggingface.co/datasets/bpiyush/sound-of-water/resolve/main/videos/VID_20240323_001139_4.6_16.9.mp4",
+    "video_sha256": "14110c6d995aa145738bbb4d544a24b4032d12c3a47dc6a67f246aed74885e7e",
+    "audio_first_pts_s": 0.018,
+    "audio_alignment_lag_samples": 0,
+    "audio_correlation": 0.9999243847223676,
+    "frames_sampled": 9
+  },
+  {
+    "clip": "clip_12",
+    "url": "https://huggingface.co/datasets/bpiyush/sound-of-water/resolve/main/videos/VID_20240211_192710_2.1_9.9.mp4",
+    "video_sha256": "4cf7b1cc27ff42490820b203e668f724fd8bd26247d250f8e131dcbc36d44ed4",
+    "audio_first_pts_s": 0.012,
+    "audio_alignment_lag_samples": 0,
+    "audio_correlation": 0.999981885064204,
+    "frames_sampled": 9
+  },
+  {
+    "clip": "clip_13",
+    "url": "https://huggingface.co/datasets/bpiyush/sound-of-water/resolve/main/videos/VID_20240405_212322_2.3_9.8.mp4",
+    "video_sha256": "324a33c3c93650c72b209075d042c699777a039cdf30cbcd6ca086636561611b",
+    "audio_first_pts_s": 0.003,
+    "audio_alignment_lag_samples": 0,
+    "audio_correlation": 0.9999930458379427,
+    "frames_sampled": 9
+  },
+  {
+    "clip": "clip_14",
+    "url": "https://huggingface.co/datasets/bpiyush/sound-of-water/resolve/main/videos/VID_20240131_200405_5.6_22.5.mp4",
+    "video_sha256": "57dea6384cd494f244fedbbb316c1ee450307f5c4db434d8737fd14f9cf3a876",
+    "audio_first_pts_s": 0.003,
+    "audio_alignment_lag_samples": 0,
+    "audio_correlation": 0.9999451958103347,
+    "frames_sampled": 9
+  },
+  {
+    "clip": "clip_15",
+    "url": "https://huggingface.co/datasets/bpiyush/sound-of-water/resolve/main/videos/VID_20240211_193436_2.0_6.3.mp4",
+    "video_sha256": "bb5264f6cc46159b13fa5e6b11e73df42e381aaa4dd72728eb96c0d57d0ef6ca",
+    "audio_first_pts_s": 0.007,
+    "audio_alignment_lag_samples": 0,
+    "audio_correlation": 0.9999526991128979,
+    "frames_sampled": 9
+  },
+  {
+    "clip": "clip_16",
+    "url": "https://huggingface.co/datasets/bpiyush/sound-of-water/resolve/main/videos/VID_20240406_235908_4.4_11.6.mp4",
+    "video_sha256": "abb7be7e693941220bc8106535c98a556caa33487903cca849c4fff53582d44b",
+    "audio_first_pts_s": 0.012,
+    "audio_alignment_lag_samples": 0,
+    "audio_correlation": 0.9999025306246371,
+    "frames_sampled": 9
+  },
+  {
+    "clip": "clip_17",
+    "url": "https://huggingface.co/datasets/bpiyush/sound-of-water/resolve/main/videos/VID_20240331_162617_2.3_15.3.mp4",
+    "video_sha256": "44db9f63c4207e83b2f4a67de8fb9f6bc060f28fa1d04565dd94b37618e9c165",
+    "audio_first_pts_s": 0.003,
+    "audio_alignment_lag_samples": 0,
+    "audio_correlation": 0.9998803923968437,
+    "frames_sampled": 9
+  },
+  {
+    "clip": "clip_18",
+    "url": "https://huggingface.co/datasets/bpiyush/sound-of-water/resolve/main/videos/VID_20240331_161321_2.7_11.9.mp4",
+    "video_sha256": "f3372e67a53f27485c2636be5251ac741abad9f69f42089ea0c3fe2c4cd6ddda",
+    "audio_first_pts_s": 0.006,
+    "audio_alignment_lag_samples": 0,
+    "audio_correlation": 0.9997926623865658,
+    "frames_sampled": 9
+  }
+]

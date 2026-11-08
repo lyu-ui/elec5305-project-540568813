@@ -11,7 +11,8 @@ mechanisms, together with controlled signal-processing experiments.
 The project does not retrain the network. It keeps continuous air-column
 length as the target and separates seen from unseen containers. All errors
 are against an assumption-derived filling reference. No independently
-measured liquid-level trajectory is available in this experiment.
+measured liquid-level trajectory is available in this experiment. The new
+visual extension is explicitly an unreviewed image-relative proxy comparison.
 
 ## Completed experimental scope
 
@@ -24,6 +25,9 @@ measured liquid-level trajectory is available in this experiment.
 - LPC resonator controls, Wiener noise/distortion comparisons, frequency-pooling controls and documented listening observations.
 - Independent Python reproduction and previously executed MATLAB numerical outputs.
 - Standalone batch analysis, single-recording demonstration, input/result verification and public documentation.
+- Full-model inference under 144 generated-noise conditions plus 16 clean controls.
+- Fixed terminal-window comparisons across all 33 recordings, including worsened cases.
+- All 72 prespecified video frames screened; 46 AI-assisted visual candidates and 26 exclusions.
 
 ## Main findings
 
@@ -54,9 +58,15 @@ The [demonstration guide](DEMONSTRATION.md) gives a short walkthrough and
 single-recording commands. Verification records distinguish executed Python
 checks, historical MATLAB execution, and static checks.
 
-The existing numerical benchmark is frozen. The November completion work
-adds usability and verification; it does not count repeated analysis as new
-experimental evidence or change the reported scientific results.
+The existing numerical benchmark is frozen. The earlier completion work added
+usability and verification. The [experimental extension](EXPERIMENT_EXTENSION.md)
+adds actual noisy neural inference, a systematic endpoint comparison and
+provisional visual references. At 0 dB, reference MAE rises to 4.142/4.326 cm
+for seen/unseen groups. The 0.2 s terminal median improves unseen reference MAE
+from 2.482 to 1.583 cm but worsens the seen mean from 1.742 to 1.778 cm.
+The visual labels have not been independently human-reviewed and do not measure
+true physical height. Experimental packaging is complete; that validation
+boundary remains open.
 
 ## Boundaries of the conclusion
 

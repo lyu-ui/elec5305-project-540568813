@@ -71,6 +71,8 @@ def main() -> None:
     parser.add_argument('--output', type=Path, default=ROOT / 'outputs/verification/project_check.json')
     args = parser.parse_args()
     result = validate()
+    from verify_extension import validate as validate_extension
+    result['experimental_extension'] = validate_extension()
     subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', str(ROOT/'tests'), '-v'], cwd=ROOT, check=True)
     result['demonstration_behavior_tests'] = 'passed'
     if args.with_data:

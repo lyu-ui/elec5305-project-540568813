@@ -1,5 +1,11 @@
 # Reproduction and verification
 
+For the additional 160 neural conditions, all-recording endpoint comparison,
+and provisional video references, see the separate
+[extension reproduction commands](EXPERIMENT_EXTENSION.md#reproduce-and-audit).
+The commands below preserve the original benchmark. New inference is optional
+and requires the extension dependencies and released checkpoint.
+
 ## One-time data preparation
 
 Use Python 3.12 and an internet connection. From the project root:

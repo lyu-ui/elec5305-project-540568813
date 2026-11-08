@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "created_utc": "2026-11-08",
+  "base_commit": "7428b728bd7f1147521786766bdde5487267cb73",
+  "status": "settings fixed before extension outcomes; not an external preregistration",
+  "noise": {
+    "roles": ["seen_test", "unseen_test"],
+    "snr_db": [20, 10, 0],
+    "seeds": [5305, 5306, 5307],
+    "type": "additive zero-mean Gaussian noise, normalized to exact full-clip SNR, no clipping",
+    "pairing": "same per-clip noise realization scaled across SNR conditions",
+    "clean_cache_max_wavelength_difference_cm": 0.01,
+    "model": "released checkpoint, eager attention, eval, CPU, original full-clip normalization",
+    "score": "original frozen development coefficients and threshold; no refitting",
+    "rank_retention": 0.7,
+    "primary": "equal-container mean assumed-reference MAE and paired change from recomputed clean",
+    "secondary": ["70% rank-selected MAE", "fixed-threshold coverage and conditional MAE", "wavelength change from clean", "endpoint-induced global offset", "negative air-column fraction"]
+  },
+  "endpoint": {
+    "roles": ["development", "seen_test", "unseen_test", "shape_diagnostic"],
+    "baseline": "last predicted wavelength sample",
+    "primary": "median wavelength within 0.2 s of final prediction timestamp",
+    "sensitivity_windows_s": [0.1, 0.5],
+    "clipping": "none",
+    "reference": "original H*(1-t/duration), assumption-derived; all prediction frames",
+    "selection": "evaluate every fixed recording; no label-tuned per-clip window"
+  },
+  "visual": {
+    "sampling_frame": "all 8 existing seen-test paired videos, before model comparison",
+    "fractions_of_audio_duration": [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
+    "alignment": "nearest decoded video frame to audio start PTS + fraction * analysis-WAV duration; save actual PTS",
+    "annotation": "AI-assisted visual coordinates and explicit uncertainty intervals, without displaying model predictions; human review remains separate",
+    "include": "rim, internal base and water-surface central region all identifiable; fixed geometry landmarks and water-surface bounds recorded",
+    "reject": "base out of frame, occlusion, bubbles, reflections, unresolvable waterline, or uncertain geometry",
+    "primary": "image-relative visible filling fraction and trend; geometric/projection proxy, not exact physical height",
+    "metric_conversion": "no primary centimetre accuracy claim; image projection and inner-height uncertainty remain",
+    "report": "all 72 planned frames accounted for, including excluded and ambiguous frames; no selection by model error",
+    "independence": "independent visual modality, not independent human measurement or new dataset"
+  },
+  "statistics": {
+    "bootstrap": "2000 resamples of containers, averaging noise seeds within each container first",
+    "seed": 20261108,
+    "interval": "percentile 95%; exploratory small-sample uncertainty, no multiple-comparison claim",
+    "prohibited_claims": ["independently measured true-level centimetre accuracy", "new unseen-container validation from seen-test video", "noise denoising benefit without neural rerun", "guaranteed improvement or grade"]
+  }
+}
