@@ -151,7 +151,24 @@ water-surface ranges, with an explicit reason for every exclusion.
 | 16 | 0 / 9 | Cup base is outside the frame |
 | 17 | 7 / 9 | Sticker hides two middle samples |
 | 18 | 0 / 9 | Full cup base is cropped by the lower image boundary |
-| Total | **46 / 72** | **26 exclusions, 0 independently human-reviewed labels** |
+| Total | **46 / 72** | **46 green water bands confirmed by the author; 26 exclusions retained** |
+
+The project author subsequently inspected the private nine-page review PDF and
+explicitly confirmed all displayed green water-surface bands, with no corrections.
+The [human-review record](../experiments/visual_human_review.json) identifies all
+46 confirmed frames and binds them to the frozen annotation SHA-256 and reviewed
+PDF SHA-256. The original annotation file, including its historical
+`not_reviewed` field, is preserved byte-for-byte; the separate review record is
+the subsequent status update. Per-frame results now distinguish the 46
+`author_confirmed_water_band` entries from 26 excluded `not_reviewed` entries.
+The `ai_provisional` inclusion status continues to describe AI origin and
+uncalibrated proxy measurements, not a lack of water-band confirmation.
+
+This is a single project-author confirmation after exploratory results were
+available, not independent blinded re-annotation or inter-rater reliability.
+Confirmation covers green water-surface bands only: blue rim/base bands and
+exclusion decisions were not separately certified. All coordinates, exclusions
+and numerical comparison results remain unchanged.
 
 The image-relative proxy is `(base_y - surface_y) / (base_y - rim_y)`.
 All endpoint combinations of the declared pixel ranges are evaluated.
@@ -178,9 +195,9 @@ effects. The low/middle/high visual-midpoint table is descriptive, retains
 boundary ambiguity, and does not count frames as independent test samples.
 
 This extension adds a visual modality to existing seen-test examples. It adds
-neither new unseen containers nor calibrated measured labels. Human review of
-the annotated frames is still pending. Even after review, calibrated physical
-level validation would remain a separate experiment.
+neither new unseen containers nor calibrated measured labels. The 46 green
+water-surface bands now have author confirmation. Independent blinded validation,
+separate rim/base review and calibrated physical-level validation remain open.
 
 ## Reproduce and audit
 
@@ -205,8 +222,10 @@ reproducing published visual numbers; revised human labels require a new,
 explicitly identified annotation version and comparison.
 
 `python python/make_visual_review_pdf.py` optionally creates private review
-sheets with ReportLab and Pillow. This is a review aid, not a completed human
-annotation record. It is not a course report.
+sheets with ReportLab and Pillow. The sheets display confirmation counts from
+the hash-bound human-review record; they are a review aid, not a course report.
+Use `python python/plot_extension.py --visual-only` to refresh only the visual
+figure after a review-status update.
 
 The [result directory](../experiments/results/) contains per-clip, per-seed,
 phase, endpoint and visual tables. `verify_extension.py` checks trial completeness,

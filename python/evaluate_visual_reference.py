@@ -16,6 +16,35 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT/'experiments/results'
 
 
+def load_human_review(annotation_path, review_path=None):
+    """Validate author confirmation without changing frozen AI coordinates.
+
+    Confirmation covers displayed green water-surface bands only. It does not
+    certify rim/base geometry, exclusions, physical height, or independence.
+    """
+    if review_path is None:
+        review_path = annotation_path.with_name('visual_human_review.json')
+    if not review_path.exists():
+        return None, set()
+    review = json.loads(review_path.read_text())
+    if review['annotation_sha256'] != hashlib.sha256(annotation_path.read_bytes()).hexdigest():
+        raise ValueError('Human review refers to a different annotation version.')
+    if review['scope'] != 'displayed_green_water_surface_bands_only':
+        raise ValueError('Unsupported human-review scope.')
+    annotations = json.loads(annotation_path.read_text())
+    confirmed = set()
+    for clip, frames in review['confirmed_frames'].items():
+        if clip not in annotations['clips']:
+            raise ValueError('Human review names an unknown clip.')
+        for frame in frames:
+            if type(frame) is not int or not 1 <= frame <= 9 or (clip, frame) in confirmed:
+                raise ValueError('Invalid or duplicate reviewed frame.')
+            if annotations['clips'][clip]['water_y_bounds'][frame-1] is None:
+                raise ValueError('An excluded frame has no green water band to confirm.')
+            confirmed.add((clip, frame))
+    return review, confirmed
+
+
 def relative_bounds(rim, base, water):
     values = np.asarray([rim, base, water], dtype=float)
     if values.shape != (3,2) or not np.isfinite(values).all() or np.any(values[:,0] > values[:,1]):
@@ -34,6 +63,8 @@ def error_bounds(pred, lower, upper):
 def main():
     annotation_path = ROOT/'experiments/visual_annotations.json'
     annotations = json.loads(annotation_path.read_text())
+    review_path = ROOT/'experiments/visual_human_review.json'
+    review, confirmed = load_human_review(annotation_path, review_path)
     manifest = pd.read_csv(OUT/'visual_frame_manifest.csv')
     source = pd.read_csv(ROOT/'reference/recording_manifest.csv').set_index('clip')
     if len(manifest) != 72 or manifest.duplicated(['clip','frame']).any():
@@ -49,7 +80,7 @@ def main():
         row = dict(clip=r.clip, container_id=r.container_id, frame=r.frame,
                    actual_audio_time_s=r.actual_audio_time_s, fraction=r.fraction,
                    status='ai_provisional' if water else 'excluded',
-                   human_review_status=annotations['human_review_status'],
+                   human_review_status='author_confirmed_water_band' if (r.clip, r.frame) in confirmed else 'not_reviewed',
                    reason=spec['caution'] if water else spec.get('excluded_all',spec.get('excluded',{}).get(str(r.frame))))
         if not row['reason']:
             raise ValueError('Every inclusion/exclusion must have a reason.')
@@ -88,7 +119,8 @@ def main():
     for clip, g in frame.groupby('clip',sort=False):
         valid = g[g.status=='ai_provisional']
         result = dict(clip=clip, planned_frames=len(g), usable_provisional_frames=len(valid),
-                      excluded_frames=int((g.status=='excluded').sum()), human_reviewed_frames=0)
+                      excluded_frames=int((g.status=='excluded').sum()),
+                      human_reviewed_frames=int(g.human_review_status.eq('author_confirmed_water_band').sum()))
         if len(valid):
             for name in ['model','assumed']:
                 result[f'{name}_mean_proxy_difference_pp'] = float(valid[f'{name}_proxy_abs_difference_pp'].mean())
@@ -105,14 +137,20 @@ def main():
         assumed_proxy_difference_pp=('assumed_proxy_abs_difference_pp','mean'),
         ambiguous_band_assignments=('band_boundary_ambiguous','sum')).reset_index()
     by_band.to_csv(OUT/'visual_by_level_band.csv',index=False)
-    report = dict(status='exploratory_AI_visual_proxy_only', planned_videos=8, planned_frames=72,
+    report = dict(status='exploratory_AI_assisted_visual_proxy', planned_videos=8, planned_frames=72,
                   usable_videos=int((summary.usable_provisional_frames>0).sum()),
-                  usable_provisional_frames=len(usable), excluded_frames=72-len(usable), human_reviewed_frames=0,
+                  usable_provisional_frames=len(usable), excluded_frames=72-len(usable), human_reviewed_frames=len(confirmed),
+                  human_review_scope='displayed green water-surface bands only; project-author confirmation',
+                  human_review_record_sha256=hashlib.sha256(review_path.read_bytes()).hexdigest() if review else None,
+                  independent_blinded_review=False,
+                  rim_and_base_human_review_status='not_explicitly_confirmed',
+                  status_definition='ai_provisional retains AI origin and uncalibrated measurement status; human review is recorded separately.',
                   annotation_sha256=hashlib.sha256(annotation_path.read_bytes()).hexdigest(),
                   equal_clip_model_proxy_difference_pp=float(summary.model_mean_proxy_difference_pp.mean()),
                   equal_clip_assumed_proxy_difference_pp=float(summary.assumed_mean_proxy_difference_pp.mean()),
                   unit='percentage points of image-relative visible filling; not centimetres',
-                  limitations=['AI annotations have not received independent human review.',
+                  limitations=['Green water-surface bands were confirmed by the project author after exploratory results were available; this is not independent blinded validation.' if confirmed else 'AI annotations have not received human review.',
+                    'Confirmation does not separately certify blue rim/base bands or excluded images.',
                     'Image-relative fraction can differ systematically from physical height fraction.',
                     'Pixel bounds are sensitivity ranges, not confidence intervals or calibrated metrology.',
                     'This reuses seen-test videos; it adds a modality, not new independent test containers.',

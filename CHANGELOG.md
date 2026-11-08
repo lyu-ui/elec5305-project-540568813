@@ -1,5 +1,11 @@
 # Changelog
 
+## Author confirmation of water-surface bands - November 2026
+
+- Recorded explicit project-author confirmation of all 46 displayed green water-surface bands in a separate, hash-bound review record.
+- Kept the original frozen coordinates, 26 exclusions and numerical comparisons unchanged.
+- Updated per-frame review status, validation, public explanations and private review-sheet generation. Confirmation does not cover blue rim/base geometry and is not independent blinded or calibrated physical validation.
+
 ## Experimental extension - November 2026
 
 - Executed 16 clean controls and 144 Gaussian-noise neural inference conditions with the frozen model and score.

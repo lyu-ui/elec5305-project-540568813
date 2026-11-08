@@ -25,7 +25,10 @@ def save(fig,name):
     plt.close(fig)
 
 
-def main():
+def main(visual_only=False):
+    if visual_only:
+        plot_visual()
+        return
     F.mkdir(exist_ok=True)
     n = pd.read_csv(R/'noise_summary.csv')
     fig, axs = plt.subplots(1,2,figsize=(11,4.5),layout='constrained')
@@ -92,21 +95,29 @@ def main():
         fig.suptitle('Exploratory mechanism examples | seed 5305 | no true pitch or level label',fontsize=12)
         save(fig,'noise_mechanisms')
 
+    plot_visual()
+
+
+def plot_visual():
     visual=pd.read_csv(R/'visual_by_frame.csv');valid=visual[visual.status=='ai_provisional']
+    reviewed=int(valid.human_review_status.eq('author_confirmed_water_band').sum())
     fig,axs=plt.subplots(2,3,figsize=(12,7.5),layout='constrained')
     for ax,(clip,g) in zip(axs.flat,valid.groupby('clip',sort=False)):
         t=g.actual_audio_time_s;v=g.visual_fraction_midpoint*100
         ax.errorbar(t,v,yerr=np.vstack([v-g.visual_fraction_lower*100,g.visual_fraction_upper*100-v]),
-                    fmt='o',color='#087e8b',ms=4,capsize=2,label='AI visual proxy + pixel range')
+                    fmt='o',color='#087e8b',ms=4,capsize=2,label='AI-assisted visual proxy + pixel range')
         ax.plot(t,g.audio_model_fraction*100,'s-',color='#ad4b36',ms=3,label='Audio model / metadata height')
         ax.plot(t,g.assumed_fraction*100,'k--',label='Assumed linear filling')
         ax.set(title=f'{clip} | {len(g)}/9 usable frames',xlabel='Audio time (s)',ylabel='Relative filling (%)',ylim=(-5,125))
         ax.grid(alpha=.15)
     handles,labels=axs[0,0].get_legend_handles_labels()
     fig.legend(handles,labels,loc='outside lower center',ncol=3,fontsize=9)
-    fig.suptitle('Exploratory image-relative comparison | AI annotations, no independent human review\nPixel ranges do not calibrate perspective or refraction; clips 16 and 18 excluded (cropped bases)',fontsize=12)
+    fig.suptitle(f'Exploratory image-relative comparison | author confirmed {reviewed}/{len(valid)} water bands\nNo independent blinded or physical calibration; rim/base bands not separately confirmed',fontsize=12)
     save(fig,'visual_proxy_comparison')
 
 
 if __name__=='__main__':
-    main()
+    import argparse
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--visual-only',action='store_true',help='Refresh only the visual-reference figure.')
+    main(visual_only=parser.parse_args().visual_only)

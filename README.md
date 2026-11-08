@@ -19,7 +19,8 @@ checked against an independent Python implementation.
 There are no independently measured liquid-level trajectories in this project.
 Results therefore describe agreement with that reference, not validated
 liquid-level accuracy. The extension also includes explicitly provisional,
-AI-assisted image-relative references; these are not calibrated measurements.
+AI-assisted image-relative references. The author has confirmed all 46 green
+water-surface bands; these are not calibrated measurements.
 
 ## Extended experiments
 
@@ -29,7 +30,9 @@ AI-assisted image-relative references; these are not calibrated measurements.
 - **33-recording endpoint comparison:** a fixed terminal median repairs two
   severe global offsets but worsens several other recordings. Every case is retained.
 - **72 video time points screened:** 46 provisional visual labels and 26 documented
-  exclusions. Independent human review and calibrated physical validation remain open.
+  exclusions. The project author has confirmed all 46 displayed green water-surface
+  bands. Independent blinded review, rim/base confirmation and calibrated physical
+  validation remain open.
 
 [Extension methods, findings and reproduction](docs/EXPERIMENT_EXTENSION.md) ·
 [Per-recording results](experiments/results/)
@@ -193,7 +196,9 @@ are documented separately.
 ## Known limitations
 
 - Reference trajectories assume filling behavior; they are not measured truth.
-- Image-relative visual annotations are AI-assisted and unreviewed; perspective,
+- Image-relative visual annotations are AI-assisted; the author confirmed the 46
+  green water-surface bands after results were available. This is not independent
+  blinded validation. Blue rim/base bands were not separately confirmed; perspective,
   refraction and visibility selection prevent a centimetre-accuracy claim.
 - Only 8 seen and 8 unseen recordings enter the principal held-out comparison.
 - Ranking uses complete recordings, and physical endpoint correction uses the

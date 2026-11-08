@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "recorded_at_utc": "2026-11-08T23:49:52.200813+00:00",
+  "reviewer_role": "project_author",
+  "review_method": "Project author explicitly confirmed that all displayed green water-surface bands in the nine-page review PDF are correct; no coordinate corrections requested.",
+  "scope": "displayed_green_water_surface_bands_only",
+  "annotation_file": "experiments/visual_annotations.json",
+  "annotation_sha256": "4eed6de7cbc85ae3109c4916c5e1f16dc9f5251d2decf67150ed9fc43b87ffea",
+  "reviewed_pdf_sha256": "882e2317017bdac58ca68b004b61ef083d79ef59aad27603a47f5826fe225585",
+  "review_timing": "After exploratory comparison results were available; not an independent or blinded study.",
+  "confirmed_frames": {
+    "clip_11": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "clip_12": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "clip_13": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "clip_14": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "clip_15": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "clip_16": [],
+    "clip_17": [
+      1,
+      2,
+      3,
+      6,
+      7,
+      8,
+      9
+    ],
+    "clip_18": []
+  },
+  "coordinate_changes": false,
+  "rim_and_base_review_status": "not_explicitly_confirmed",
+  "excluded_frame_review_status": "not_explicitly_confirmed; retain all 26 original exclusions",
+  "limitations": [
+    "One project-author visual confirmation, not independent re-annotation or inter-rater reliability.",
+    "No calibrated physical height, perspective or refraction validation."
+  ]
+}

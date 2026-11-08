@@ -8,11 +8,17 @@ from reportlab.lib.pagesizes import A4
 from reportlab.lib.utils import ImageReader
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.cidfonts import UnicodeCIDFont
+from evaluate_visual_reference import load_human_review
 
 ROOT=Path(__file__).resolve().parents[1]
 
 
 def main():
+    annotation_path=ROOT/'experiments/visual_annotations.json'
+    annotations=json.loads(annotation_path.read_text())['clips']
+    review,confirmed=load_human_review(annotation_path)
+    total=sum(v is not None for spec in annotations.values() for v in spec['water_y_bounds'])
+    reviewed=len(confirmed)
     out=ROOT/'outputs/pdf';out.mkdir(parents=True,exist_ok=True)
     target=out/'ELEC5305_Visual_Reference_Review.pdf'
     pdfmetrics.registerFont(UnicodeCIDFont('STSong-Light'))
@@ -22,7 +28,7 @@ def main():
     def text(x,y,value,size=11,color='#182d34'):
         c.setFillColor(color);c.setFont('STSong-Light',size);c.drawString(x,y,value)
     def footer(page):
-        text(36,24,'ELEC5305 | 视觉参考核对 | AI 初始标注，尚未人工复核',9,'#536971')
+        text(36,24,f'ELEC5305 | AI 初始标注 | 作者已确认 {reviewed}/{total} 处绿色水面范围',9,'#536971')
         text(W-70,24,f'{page}/9',9)
     c.setFillColorRGB(.07,.23,.27);c.rect(0,H-170,W,170,fill=1,stroke=0)
     text(38,H-60,'水位视觉参考核对',25,'#ffffff')
@@ -30,8 +36,8 @@ def main():
     text(38,H-124,'已有公开视频的 72 个固定时间点 / 8 段录音',11,'#d4e6e5')
     lines=[
       '这份文件用于核对画面中的水面位置，不是最终课程报告。',
-      '绿色区域：AI 初步判断的水面可能范围。',
-      '蓝色区域：杯口和内底的可能位置。',
+      f'绿色区域：AI 初始水面范围，作者已确认 {reviewed}/{total} 处。',
+      '蓝色区域：杯口和内底的可能位置，尚未单独确认。',
       '灰色标记：已排除，不参与相对水位比较。',
       '',
       '目前保留 46 个候选点，排除 26 个点。',
@@ -41,7 +47,8 @@ def main():
       '核对时只看水面和杯体，不需要判断模型预测是否正确。',
       '若绿色区域没有覆盖水面，可记录“clip_14，F04，范围偏下”。',
       '若看不清，可记录“无法判断”，不必勉强选出一个位置。',
-      '你可以直接回复需要修改的编号；当前文件没有记录你的确认。',
+      '本版已记录你的绿色框确认，原坐标和 26 处排除保持不变。' if review else '当前文件尚未记录人工确认。',
+      '本次为作者目视确认，不是独立盲评，也不是重新独立标注。',
       '',
       '即使完成目视复核，透视、折射和内底厚度仍然带来系统误差。',
       '所以这些标签支持相对趋势与探索性对照，不能证明厘米级精度。',
@@ -54,14 +61,14 @@ def main():
     for line in lines:
         text(38,y,line,11);y-=24
     footer(1);c.showPage()
-    annotations=json.loads((ROOT/'experiments/visual_annotations.json').read_text())['clips']
     frames=pd.read_csv(ROOT/'experiments/results/visual_frame_manifest.csv')
     rois={11:(80,190,180,470),12:(65,335,180,480),13:(85,335,180,480),
           14:(78,265,175,460),15:(65,335,175,480),16:(40,355,155,480),
           17:(55,290,190,480),18:(75,315,195,480)}
     for page,(clip,spec) in enumerate(annotations.items(),2):
         count=sum(v is not None for v in spec['water_y_bounds'])
-        text(36,H-40,f'{clip} | 候选 {count}/9 | 人工复核 0/9',18)
+        clip_reviewed=sum((clip,j+1) in confirmed for j in range(9))
+        text(36,H-40,f'{clip} | 保留 {count}/9 | 绿框已确认 {clip_reviewed}/{count}',17)
         text(36,H-63,'绿色：水面范围   蓝色：杯口与内底范围   EXCLUDED：已排除',10)
         if count==0:
             note='排除原因：杯底在画面外，不能猜测完整杯高。'

@@ -12,7 +12,8 @@ The project does not retrain the network. It keeps continuous air-column
 length as the target and separates seen from unseen containers. All errors
 are against an assumption-derived filling reference. No independently
 measured liquid-level trajectory is available in this experiment. The new
-visual extension is explicitly an unreviewed image-relative proxy comparison.
+visual extension is an image-relative proxy comparison with author confirmation
+of the 46 green water-surface bands, not independent blinded validation.
 
 ## Completed experimental scope
 
@@ -27,7 +28,7 @@ visual extension is explicitly an unreviewed image-relative proxy comparison.
 - Standalone batch analysis, single-recording demonstration, input/result verification and public documentation.
 - Full-model inference under 144 generated-noise conditions plus 16 clean controls.
 - Fixed terminal-window comparisons across all 33 recordings, including worsened cases.
-- All 72 prespecified video frames screened; 46 AI-assisted visual candidates and 26 exclusions.
+- All 72 prespecified video frames screened; 46 AI-assisted visual candidates and 26 exclusions. The author confirmed the 46 displayed green water-surface bands.
 
 ## Main findings
 
@@ -64,9 +65,10 @@ adds actual noisy neural inference, a systematic endpoint comparison and
 provisional visual references. At 0 dB, reference MAE rises to 4.142/4.326 cm
 for seen/unseen groups. The 0.2 s terminal median improves unseen reference MAE
 from 2.482 to 1.583 cm but worsens the seen mean from 1.742 to 1.778 cm.
-The visual labels have not been independently human-reviewed and do not measure
-true physical height. Experimental packaging is complete; that validation
-boundary remains open.
+The author has confirmed the 46 green water-surface bands, with no coordinate
+changes. This is one author review after results were available, not an independent
+blinded study; blue rim/base bands were not separately confirmed. These proxies
+do not measure true physical height. That validation boundary remains open.
 
 ## Boundaries of the conclusion
 

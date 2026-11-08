@@ -1,11 +1,14 @@
 import sys
 import unittest
+import tempfile
+import json
+import hashlib
 from pathlib import Path
 import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]/'python'))
 from run_extension import add_noise, terminal_estimate
-from evaluate_visual_reference import relative_bounds, error_bounds
+from evaluate_visual_reference import relative_bounds, error_bounds, load_human_review
 
 
 class ExtensionTests(unittest.TestCase):
@@ -49,6 +52,25 @@ class ExtensionTests(unittest.TestCase):
         np.testing.assert_allclose(error_bounds(.8,.4,.6),(.2,.4))
         with self.assertRaises(ValueError):
             relative_bounds([10,20],[15,25],[18,22])
+
+    def test_review_cannot_transfer_to_changed_annotations_or_excluded_frames(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            annotation=Path(tmp)/'visual_annotations.json'
+            review=Path(tmp)/'visual_human_review.json'
+            annotation.write_text(json.dumps({'clips':{'example':{'water_y_bounds':[[40,50],None]+[None]*7}}}))
+            record={'annotation_sha256':hashlib.sha256(annotation.read_bytes()).hexdigest(),
+                    'scope':'displayed_green_water_surface_bands_only','confirmed_frames':{'example':[1]}}
+            review.write_text(json.dumps(record))
+            self.assertEqual(load_human_review(annotation)[1],{('example',1)})
+            record['confirmed_frames']['example']=[2]
+            review.write_text(json.dumps(record))
+            with self.assertRaises(ValueError):
+                load_human_review(annotation)
+            record['confirmed_frames']['example']=[1]
+            review.write_text(json.dumps(record))
+            annotation.write_text(annotation.read_text()+'\n')
+            with self.assertRaises(ValueError):
+                load_human_review(annotation)
 
 
 if __name__ == '__main__':
