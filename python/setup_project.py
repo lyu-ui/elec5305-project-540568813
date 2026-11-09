@@ -70,6 +70,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--workers', type=int, default=4, choices=range(1, 9), metavar='1..8')
     parser.add_argument('--data-only', action='store_true', help='Download/verify WAVs without regenerating analysis outputs.')
+    parser.add_argument('--portable', action='store_true', help='Check regenerated values numerically across platforms, preserving archived summaries; exact-byte mode remains the default.')
     args = parser.parse_args()
     cache = ROOT / '.cache' / 'source_audio'
     cache.mkdir(parents=True, exist_ok=True)
@@ -80,7 +81,7 @@ def main() -> None:
             print(f'Verified {number}/{len(rows)}: {clip}', flush=True)
     scripts = ['verify_inputs.py', 'verify_selection.py']
     if not args.data_only:
-        scripts += ['reproduce_analysis.py', 'endpoint_diagnostic.py', 'verify_generated_results.py']
+        scripts += ['prepare_portable_analysis.py'] if args.portable else ['reproduce_analysis.py', 'endpoint_diagnostic.py', 'verify_generated_results.py']
     for script in scripts:
         subprocess.run([sys.executable, str(ROOT / 'python' / script)], cwd=ROOT, check=True)
     print('Audio verified.' if args.data_only else 'Setup complete. Open the project in MATLAB and run: R = run_project;')

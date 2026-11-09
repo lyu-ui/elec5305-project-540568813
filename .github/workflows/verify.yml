@@ -38,14 +38,14 @@ jobs:
       - name: Prepare independently verified reference inputs
         run: |
           python -m pip install -r python/requirements-analysis.txt
-          python python/setup_project.py
+          python python/setup_project.py --portable
       - uses: matlab-actions/setup-matlab@v3
         with:
           release: R2025b
       - name: Execute and compare MATLAB results
         uses: matlab-actions/run-command@v3
         with:
-          command: diary('matlab_ci.log'); R = run_project(false,false); assert(height(R.meta)==33); assert(height(R.frames)==21494); disp('RUN_PROJECT_CI_PASSED'); diary off
+          command: diary('matlab_ci.log'); R = run_project(false,false); assert(height(R.meta)==33); assert(height(R.frames)==21494); r2_plot(R,5); disp('RUN_PROJECT_CI_PASSED'); diary off
       - name: Independently audit all four MATLAB tables
         run: python python/audit_matlab_results.py
       - name: Retain execution evidence
@@ -59,3 +59,5 @@ jobs:
             matlab_results/selective_by_clip.csv
             matlab_results/wiener_trials.csv
             matlab_results/lpc_control.csv
+            matlab_results/figure_05.png
+            outputs/verification/portable_analysis.json
