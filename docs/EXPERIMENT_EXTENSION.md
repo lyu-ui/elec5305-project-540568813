@@ -7,6 +7,11 @@ The new evidence explains failure mechanisms and challenges overly broad
 reliability claims. It does not establish independently measured liquid-level
 accuracy.
 
+Throughout this historical extension, "seen" means official Test I: recordings
+are held out but 7/8 containers overlap reliability-score development. "Unseen"
+means Test II, whose containers are absent from both score development and
+upstream neural training. See the subsequent [statistical audit](STATISTICAL_AUDIT.md).
+
 ## Design and provenance
 
 [Settings](../experiments/extension_protocol.json) were written before running

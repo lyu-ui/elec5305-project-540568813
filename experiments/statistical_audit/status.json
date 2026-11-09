@@ -1,0 +1,13 @@
+{
+  "status": "computed",
+  "protocol_sha256": "bac16149d325d8d6848bb597ab4cb094a017858ded1bda6989de6db62bdf726d",
+  "script_sha256": "635b0b1cefc6c64c521d526baaae5e26711ef97b3c3d9501e148fc2089d62a6b",
+  "manifest_sha256": "72829a7506f30e96d210746085706710905b30baebd9d262cb281f4b6d8bd346",
+  "frozen_score_sha256": "74083abc05e505bcd48a04f0a788ed5ee86c6dfccb702795fe7c2d84b736769d",
+  "test_I_overlap_containers": 7,
+  "test_I_containers": 8,
+  "loco_containers": 11,
+  "loco_recordings": 19,
+  "reference": "Assumption-derived reference error; no new measured water-level labels.",
+  "design": "Post-review exploratory audit; network stays frozen; existing benchmark is not overwritten."
+}

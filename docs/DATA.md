@@ -9,8 +9,8 @@ are not new measurements collected by this project.
 | Role | Official split | Recordings | Containers |
 | --- | --- | ---: | ---: |
 | Development | train | 11 | 10 |
-| Seen test | Test I | 8 | 8 |
-| Unseen test | Test II | 8 | 8 |
+| Recording-held-out test (7/8 score-development containers) | Test I | 8 | 8 |
+| New-container test | Test II | 8 | 8 |
 | Shape diagnostics | Test III | 6 | 6 |
 
 There are 25 unique containers across roles, because seen containers can
@@ -18,6 +18,9 @@ recur across official splits. Counts must not be added as if all groups
 contained distinct containers. The shape-diagnostic set includes four
 bottleneck cases, one cylinder and one pointed semiconical/conical case;
 there is no verified hemispherical recording in this subset.
+
+The seven score-development overlaps are container_1, 6, 7, 18, 25, 30 and 31.
+Only Test I clip_18/container_40 is new to the score. See the [split audit](STATISTICAL_AUDIT.md).
 
 ## Provenance files
 

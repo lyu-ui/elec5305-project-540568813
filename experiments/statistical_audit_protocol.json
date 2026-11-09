@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "purpose": "Post-review audit; historical test results were already known. This is not external preregistration or a new independent test set.",
+  "paired_tests": "Two-sided exact sign flips of mean paired container differences at 70% within-recording retention; enumerate all 256 assignments for each eight-container group.",
+  "multiplicity_family": ["Test I Combined", "Test II Combined", "Test I Prominence", "Test II Prominence"],
+  "multiplicity_correction": "Holm across these four exploratory comparisons",
+  "nested_loco": {
+    "pool": ["development", "seen_test"],
+    "outer_unit": "container; all recordings of that container withheld",
+    "inner_unit": "container within outer training data",
+    "ridge_grid": [0.001, 0.01, 0.1, 1.0, 10.0, 100.0],
+    "inner_objective": "Mean over validation containers of recording-mean squared log1p reference-error prediction error",
+    "training_weights": "Equal total weight per recording, matching the original score",
+    "standardization": "Refit only on each training fold",
+    "reporting": "Average recordings within each outer container, then average containers. Fold estimates share training data: descriptive results, no independent-fold p-value."
+  },
+  "risk_coverage": {
+    "methods": ["Combined", "Prominence", "Model support", "Endpoint stability", "Error oracle"],
+    "coverage": "Retained fraction under weights that give each recording equal total mass; one test recording per container",
+    "risk": "Weighted retained absolute reference error divided by retained mass",
+    "thresholds": "All distinct scores; tied scores enter together",
+    "curve_export": "At most 201 index-spaced display points per curve; AURC uses every distinct threshold before thinning",
+    "aurc": "Exact right-step sum of risk times coverage increments, over (0,1]; no trapezoid convention or zero-risk origin",
+    "deployable_grid": "101 thresholds from development score quantiles, fixed before applying to either test group; no test-error threshold selection"
+  },
+  "recording_indicator": {
+    "window_s": 0.2,
+    "value": "Absolute cents difference between final model pitch and median preceding pitch in the last 0.2 seconds, excluding the final sample",
+    "flag_threshold": "90th percentile of development recording indicators; no test labels used",
+    "interpretation": "Offline diagnostic for final-pitch instability; no calibrated reliability probability"
+  },
+  "uncertainty": "Archived 2000-resample percentile bootstrap intervals retained alongside exact tests. With eight containers, intervals are unstable and sign-flip inference requires joint sign symmetry under the null."
+}

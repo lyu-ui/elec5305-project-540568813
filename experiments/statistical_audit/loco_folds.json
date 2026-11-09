@@ -1,0 +1,362 @@
+[
+  {
+    "held_out_container": "container_1",
+    "train_containers": [
+      "container_17",
+      "container_18",
+      "container_25",
+      "container_30",
+      "container_31",
+      "container_4",
+      "container_40",
+      "container_5",
+      "container_6",
+      "container_7"
+    ],
+    "test_clips": [
+      "clip_01",
+      "clip_11",
+      "clip_27"
+    ],
+    "selected_penalty": 0.001,
+    "inner_containers": [
+      "container_17",
+      "container_18",
+      "container_25",
+      "container_30",
+      "container_31",
+      "container_4",
+      "container_40",
+      "container_5",
+      "container_6",
+      "container_7"
+    ],
+    "standardization": "outer training only"
+  },
+  {
+    "held_out_container": "container_17",
+    "train_containers": [
+      "container_1",
+      "container_18",
+      "container_25",
+      "container_30",
+      "container_31",
+      "container_4",
+      "container_40",
+      "container_5",
+      "container_6",
+      "container_7"
+    ],
+    "test_clips": [
+      "clip_04"
+    ],
+    "selected_penalty": 1.0,
+    "inner_containers": [
+      "container_1",
+      "container_18",
+      "container_25",
+      "container_30",
+      "container_31",
+      "container_4",
+      "container_40",
+      "container_5",
+      "container_6",
+      "container_7"
+    ],
+    "standardization": "outer training only"
+  },
+  {
+    "held_out_container": "container_18",
+    "train_containers": [
+      "container_1",
+      "container_17",
+      "container_25",
+      "container_30",
+      "container_31",
+      "container_4",
+      "container_40",
+      "container_5",
+      "container_6",
+      "container_7"
+    ],
+    "test_clips": [
+      "clip_05",
+      "clip_14"
+    ],
+    "selected_penalty": 0.01,
+    "inner_containers": [
+      "container_1",
+      "container_17",
+      "container_25",
+      "container_30",
+      "container_31",
+      "container_4",
+      "container_40",
+      "container_5",
+      "container_6",
+      "container_7"
+    ],
+    "standardization": "outer training only"
+  },
+  {
+    "held_out_container": "container_25",
+    "train_containers": [
+      "container_1",
+      "container_17",
+      "container_18",
+      "container_30",
+      "container_31",
+      "container_4",
+      "container_40",
+      "container_5",
+      "container_6",
+      "container_7"
+    ],
+    "test_clips": [
+      "clip_08",
+      "clip_15"
+    ],
+    "selected_penalty": 1.0,
+    "inner_containers": [
+      "container_1",
+      "container_17",
+      "container_18",
+      "container_30",
+      "container_31",
+      "container_4",
+      "container_40",
+      "container_5",
+      "container_6",
+      "container_7"
+    ],
+    "standardization": "outer training only"
+  },
+  {
+    "held_out_container": "container_30",
+    "train_containers": [
+      "container_1",
+      "container_17",
+      "container_18",
+      "container_25",
+      "container_31",
+      "container_4",
+      "container_40",
+      "container_5",
+      "container_6",
+      "container_7"
+    ],
+    "test_clips": [
+      "clip_09",
+      "clip_16"
+    ],
+    "selected_penalty": 1.0,
+    "inner_containers": [
+      "container_1",
+      "container_17",
+      "container_18",
+      "container_25",
+      "container_31",
+      "container_4",
+      "container_40",
+      "container_5",
+      "container_6",
+      "container_7"
+    ],
+    "standardization": "outer training only"
+  },
+  {
+    "held_out_container": "container_31",
+    "train_containers": [
+      "container_1",
+      "container_17",
+      "container_18",
+      "container_25",
+      "container_30",
+      "container_4",
+      "container_40",
+      "container_5",
+      "container_6",
+      "container_7"
+    ],
+    "test_clips": [
+      "clip_10",
+      "clip_17"
+    ],
+    "selected_penalty": 10.0,
+    "inner_containers": [
+      "container_1",
+      "container_17",
+      "container_18",
+      "container_25",
+      "container_30",
+      "container_4",
+      "container_40",
+      "container_5",
+      "container_6",
+      "container_7"
+    ],
+    "standardization": "outer training only"
+  },
+  {
+    "held_out_container": "container_4",
+    "train_containers": [
+      "container_1",
+      "container_17",
+      "container_18",
+      "container_25",
+      "container_30",
+      "container_31",
+      "container_40",
+      "container_5",
+      "container_6",
+      "container_7"
+    ],
+    "test_clips": [
+      "clip_06"
+    ],
+    "selected_penalty": 100.0,
+    "inner_containers": [
+      "container_1",
+      "container_17",
+      "container_18",
+      "container_25",
+      "container_30",
+      "container_31",
+      "container_40",
+      "container_5",
+      "container_6",
+      "container_7"
+    ],
+    "standardization": "outer training only"
+  },
+  {
+    "held_out_container": "container_40",
+    "train_containers": [
+      "container_1",
+      "container_17",
+      "container_18",
+      "container_25",
+      "container_30",
+      "container_31",
+      "container_4",
+      "container_5",
+      "container_6",
+      "container_7"
+    ],
+    "test_clips": [
+      "clip_18"
+    ],
+    "selected_penalty": 100.0,
+    "inner_containers": [
+      "container_1",
+      "container_17",
+      "container_18",
+      "container_25",
+      "container_30",
+      "container_31",
+      "container_4",
+      "container_5",
+      "container_6",
+      "container_7"
+    ],
+    "standardization": "outer training only"
+  },
+  {
+    "held_out_container": "container_5",
+    "train_containers": [
+      "container_1",
+      "container_17",
+      "container_18",
+      "container_25",
+      "container_30",
+      "container_31",
+      "container_4",
+      "container_40",
+      "container_6",
+      "container_7"
+    ],
+    "test_clips": [
+      "clip_07"
+    ],
+    "selected_penalty": 0.1,
+    "inner_containers": [
+      "container_1",
+      "container_17",
+      "container_18",
+      "container_25",
+      "container_30",
+      "container_31",
+      "container_4",
+      "container_40",
+      "container_6",
+      "container_7"
+    ],
+    "standardization": "outer training only"
+  },
+  {
+    "held_out_container": "container_6",
+    "train_containers": [
+      "container_1",
+      "container_17",
+      "container_18",
+      "container_25",
+      "container_30",
+      "container_31",
+      "container_4",
+      "container_40",
+      "container_5",
+      "container_7"
+    ],
+    "test_clips": [
+      "clip_02",
+      "clip_12"
+    ],
+    "selected_penalty": 1.0,
+    "inner_containers": [
+      "container_1",
+      "container_17",
+      "container_18",
+      "container_25",
+      "container_30",
+      "container_31",
+      "container_4",
+      "container_40",
+      "container_5",
+      "container_7"
+    ],
+    "standardization": "outer training only"
+  },
+  {
+    "held_out_container": "container_7",
+    "train_containers": [
+      "container_1",
+      "container_17",
+      "container_18",
+      "container_25",
+      "container_30",
+      "container_31",
+      "container_4",
+      "container_40",
+      "container_5",
+      "container_6"
+    ],
+    "test_clips": [
+      "clip_03",
+      "clip_13"
+    ],
+    "selected_penalty": 1.0,
+    "inner_containers": [
+      "container_1",
+      "container_17",
+      "container_18",
+      "container_25",
+      "container_30",
+      "container_31",
+      "container_4",
+      "container_40",
+      "container_5",
+      "container_6"
+    ],
+    "standardization": "outer training only"
+  }
+]

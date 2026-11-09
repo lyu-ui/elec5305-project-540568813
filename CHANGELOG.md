@@ -1,5 +1,15 @@
 # Changelog
 
+## Split, inference and presentation audit - 9 November 2026
+
+- Corrected Test I interpretation: 7/8 containers overlap reliability-score development; preserved official machine-readable role identifiers.
+- Added four exact paired sign-flip tests, Holm adjustment, nested 11-container LOCO, dense selection curves, global AURC and a recording-level endpoint indicator.
+- Replaced the claim of Prominence superiority with the observed, unstable group-dependent direction.
+- Executed the MATLAB entry point and updated figure 5 in GitHub CI; added Python 3.12/3.13 checks and portable numeric reproduction with archived outputs preserved.
+- Formatted the MATLAB helpers and removed course-week labels from the main analysis.
+- Added scientific WebP figures, a source-hosted audio preview, local comparison players, a consolidated limitations section, favicon and sharing metadata.
+- Added MIT terms for original code/documentation; kept third-party assets outside the grant. Public hosting of the four processed audio files remains pending source permission.
+
 ## Author confirmation of water-surface bands - November 2026
 
 - Recorded explicit project-author confirmation of all 46 displayed green water-surface bands in a separate, hash-bound review record.

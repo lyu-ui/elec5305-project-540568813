@@ -14,6 +14,13 @@ No video crosses development and principal test roles. All eight selected
 unseen containers are absent from the official training-container list.
 `python/verify_selection.py` reconstructs the selection and asserts agreement.
 
+Official Test I is **recording-held-out with 7/8 score-development containers**:
+container_1, 6, 7, 18, 25, 30 and 31 overlap. Only clip_18/container_40 is new
+to the reliability score. The upstream network's "seen" definition and the
+reliability regression's training boundary are different. All eight Test II
+containers are absent from both. Video separation does not imply container
+separation. See the explicit [split audit](STATISTICAL_AUDIT.md#two-different-meanings-of-an-unseen-container).
+
 ## Frozen physical estimates
 
 The real-finetuned upstream checkpoint is fixed. Its 215 state-dictionary
@@ -62,7 +69,9 @@ predictor.
 A ridge regression predicts `log(1 + reference absolute error)` with penalty
 0.1. Standardization and coefficients are fitted on development data only,
 with equal total weight per recording. The score is the negative prediction;
-it is not a calibrated probability.
+it is not a calibrated probability. The fixed 0.1 is a baseline regularisation
+choice, not a demonstrated optimum. A separate nested container-validation audit
+compares penalties 0.001 to 100 without changing the historical score.
 
 Evaluation retains 100%, 90%, 80% or 70% of frames within each complete test
 recording. Acoustic scores determine selection; test reference errors do not.
@@ -71,6 +80,22 @@ uniform random retention, and an explicitly labelled error oracle.
 Per-recording MAEs are averaged equally. The paired uncertainty analysis
 resamples containers 2,000 times with seed 5305; frames are not treated as
 independent experimental units.
+
+## Additional evaluation after review
+
+The [statistical audit](STATISTICAL_AUDIT.md) adds two-sided exact sign-flip tests
+(all 256 assignments per eight-container group), Holm correction for four
+comparisons, 91 within-recording retention fractions, global threshold curves
+and an explicitly defined weighted AURC. A 101-point threshold grid is obtained
+from development scores only. A final-pitch jump indicator diagnoses recording-level
+endpoint instability; fixed within-recording retention cannot reject a whole clip.
+
+The audit also pools 19 development/Test I recordings into eleven outer
+leave-one-container-out folds. Every recording of a held-out container is excluded
+from model fitting, scaling and inner penalty selection. These are exploratory
+post-review analyses; the pretrained network stays frozen and outer fits share
+training data. Full estimands, fold identities and limitations are documented
+with the saved results.
 
 ## Controlled extensions
 

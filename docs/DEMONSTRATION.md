@@ -70,7 +70,7 @@ their limitations are described in [Results](RESULTS.md).
 1. Explain the question: can acoustic features help identify unreliable estimates?
 2. Show the official split design: 11 development, 8 seen, 8 unseen and 6 diagnostic recordings.
 3. Open the three case plots. Explain that an obvious resonance can coexist with a bad physical offset.
-4. Show the held-out coverage/error results. Seen performance improves; the unseen combined-score improvement is inconclusive.
+4. Show the coverage/error results and split boundary: Test I shares 7/8 containers with score development. Test II improvement is inconclusive. Then show container LOCO and global threshold curves.
 5. Play the noise comparison and explain why waveform SNR and natural sound quality differ.
 6. Finish with the limitation: independent water-level measurements are needed to validate actual sensing accuracy.
 
@@ -78,15 +78,17 @@ their limitations are described in [Results](RESULTS.md).
 
 ```bash
 python python/verify_project.py
-python python/verify_project.py --with-data
+python python/verify_inputs.py
+python python/verify_selection.py
 ```
 
-The first command checks the published files, split constraints, cached
-physical calculations, summary aggregation and five demonstration behavior
-tests. It does not download data. The second additionally checks all analysis
-WAV hashes, metadata selection and the 14 prepared result tables. Output is
-written to `outputs/verification/project_check.json`.
+The first command checks published files, split constraints, cached physical
+calculations, summary aggregation, the statistical audit and 16 behavior tests.
+It does not download data and saves `outputs/verification/project_check.json`.
+The other two commands check analysis WAV hashes and metadata selection after
+setup. Portable setup separately checks regenerated values numerically; the
+optional `verify_project.py --with-data` route requires exact historical CSV bytes.
 
-The GitHub workflow runs the first check on changes to `main`. Neither check
-executes MATLAB or reruns the neural network. Use the separate MATLAB route
-and four-table audit for those numerical outputs.
+The GitHub workflow runs the first check on changes to `main` in Python 3.12
+and 3.13. A separate job executes MATLAB and audits its four output tables.
+These checks use frozen predictions and do not rerun the neural network.

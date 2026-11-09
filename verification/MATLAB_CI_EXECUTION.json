@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "run_url": "https://github.com/lyu-ui/elec5305-project-540568813/actions/runs/42541443174",
+  "commit": "6b05ef9f154687e7268b905a5ed244cebd1b0841",
+  "job_id": 128917044613,
+  "artifact_id": 13640888666,
+  "command": "R = run_project(false,false); r2_plot(R,5)",
+  "recordings": 33,
+  "frames": 21494,
+  "marker": "RUN_PROJECT_CI_PASSED",
+  "numeric_audit": {
+    "frame_features_max_abs": 3.69e-10,
+    "selective_by_clip_max_abs": 5.33e-15,
+    "wiener_trials_max_abs": 4.97e-13,
+    "lpc_control_max_abs": 1.33e-09,
+    "atol": 1e-07,
+    "rtol": 1e-09
+  },
+  "matlab_marker": "MATLAB execution completed: 09-Nov-2026 00:42:38\nVersion: 25.2.0.3360999 (R2025b) Update 7\nMaximum feature mismatch: 2.49145e-10\nIdentity NRMSE: 1.98838e-16\n",
+  "figure_05_sha256": "bebca9c1e78784a16de4f5c78c9d3cc06e40256d0f2fe4fe83304153e041d94f",
+  "python_versions_checked": [
+    "3.12",
+    "3.13"
+  ]
+}

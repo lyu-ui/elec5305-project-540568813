@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "test_I_score_development_overlap": "7/8 containers",
+  "exact_tests": 4,
+  "sign_patterns_per_test": 256,
+  "loco_containers": 11,
+  "loco_recordings": 19,
+  "global_threshold_curves": 10,
+  "scope": "Saved-data consistency and fold identities; not independent physical-level validation."
+}

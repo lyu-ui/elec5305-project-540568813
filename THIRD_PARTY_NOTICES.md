@@ -8,6 +8,13 @@ Its MIT license and copyright notice are preserved in
 `python/upstream/LICENSE`. The exact upstream commit is recorded in
 `reference/model_run.json`.
 
+## Scope of the project MIT license
+
+The root LICENSE covers original project code and documentation only.
+It does not relicense dataset audio/video, pretrained weights, upstream metadata,
+or third-party illustrations. The vendored model retains the original upstream
+MIT copyright notice separately. Existing third-party assets keep their own terms.
+
 ## Dataset and weights
 
 Audio, official metadata and pretrained model outputs originate from the
@@ -37,3 +44,19 @@ https://doi.org/10.1109/TPAMI.2026.3690989
 The original analysis, reliability diagnostics and documentation are by
 Yueyao Lyu. This package does not include university report PDFs, Live Script
 reports, teacher feedback, marking rubrics or course sample reports.
+
+## Audio publication review (9 November 2026)
+
+The dataset API at revision `12575460ee39d6adaebbe5aff531a5f4a24a627b`
+has no `cardData.license` value and lists no LICENSE file. The README contains
+a placeholder comment about adding a license, not an express redistribution
+grant. Sources: [dataset API](https://huggingface.co/api/datasets/bpiyush/sound-of-water)
+and [dataset card](https://huggingface.co/datasets/bpiyush/sound-of-water).
+This observation does not determine every possible legal basis for use.
+
+The repository already contains the historical `legacy/early-spectral-analysis/data/pour_A.wav`
+and `pour_B.wav`; their presence does not establish permission to publish new
+derivatives. This revision adds no new hosted audio copies. The website offers
+an original-source preview and local playback of the four generated comparison
+files. Selecting local files does not upload them. Public MP3/OGG redistribution
+of the four processed examples remains pending clarification of the source terms.

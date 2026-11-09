@@ -8,22 +8,29 @@ and requires the extension dependencies and released checkpoint.
 
 ## One-time data preparation
 
-Use Python 3.12 and an internet connection. From the project root:
+Use Python 3.12 or 3.13 (both checked in CI) and an internet connection. From the project root:
 
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r python/requirements-analysis.txt
-python python/setup_project.py
+python python/setup_project.py --portable
 ```
 
 On Windows activate with `.venv\Scripts\activate`. Source audio is downloaded
 from the official public dataset URLs in the manifest and cached under
 `.cache/source_audio/`. The source and 16 kHz analysis WAV hashes are verified.
-The script recreates fixed LPC/Wiener controls, four listening files, all Python
-result tables and figures. The 14 CSV hashes are checked against
-`reference/generated_results_sha256.json`. A source or result mismatch stops
-setup rather than silently changing the reference.
+Portable mode recreates LPC/Wiener controls, four listening files and local
+frame tables. It compares all twelve archived summary tables at atol 1e-7 and
+rtol 1e-9, including text and missing-value identities; it checks cached-prediction
+alignment, frozen-score equations and container-out-of-fold scores for the two
+large generated tables. Published summaries and figures are restored byte-for-byte.
+Evidence is saved in `outputs/verification/portable_analysis.json`.
+
+Omitting `--portable` retains the original strict fourteen-CSV hash test. Identical
+package versions can still produce different CSV bytes on another platform.
+The original hashes remain archival evidence; they are not silently replaced
+when portable mode is used. Source/analysis WAV hashes remain exact in both modes.
 
 The checkout includes summary tables, recorded MATLAB execution evidence,
 selected figures and cached neural predictions. Audio, control MAT files and
@@ -40,12 +47,19 @@ already present in the early repository are retained under `legacy/`.
 4. For listening, run `r2_listen(R,'pours')` and
    `r2_listen(R,'comparison')`, or start with `run_project(true)`.
 
-The numerical helpers were executed in MATLAB R2025b Update 6
-(25.2.0.3312555) on 30 October 2026. The retained log records 10:21:04.
-The executed workflow's saved final marker was 10:22:06. The new standalone
-entry point uses those unchanged helpers, but has not itself been run in
-MATLAB in the packaging environment. Static syntax checking is separate
-from native execution.
+The numerical helpers were executed historically in MATLAB R2025b Update 6
+on 30 October 2026. On 9 November 2026, GitHub CI actually ran
+`R = run_project(false,false)` and `r2_plot(R,5)` in R2025b Update 7
+(25.2.0.3360999), then independently audited all four result tables. The run
+passed on all 33 recordings and 21,494 frames. The maximum feature mismatch
+was 2.49145e-10 and identity NRMSE was 1.98838e-16.
+
+[Completed run](https://github.com/lyu-ui/elec5305-project-540568813/actions/runs/42541443174)
+and [retained evidence](../verification/MATLAB_CI_EXECUTION.json) identify the
+executed commit and downloadable artifact. The workflow runs this entry point
+on every push and checks the lightweight project tests in both Python 3.12 and
+3.13. It uses the official MathWorks setup/run-command actions; automatic
+licensing applies to this public repository's base-MATLAB workflow.
 
 Base MATLAB is sufficient for the supplied numerical implementations.
 The plotting helper requests Times New Roman; if unavailable, MATLAB may
@@ -54,7 +68,13 @@ substitute another font. No report export or document-font check is needed.
 ## Repeat analysis or compare implementations
 
 The setup command already executes the independent Python analysis. To repeat
-it after preparing the WAVs:
+the portable route while preserving published summary bytes:
+
+```bash
+python python/prepare_portable_analysis.py
+```
+
+For exact-byte reproduction in the original environment:
 
 ```bash
 python python/reproduce_analysis.py
@@ -118,3 +138,9 @@ to have run MATLAB.
 `verification/PACKAGING_CHECKS.json` records checks performed on this project
 bundle. It distinguishes the actual earlier MATLAB execution from static
 checks and Python reproduction in the packaging environment.
+
+## Statistical revision
+
+See [the statistical audit](STATISTICAL_AUDIT.md#reproduction) for container LOCO,
+inner grouped ridge selection, exact paired tests, global risk-coverage curves
+and AURC. These scripts preserve historical benchmark outputs.

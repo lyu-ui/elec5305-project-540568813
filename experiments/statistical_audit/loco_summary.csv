@@ -1,0 +1,3 @@
+method,containers,recordings,full_mae_cm,retained_mae_cm,delta_cm,improved_containers
+Fixed ridge 0.1,11,19,1.4573335562368366,1.3288152675592544,-0.1285182886775823,9
+Nested ridge,11,19,1.4573335562368366,1.3312030787057112,-0.12613047753112522,9

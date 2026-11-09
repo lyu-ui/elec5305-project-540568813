@@ -2,24 +2,42 @@
 
 ## Selective prediction
 
-| Retained frames | Seen macro reference MAE (cm) | Unseen macro reference MAE (cm) |
+Test I is recording-held-out, with **7/8 containers shared with score development**;
+clip_18/container_40 is the exception. Test II is container-disjoint from score
+development and upstream model training. These boundaries constrain interpretation.
+
+| Retained frames | Test I macro reference MAE (cm) | Test II macro reference MAE (cm) |
 | --- | ---: | ---: |
 | 100% | 1.742 | 2.479 |
 | 90% | 1.673 | 2.447 |
-| 80% | 1.604 | 2.447 |
+| 80% | 1.604 | 2.429 |
 | 70% | 1.538 | 2.414 |
 
-The seen-group reduction at 70% retention is about 11.7%. The unseen-group
-reduction is about 2.6%, with a paired 95% interval spanning zero. On unseen
-recordings, prominence alone gives 2.235 cm at 70% retention, outperforming
-the combined score. The fitted model therefore does not establish a universal
-reliability rule.
+At 70%, the Combined paired changes are -0.204 cm [-0.274, -0.134] for Test I
+and -0.065 cm [-0.158, +0.031] for Test II (archived percentile-bootstrap intervals).
+Exact two-sided sign-flip p-values are 0.0078125 and 0.2578125, respectively.
+The Test I result does not establish transfer to new containers; Test II remains
+inconclusive. Eight-cluster uncertainty is substantial.
 
-![Coverage versus reference error](../matlab_results/figure_05.png)
+Prominence raises Test I mean error to 1.834 cm, worsening 7/8 recordings
+(p=0.015625 versus no selection). Its Test II mean is lower at 2.235 cm, mainly
+through clips 20 and 23, but p=0.4453125 versus no selection. The direction
+changes across groups; a stable advantage is not established. See the
+[four-test Holm adjustment and per-clip changes](STATISTICAL_AUDIT.md).
 
-The separate development-fitted threshold produces approximately 76.9% seen
-and 79.6% unseen coverage, illustrating that a training retention target does
-not guarantee the same coverage on new recordings.
+![Coverage versus reference error](../experiments/statistical_audit/figures/within_recording_selection.svg)
+
+The new 19-recording, 11-container outer-LOCO evaluation yields 1.457 to 1.329 cm
+for fixed ridge 0.1 and 1.331 cm for nested penalty selection. All recordings
+of the outer container are withheld. This post-review pool is different from
+Test II and does not replace it.
+
+The original development-fitted threshold produces approximately 76.9% Test I
+and 79.6% Test II coverage. The new global curves give Combined AURC of
+1.293/2.738 cm, versus constant-risk areas of 1.742/2.479 cm. Thus within-recording
+ranking and cross-recording rejection have different behavior. The
+[full audit](STATISTICAL_AUDIT.md) defines weighting, AURC, development-only
+thresholds and the recording-level endpoint-jump diagnostic.
 
 ## Endpoint failure
 
@@ -78,8 +96,8 @@ diagnosing competing peaks.
 
 ## What the results establish
 
-Acoustic features help reject some high-reference-error frames, especially
-on the selected seen-container subset. Endpoint correction and physical
+Acoustic features help reject some high-reference-error frames, on the recording-held-out Test I subset,
+which shares 7/8 containers with score development. Endpoint correction and physical
 model mismatch can still defeat local spectral evidence. Independent
 level measurements and additional unseen containers are required before
 claiming deployment accuracy.
