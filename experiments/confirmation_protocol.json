@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "created_local": "2026-11-10 (Australia/Sydney)",
+  "base_commit": "3dfcf87",
+  "status": "Pre-registered before any confirmation audio was downloaded or any model output for these recordings was computed. The commit containing this file is the time stamp. Settings must not change after audio download; any deviation is reported as such.",
+  "purpose": "Independent confirmation of the post-hoc level-by-level findings (docs/FAILURE_LEVELS.md) on recordings and containers never used in this project.",
+  "data": {
+    "manifest": "reference/confirmation_manifest.csv, produced by python/confirm_select.py from official metadata only",
+    "source": "official Test II, containers absent from upstream training and from the 33-recording study",
+    "eligibility": "clean == yes; flow_rate_appx == constant; 4 <= end_time - start_time <= 22 s; shape cylindrical or semiconical",
+    "sampling": "up to three recordings per container in item_id order",
+    "size": "33 recordings from 11 containers (6 officially cylindrical, 5 semiconical)",
+    "audio": "official per-item WAV, mono mean, resampled to 16 kHz float32 exactly as setup_project.py; source and analysis SHA-256 recorded at first download",
+    "exclusions": "only download failure, unreadable format, or analysis duration differing from metadata by more than 0.1 s; decided before outputs are inspected and always reported; no outcome-based exclusion"
+  },
+  "model": {
+    "network": "released real-finetuned checkpoint (SHA-256 2fa3d8cec1488ee65bb5a6e30f1b79716d8243bbe4ddc4c0687ce2a02c84303c) via python/infer_official.py classes, eval mode, CPU",
+    "adapter_check": "before confirmation inference, recompute clip_01, clip_19 and clip_24; require maximum absolute wavelength difference from cached predictions below 0.01 cm, otherwise stop and report",
+    "estimator": "released endpoint-corrected air column (lambda - lambda_end)/4; linear reference H*(1 - t/T); no refitting"
+  },
+  "frozen_components": {
+    "reliability_score": "results/score_coefficients.csv (original development fit)",
+    "retargeted_score": "development-only ridge on log1p(|fast|), penalty 0.1, as in python/failure_levels.py",
+    "features": "python/reproduce_analysis.features, 40 ms Hann window",
+    "decomposition": "python/failure_levels.decompose (1.0 s slow window)",
+    "selection": "70% retention within each recording; time-stratified version uses ten equal-duration bins"
+  },
+  "unit_of_analysis": "container: recording-level metrics are averaged over each container's recordings; n = 11",
+  "primary_hypotheses": {
+    "H1_fill_position": "Time-only selection (drop earliest 30%) has lower total |e| MAE than the frozen acoustic score at 70%. Test: one-sided exact sign-flip on container differences (2048 assignments).",
+    "H2_frame_level": "Within time bins, the frozen score increases frame-level |fast| MAE relative to no selection. Test: one-sided exact sign-flip.",
+    "H3_gain": "The gain k (L_pred = k * L_ref, least squares through the origin, linear reference) is below 1. Test: one-sided exact sign-flip on k - 1.",
+    "H4_geometry": "Mean container k is lower for officially semiconical than cylindrical containers. Test: one-sided exact permutation of shape labels (462 splits).",
+    "multiplicity": "Holm over H1-H4 at familywise alpha 0.05; a hypothesis is confirmed only if its Holm-adjusted p < 0.05 and the effect has the predicted sign"
+  },
+  "pre_registered_descriptive_expectations": {
+    "D1_levels": "container-mean offset plus rate share > 50% and frame-level fluctuation share < 10% of mean-square error",
+    "D2_retargeted": "time-stratified retargeted score lowers |fast| MAE versus no selection (one-sided exact sign-flip, unadjusted, secondary)",
+    "D3_taper": "Spearman correlation between container taper ratio (top radius / bottom radius) and container k is negative (descriptive, n = 11)",
+    "D4_original_claim": "frozen score versus no selection on total |e| at 70% is reported two-sided without a directional prediction"
+  },
+  "reporting": "All hypotheses and expectations are reported whether confirmed or not, with container bootstrap 95% intervals (2,000 resamples, seed 5305) for effect sizes, per-container tables and any exclusions."
+}
