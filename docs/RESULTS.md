@@ -15,13 +15,13 @@ development and upstream model training. These boundaries constrain interpretati
 
 At 70%, the Combined paired changes are -0.204 cm [-0.274, -0.134] for Test I
 and -0.065 cm [-0.158, +0.031] for Test II (archived percentile-bootstrap intervals).
-Exact two-sided sign-flip p-values are 0.0078125 and 0.2578125, respectively.
+Exact two-sided sign-flip p-values are 0.0078 and 0.26, respectively.
 The Test I result does not establish transfer to new containers; Test II remains
 inconclusive. Eight-cluster uncertainty is substantial.
 
 Prominence raises Test I mean error to 1.834 cm, worsening 7/8 recordings
-(p=0.015625 versus no selection). Its Test II mean is lower at 2.235 cm, mainly
-through clips 20 and 23, but p=0.4453125 versus no selection. The direction
+(p=0.016 versus no selection). Its Test II mean is lower at 2.235 cm, mainly
+through clips 20 and 23, but p=0.45 versus no selection. The direction
 changes across groups; a stable advantage is not established. See the
 [four-test Holm adjustment and per-clip changes](STATISTICAL_AUDIT.md).
 

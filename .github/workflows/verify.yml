@@ -48,6 +48,8 @@ jobs:
           command: diary('matlab_ci.log'); R = run_project(false,false); assert(height(R.meta)==33); assert(height(R.frames)==21494); r2_plot(R,5); disp('RUN_PROJECT_CI_PASSED'); diary off
       - name: Independently audit all four MATLAB tables
         run: python python/audit_matlab_results.py
+      - name: Confirm the run left tracked files unchanged
+        run: git diff --exit-code --stat
       - name: Retain execution evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -55,9 +57,10 @@ jobs:
           name: matlab-execution-evidence
           path: |
             matlab_ci.log
-            matlab_results/MATLAB_VERIFICATION.txt
-            matlab_results/selective_by_clip.csv
-            matlab_results/wiener_trials.csv
-            matlab_results/lpc_control.csv
-            matlab_results/figure_05.png
+            outputs/matlab/MATLAB_VERIFICATION.txt
+            outputs/matlab/selective_by_clip.csv
+            outputs/matlab/wiener_trials.csv
+            outputs/matlab/lpc_control.csv
+            outputs/matlab/figure_05.png
             outputs/verification/portable_analysis.json
+            outputs/verification/analysis_wav_portability.json

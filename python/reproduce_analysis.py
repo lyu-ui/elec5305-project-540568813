@@ -98,6 +98,25 @@ def wiener(x,n,kind):
     z=z/np.maximum(den,EPS)
     return z[L:L+len(x)]
 
+def draw_pipeline():
+    """Figure 1: analysis pipeline with explicit test-group boundaries."""
+    from matplotlib.patches import FancyBboxPatch
+    fig,ax=plt.subplots(figsize=(8.8,2.6));ax.set_xlim(-.05,10.05);ax.set_ylim(0,3);ax.axis('off')
+    w,h=2.95,.74;cols=[1.5,5.0,8.5];rows=[2.25,.75]
+    text=[['33 source WAVs\nOfficial split labels','Frozen pitch model\nWavelength and air column','Error against an\nassumption-based reference'],
+          ['STFT diagnostics\nWiener and LPC studies','Development-only\nreliability regression','Test I and Test II\nCoverage versus error']]
+    for r,y in enumerate(rows):
+        for c,x in enumerate(cols):
+            ax.add_patch(FancyBboxPatch((x-w/2,y-h/2),w,h,boxstyle='round,pad=0.02,rounding_size=0.08',fc='#f1f3f5',ec='#6c7278',lw=1))
+            ax.text(x,y,text[r][c],ha='center',va='center',fontsize=9)
+    gap=.08;arrow=dict(arrowstyle='-|>',color='#555',lw=1,shrinkA=0,shrinkB=0,mutation_scale=10)
+    for y in rows:
+        for a,b in [(0,1),(1,2)]:
+            ax.annotate('',(cols[b]-w/2-gap,y),(cols[a]+w/2+gap,y),arrowprops=arrow)
+    for x in [cols[0],cols[2]]:
+        ax.annotate('',(x,rows[1]+h/2+gap),(x,rows[0]-h/2-gap),arrowprops=arrow)
+    save('fig01_pipeline')
+
 def main():
     global NOISE_CAL
     meta=pd.read_csv(ROOT/'reference/recording_manifest.csv');parts=[];spec={}
@@ -177,12 +196,7 @@ def main():
             cor.append(dict(role=role,feature=f,n=len(d),rho=spearmanr(d[f],d.mae_cm).statistic))
     pd.DataFrame(cor).to_csv(RES/'recording_correlations.csv',index=False)
 
-    # Figure 1: one scientific pipeline, including the scope of reference labels.
-    fig,ax=plt.subplots(figsize=(8.4,2.5));ax.set_xlim(0,10);ax.set_ylim(0,3);ax.axis('off')
-    boxes=[(1,2.2,'33 source WAVs\nOfficial split labels'),(4,2.2,'Frozen pitch model\nWavelength and air column'),(8,2.2,'Error against an\nassumption-based reference'),(1,.7,'STFT diagnostics\nWiener and LPC studies'),(4,.7,'Development-only\nreliability regression'),(8,.7,'Seen and unseen tests\nCoverage versus error')]
-    for x,y,s in boxes:ax.text(x,y,s,ha='center',va='center',bbox=dict(boxstyle='round,pad=.45',fc='#f1f3f5',ec='#6c7278'),fontsize=9)
-    for x1,y1,x2,y2 in [(2.05,2.2,2.7,2.2),(5.5,2.2,6.4,2.2),(1,1.8,1,1.14),(2.1,.7,2.7,.7),(5.2,.7,6.4,.7),(8,1.8,8,1.1)]:ax.annotate('',(x2,y2),(x1,y1),arrowprops=dict(arrowstyle='->',color='#555'))
-    save('fig01_pipeline')
+    draw_pipeline()
 
     # Original pair diagnostic, not used as two independent containers.
     fig,axs=plt.subplots(2,1,figsize=(8.1,4.8),layout='constrained')

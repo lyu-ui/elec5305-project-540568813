@@ -8,6 +8,7 @@ from __future__ import annotations
 import argparse
 import csv
 import hashlib
+import json
 import math
 from pathlib import Path
 import shutil
@@ -27,7 +28,22 @@ def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def prepare_recording(row: dict, cache: Path) -> str:
+def check_analysis_wav(path: Path, row: dict) -> None:
+    """Platform-independent checks used when analysis bytes may differ."""
+    fs, y = wavfile.read(path)
+    if fs != 16000 or y.dtype != np.float32 or y.ndim != 1:
+        raise ValueError(f"Unexpected analysis format: {row['clip']}; expected 16 kHz mono float32.")
+    if len(y) != int(row['samples']) or not np.all(np.isfinite(y)):
+        raise ValueError(f"Analysis length/value check failed: {row['clip']}.")
+
+
+def prepare_recording(row: dict, cache: Path, exact_analysis: bool = True) -> tuple[str, bool]:
+    """Return (clip, analysis_bytes_match_manifest).
+
+    Source bytes are always exact. In portable mode, resampled float32 bytes may
+    differ by CPU architecture; those files are kept after format/length checks
+    and validated downstream through numeric table comparisons.
+    """
     source = cache / (row['item_id'] + '.wav')
     if not source.exists() or sha256(source) != row['source_sha256']:
         request = urllib.request.Request(row['source_url'], headers={'User-Agent': 'PouringSoundResearch/1.0'})
@@ -38,7 +54,8 @@ def prepare_recording(row: dict, cache: Path) -> str:
         source.write_bytes(data)
     target = ROOT / row['audio_file']
     target.parent.mkdir(parents=True, exist_ok=True)
-    if not target.exists() or sha256(target) != row['analysis_sha256']:
+    exact = target.exists() and sha256(target) == row['analysis_sha256']
+    if not exact:
         fs, raw = wavfile.read(source)
         if str(fs) != row['source_fs'] or raw.dtype != np.int16:
             raise ValueError(f"Unexpected source format: {row['clip']}; expected the recorded 16-bit PCM input.")
@@ -51,8 +68,11 @@ def prepare_recording(row: dict, cache: Path) -> str:
             temporary = Path(handle.name)
         try:
             wavfile.write(temporary, 16000, analysis)
-            if sha256(temporary) != row['analysis_sha256']:
-                raise ValueError(f"Analysis hash mismatch: {row['clip']}. Use the pinned analysis dependencies.")
+            exact = sha256(temporary) == row['analysis_sha256']
+            if not exact and exact_analysis:
+                raise ValueError(f"Analysis hash mismatch: {row['clip']}. Use the pinned analysis dependencies, "
+                                 "or use --portable for numeric cross-platform checks.")
+            check_analysis_wav(temporary, row)
             temporary.replace(target)
         finally:
             temporary.unlink(missing_ok=True)
@@ -63,7 +83,7 @@ def prepare_recording(row: dict, cache: Path) -> str:
         destination.parent.mkdir(parents=True, exist_ok=True)
         if not destination.exists() or sha256(destination) != row['source_sha256']:
             shutil.copyfile(source, destination)
-    return row['clip']
+    return row['clip'], exact
 
 
 def main() -> None:
@@ -76,14 +96,38 @@ def main() -> None:
     cache.mkdir(parents=True, exist_ok=True)
     with (ROOT / 'reference' / 'recording_manifest.csv').open(newline='') as handle:
         rows = list(csv.DictReader(handle))
+    differing = []
     with ThreadPoolExecutor(max_workers=args.workers) as pool:
-        for number, clip in enumerate(pool.map(lambda row: prepare_recording(row, cache), rows), 1):
-            print(f'Verified {number}/{len(rows)}: {clip}', flush=True)
-    scripts = ['verify_inputs.py', 'verify_selection.py']
+        results = pool.map(lambda row: prepare_recording(row, cache, exact_analysis=not args.portable), rows)
+        for number, (clip, exact) in enumerate(results, 1):
+            note = '' if exact else ' (analysis bytes differ on this platform; numeric checks follow)'
+            print(f'Verified {number}/{len(rows)}: {clip}{note}', flush=True)
+            if not exact:
+                differing.append(clip)
+    if args.portable:
+        import platform
+        import scipy
+        report = {
+            'source_hashes_exact': len(rows),
+            'analysis_hash_exact': len(rows) - len(differing),
+            'analysis_bytes_differ': sorted(differing),
+            'platform': platform.platform(),
+            'machine': platform.machine(),
+            'python': platform.python_version(),
+            'numpy': np.__version__,
+            'scipy': scipy.__version__,
+            'scope': 'Differing analysis WAVs pass format/length checks; regenerated tables are compared numerically next.',
+        }
+        out = ROOT / 'outputs' / 'verification' / 'analysis_wav_portability.json'
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(json.dumps(report, indent=2) + '\n')
+        print(f"Analysis WAV bytes: {report['analysis_hash_exact']}/{len(rows)} exact; "
+              f"differing: {', '.join(report['analysis_bytes_differ']) or 'none'}", flush=True)
+    scripts = [['verify_inputs.py', '--portable'] if args.portable else ['verify_inputs.py'], ['verify_selection.py']]
     if not args.data_only:
-        scripts += ['prepare_portable_analysis.py'] if args.portable else ['reproduce_analysis.py', 'endpoint_diagnostic.py', 'verify_generated_results.py']
-    for script in scripts:
-        subprocess.run([sys.executable, str(ROOT / 'python' / script)], cwd=ROOT, check=True)
+        scripts += [['prepare_portable_analysis.py']] if args.portable else [['reproduce_analysis.py'], ['endpoint_diagnostic.py'], ['verify_generated_results.py']]
+    for script, *extra in scripts:
+        subprocess.run([sys.executable, str(ROOT / 'python' / script), *extra], cwd=ROOT, check=True)
     print('Audio verified.' if args.data_only else 'Setup complete. Open the project in MATLAB and run: R = run_project;')
 
 

@@ -36,15 +36,16 @@ At 70% retention, seen macro reference MAE falls from 1.742 to 1.538 cm.
 The paired change is -0.204 cm, with a 95% container-bootstrap interval of
 [-0.274, -0.134] cm. Unseen macro reference MAE falls from 2.479 to 2.414 cm;
 its -0.065 cm change has an interval of [-0.158, +0.031] cm. Exact sign-flip
-p-values are 0.0078125 for Test I and 0.2578125 for Test II. Test I shares
+p-values are 0.0078 for Test I and 0.26 for Test II. Test I shares
 7/8 score-development containers, so its benefit is recording-held-out.
-Prominence has a lower observed Test II mean (2.235 cm; p=0.4453125 versus no
+Prominence has a lower observed Test II mean (2.235 cm; p=0.45 versus no
 selection), but worsens 7/8 Test I recordings. Its direction is unstable.
 
 The post-review 11-container outer-LOCO audit pools 19 development/Test I
 recordings: fixed ridge changes mean reference MAE from 1.457 to 1.329 cm;
 nested ridge selection gives 1.331 cm. Global Combined AURC is 1.293/2.738 cm
-for Test I/II, revealing weak cross-recording rejection on new containers.
+for Test I/II (constant-risk 1.742/2.479 cm): on new containers, global
+score ranking is worse than no selection.
 See [statistical audit](STATISTICAL_AUDIT.md).
 
 The clearest failure mechanism is global endpoint correction. In clip 24,

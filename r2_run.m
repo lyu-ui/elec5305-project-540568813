@@ -1,11 +1,15 @@
-function R = r2_run(root)
+function R = r2_run(root, out)
     % R2_RUN Recompute all core acoustic features and held-out selection results.
     % Pretrained trajectories are frozen input data. No internet/Python is needed.
-    if nargin == 0
+    % New outputs go to OUT (default outputs/matlab, ignored by git), so a run
+    % never overwrites the archived evidence tracked in matlab_results/.
+    if nargin == 0 || isempty(root)
         root = fileparts(mfilename('fullpath'));
     end
+    if nargin < 2 || isempty(out)
+        out = fullfile(root, 'outputs', 'matlab');
+    end
     addpath(root);
-    out = fullfile(root, 'matlab_results');
     if ~exist(out, 'dir')
         mkdir(out);
     end
@@ -157,6 +161,6 @@ function R = r2_run(root)
     fid = fopen(fullfile(out, 'MATLAB_VERIFICATION.txt'), 'w');
     fprintf(fid, 'MATLAB execution completed: %s\nVersion: %s\nMaximum feature mismatch: %.6g\nIdentity NRMSE: %.6g\n', char(datetime('now')), version, maxerr, nrmse);
     fclose(fid);
-    R = struct('root', root, 'meta', meta, 'frames', D, 'model', model, 'selective', sel, 'noise', noiseTable, 'lpc', lpcTable, 'audio', audio);
+    R = struct('root', root, 'out', out, 'meta', meta, 'frames', D, 'model', model, 'selective', sel, 'noise', noiseTable, 'lpc', lpcTable, 'audio', audio);
     fprintf('MATLAB checks passed: %d recordings, %d frames. Maximum mismatch %.3g.\n', height(meta), height(D), maxerr);
 end

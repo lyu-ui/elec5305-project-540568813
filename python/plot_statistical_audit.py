@@ -29,7 +29,11 @@ def main():
     plt.rcParams.update({'font.family':'DejaVu Sans','font.size':10,'svg.fonttype':'none',
                          'svg.hashsalt':'elec5305-statistical-audit','axes.spines.top':False,
                          'axes.spines.right':False})
-    frames=pd.read_csv(ROOT/'outputs/statistical_audit/frame_features.csv')
+    cache=ROOT/'outputs/statistical_audit/frame_features.csv'
+    # The audit cache needs exact analysis-WAV bytes. Otherwise use the
+    # setup-generated table, which portable setup checks numerically and which
+    # carries the same features and frozen reliability score.
+    frames=pd.read_csv(cache if cache.exists() else ROOT/'results/frame_features.csv')
     fig,axes=plt.subplots(1,2,figsize=(12,5),layout='constrained',sharey=True)
     rows=[]
     coverages=np.arange(10,101)/100
@@ -50,15 +54,21 @@ def main():
             mean=values.mean(axis=0)
             ax.plot(coverages*100,mean,label=method,color=COLORS[method],lw=1.7 if method=='Combined' else 1.1)
             if method=='Combined':
-                boot=values[resamples].mean(axis=1)
-                low,high=np.quantile(boot,[.025,.975],axis=0)
-                ax.fill_between(coverages*100,low,high,color=COLORS[method],alpha=.16,lw=0)
-                for c,m,l,h in zip(coverages,mean,low,high):
-                    rows.append(dict(role=role,coverage=c,mean_cm=m,ci_low=l,ci_high=h))
+                # Paired change from 100% retention, resampled by container, so
+                # the band matches the tested quantity, not between-container spread.
+                delta=values-values[:,[-1]]
+                boot=delta[resamples].mean(axis=1)
+                dlow,dhigh=np.quantile(boot,[.025,.975],axis=0)
+                full=mean[-1]
+                ax.fill_between(coverages*100,full+dlow,full+dhigh,color=COLORS[method],alpha=.18,lw=0,
+                                label='Combined: 95% paired-change interval')
+                for c,m,l,h in zip(coverages,mean,dlow,dhigh):
+                    rows.append(dict(role=role,coverage=c,mean_cm=m,delta_cm=m-full,delta_ci_low=l,delta_ci_high=h,
+                                     ci_low=full+l,ci_high=full+h))
         ax.set(title=LABELS[role],xlabel='Frames retained within every recording (%)',ylabel='Macro reference MAE (cm)',ylim=(0,4.5),xlim=(10,100))
         ax.grid(alpha=.18)
     axes[0].legend(fontsize=8)
-    fig.suptitle('Within-recording selection | common vertical scale\nShading: pointwise 95% container bootstrap, eight containers per group',fontsize=12)
+    fig.suptitle('Within-recording selection | common vertical scale\nShading: pointwise 95% container-bootstrap interval of the Combined paired change from 100% retention (eight containers per group)',fontsize=11)
     save(fig,'within_recording_selection')
     pd.DataFrame(rows).to_csv(R/'within_recording_curve.csv',index=False)
 

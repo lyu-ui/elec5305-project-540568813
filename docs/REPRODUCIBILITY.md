@@ -19,7 +19,7 @@ python python/setup_project.py --portable
 
 On Windows activate with `.venv\Scripts\activate`. Source audio is downloaded
 from the official public dataset URLs in the manifest and cached under
-`.cache/source_audio/`. The source and 16 kHz analysis WAV hashes are verified.
+`.cache/source_audio/`. Source hashes are always verified exactly.
 Portable mode recreates LPC/Wiener controls, four listening files and local
 frame tables. It compares all twelve archived summary tables at atol 1e-7 and
 rtol 1e-9, including text and missing-value identities; it checks cached-prediction
@@ -30,7 +30,16 @@ Evidence is saved in `outputs/verification/portable_analysis.json`.
 Omitting `--portable` retains the original strict fourteen-CSV hash test. Identical
 package versions can still produce different CSV bytes on another platform.
 The original hashes remain archival evidence; they are not silently replaced
-when portable mode is used. Source/analysis WAV hashes remain exact in both modes.
+when portable mode is used. Source WAV hashes are exact in both modes. The
+default mode also requires exact 16 kHz analysis WAV bytes. Portable mode does
+not: resampling to float32 can round differently by CPU architecture. On
+Apple Silicon (macOS 26, numpy 2.3.5, scipy 1.17.0), 3 of 33 analysis WAVs
+(clip_13, clip_22, clip_28) differed in bytes, yet all regenerated tables
+matched the archive within 1.3e-9. Portable mode checks such files for 16 kHz
+mono float32 format, manifest length and finite values, records them in
+`outputs/verification/analysis_wav_portability.json`, and then applies the
+numeric table comparison above. `verify_inputs.py --portable` and
+`verify_project.py --with-data --portable` apply the same rule.
 
 The checkout includes summary tables, recorded MATLAB execution evidence,
 selected figures and cached neural predictions. Audio, control MAT files and
@@ -42,7 +51,8 @@ already present in the early repository are retained under `legacy/`.
 1. Finish the setup above, then select the project root as MATLAB Current Folder.
 2. Run `R = run_project;` in the Command Window.
 3. Inspect the completion message, regenerated CSVs and figures in
-   `matlab_results/`. The core assertions stop execution on a numerical or
+   `outputs/matlab/` (ignored by git; `matlab_results/` keeps archived
+   evidence and is not overwritten). The core assertions stop execution on a numerical or
    split mismatch.
 4. For listening, run `r2_listen(R,'pours')` and
    `r2_listen(R,'comparison')`, or start with `run_project(true)`.
@@ -53,6 +63,12 @@ on 30 October 2026. On 9 November 2026, GitHub CI actually ran
 (25.2.0.3360999), then independently audited all four result tables. The run
 passed on all 33 recordings and 21,494 frames. The maximum feature mismatch
 was 2.49145e-10 and identity NRMSE was 1.98838e-16.
+
+On 10 November 2026 the complete route was also run locally on Apple Silicon
+(macOS 26, MATLAB R2025b Update 6, Python 3.13.5): portable setup, then
+`R = run_project;` with all 11 figures. All four MATLAB tables matched Python
+(maximum 1.43e-9) and the run changed no tracked file. See
+[local execution evidence](../verification/MAC_LOCAL_EXECUTION.json).
 
 [Completed run](https://github.com/lyu-ui/elec5305-project-540568813/actions/runs/42541443174)
 and [retained evidence](../verification/MATLAB_CI_EXECUTION.json) identify the
@@ -82,7 +98,8 @@ python python/endpoint_diagnostic.py
 python python/verify_generated_results.py
 ```
 
-After running the MATLAB entry point, compare all four complete MATLAB CSVs:
+After running the MATLAB entry point, compare all four complete MATLAB CSVs in
+`outputs/matlab/` (add `--dir matlab_results` to audit archived evidence):
 
 ```bash
 python python/audit_matlab_results.py

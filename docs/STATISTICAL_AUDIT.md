@@ -67,8 +67,11 @@ selection; they do not test Prominence against Combined directly.
 ![Within-recording selection](../experiments/statistical_audit/figures/within_recording_selection.svg)
 
 The updated plot uses 91 retention fractions, common vertical limits and
-pointwise Combined-score container-bootstrap shading. The shading is not a
-simultaneous confidence band and does not replace the paired tests above.
+shading for the Combined score's paired change from 100% retention (pointwise
+95% container bootstrap, drawn around the full-coverage MAE). It shows the
+uncertainty of the tested improvement rather than between-container spread in
+MAE levels; it is not a simultaneous band and does not replace the paired tests
+above. `within_recording_curve.csv` stores `delta_cm` and its interval.
 
 ## Container-disjoint evaluation and ridge selection
 

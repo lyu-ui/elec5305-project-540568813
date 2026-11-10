@@ -83,11 +83,13 @@ python python/verify_selection.py
 ```
 
 The first command checks published files, split constraints, cached physical
-calculations, summary aggregation, the statistical audit and 16 behavior tests.
+calculations, summary aggregation, the statistical audit and 18 behavior tests.
 It does not download data and saves `outputs/verification/project_check.json`.
-The other two commands check analysis WAV hashes and metadata selection after
-setup. Portable setup separately checks regenerated values numerically; the
-optional `verify_project.py --with-data` route requires exact historical CSV bytes.
+The other two commands check the analysis WAVs and metadata selection after
+setup. Use `verify_inputs.py --portable` after portable setup: it accepts
+platform-dependent float32 bytes after format and length checks. The optional
+`verify_project.py --with-data` route requires exact historical CSV bytes;
+add `--portable` for numeric checks instead.
 
 The GitHub workflow runs the first check on changes to `main` in Python 3.12
 and 3.13. A separate job executes MATLAB and audits its four output tables.

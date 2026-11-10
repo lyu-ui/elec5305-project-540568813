@@ -3,6 +3,8 @@ function R = run_project(playAudio, makeFigures)
     %   R = run_project;              % numerical analysis and all figures
     %   R = run_project(true);        % also play original/processed audio
     %   R = run_project(false,false); % numerical checks only
+    %   Outputs are written to outputs/matlab/ (ignored by git); the archived
+    %   evidence in matlab_results/ is never overwritten by a run.
     if nargin < 1
         playAudio = false;
     end
@@ -32,5 +34,5 @@ function R = run_project(playAudio, makeFigures)
         r2_listen(R, 'comparison');
     end
     fprintf('Project completed: %d recordings | %d frames.\n', height(R.meta), height(R.frames));
-    fprintf('Outputs: %s\n', fullfile(root, 'matlab_results'));
+    fprintf('Outputs: %s\n', R.out);
 end

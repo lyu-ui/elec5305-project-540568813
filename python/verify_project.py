@@ -1,7 +1,9 @@
 """Validate the published project without downloading audio or model weights.
 
 Use --with-data after setup to additionally validate the 33 WAVs and all 14
-regenerated CSVs. This validator does not execute MATLAB or neural inference.
+regenerated CSVs byte-for-byte. Add --portable (after setup_project.py
+--portable) to check analysis WAVs by format/length and regenerated tables
+numerically, as needed on platforms such as Apple Silicon. This validator does not execute MATLAB or neural inference.
 """
 from __future__ import annotations
 
@@ -68,6 +70,7 @@ def validate() -> dict:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--with-data', action='store_true')
+    parser.add_argument('--portable', action='store_true', help='With --with-data: numeric cross-platform checks instead of byte hashes.')
     parser.add_argument('--output', type=Path, default=ROOT / 'outputs/verification/project_check.json')
     args = parser.parse_args()
     result = validate()
@@ -78,9 +81,11 @@ def main() -> None:
     subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', str(ROOT/'tests'), '-v'], cwd=ROOT, check=True)
     result['demonstration_behavior_tests'] = 'passed'
     if args.with_data:
-        for name in ['verify_inputs.py', 'verify_selection.py', 'verify_generated_results.py']:
-            subprocess.run([sys.executable, str(ROOT/'python'/name)], cwd=ROOT, check=True)
-        result['local_inputs_and_regenerated_tables'] = 'passed'
+        steps = ([['verify_inputs.py', '--portable'], ['verify_selection.py'], ['prepare_portable_analysis.py']]
+                 if args.portable else [['verify_inputs.py'], ['verify_selection.py'], ['verify_generated_results.py']])
+        for name, *extra in steps:
+            subprocess.run([sys.executable, str(ROOT/'python'/name), *extra], cwd=ROOT, check=True)
+        result['local_inputs_and_regenerated_tables'] = 'passed (portable numeric checks)' if args.portable else 'passed (exact bytes)'
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2) + '\n')
     print(json.dumps(result, indent=2))

@@ -1,0 +1,46 @@
+{
+  "status": "passed",
+  "date": "2026-11-10",
+  "purpose": "Local Apple Silicon reproduction of the portable setup and MATLAB entry point after the portability and output-directory fixes.",
+  "base_commit": "d8e873a",
+  "environment": {
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "matlab": "25.2.0.3312555 (R2025b) Update 6",
+    "python": "3.13.5 (miniconda, project .venv)",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0"
+  },
+  "setup_portable": {
+    "source_hashes_exact": 33,
+    "analysis_hash_exact": 30,
+    "analysis_bytes_differ": ["clip_13", "clip_22", "clip_28"],
+    "before_fix": "setup_project.py --portable stopped at clip_13 with 'Analysis hash mismatch'.",
+    "regenerated_table_max_abs_difference": 1.2621512723853812e-09,
+    "numeric_atol": 1e-07,
+    "numeric_rtol": 1e-09,
+    "generated_frames_checked": 21494,
+    "development_oof_frames_checked": 7017
+  },
+  "matlab_run_project": {
+    "command": "R = run_project;",
+    "recordings": 33,
+    "frames": 21494,
+    "maximum_feature_mismatch": 4.27363e-10,
+    "identity_nrmse": 2.1352e-16,
+    "figures_exported": 11,
+    "output_directory": "outputs/matlab",
+    "tracked_files_changed_by_run": 0,
+    "warnings": "none after hiding axes toolbars before export"
+  },
+  "audit_matlab_results": {
+    "frame_features.csv": 4.27e-10,
+    "selective_by_clip.csv": 5.33e-15,
+    "wiener_trials.csv": 4.97e-13,
+    "lpc_control.csv": 1.43e-09
+  },
+  "within_recording_curve": {
+    "regenerated_on_this_machine": true,
+    "max_abs_mean_difference_vs_previous": 4.440892098500626e-16,
+    "note": "Shading changed to the paired change from 100% retention; curve means are unchanged."
+  }
+}

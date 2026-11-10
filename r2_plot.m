@@ -52,7 +52,7 @@ function r2_plot(R, number)
                 hold on;
                 for k = 1:3
                     z = C(C.role == roles(k), :);
-                    scatter(z.(names{j}), z.mae_cm, 32, marks{k}, 'DisplayName', roles(k));
+                    scatter(z.(names{j}), z.mae_cm, 32, marks{k}, 'DisplayName', role_label(roles(k)));
                 end
                 xlabel(labels{j});
                 ylabel('Reference MAE (cm)');
@@ -66,24 +66,26 @@ function r2_plot(R, number)
             titles = {"Test I: 7/8 development containers", "Test II: new containers"};
             methods = ["Combined", "Prominence", "Model support", "Random expectation", "Error oracle"];
             cov = [.7 .8 .9 1];
-            oldRng = rng;
-            rng(5305, 'twister');
+            % Shade the paired change of the combined score relative to 100%
+            % retention (95% container bootstrap from results/), so the band
+            % matches the tested quantity rather than between-container spread.
+            B = readtable(fullfile(R.root, 'results', 'paired_container_bootstrap.csv'), 'TextType', 'string');
             for j = 1:2
                 subplot(1, 2, j);
                 hold on;
-                lower = zeros(1, 4);
-                upper = zeros(1, 4);
-                for a = 1:4
-                    z = R.selective(R.selective.role == roles(j) & ...
-                                    R.selective.method == "Combined" & R.selective.coverage == cov(a), :);
-                    v = z.mae_cm;
-                    boot = sort(mean(v(randi(numel(v), [2000 numel(v)])), 2));
-                    bounds = interp1(1:2000, boot, 1 + 1999 * [.025 .975]);
-                    lower(a) = bounds(1);
-                    upper(a) = bounds(2);
+                full = mean(R.selective.mae_cm(R.selective.role == roles(j) & ...
+                            R.selective.method == "Combined" & R.selective.coverage == 1));
+                lower = full * ones(1, 4);
+                upper = full * ones(1, 4);
+                for a = 1:3
+                    b = B(B.role == roles(j) & abs(B.coverage - cov(a)) < 1e-9, :);
+                    assert(height(b) == 1, 'Missing paired bootstrap row.');
+                    lower(a) = full + b.ci_low;
+                    upper(a) = full + b.ci_high;
                 end
                 fill(100 * [cov fliplr(cov)], [lower fliplr(upper)], [.1 .42 .57], ...
-                     'FaceAlpha', .15, 'EdgeColor', 'none', 'HandleVisibility', 'off');
+                     'FaceAlpha', .18, 'EdgeColor', 'none', 'DisplayName', 'Combined: 95% paired-change interval');
+                allVals = [lower upper];
                 for k = 1:5
                     vals = zeros(1, 4);
                     for a = 1:4
@@ -91,19 +93,21 @@ function r2_plot(R, number)
                                         R.selective.method == methods(k) & R.selective.coverage == cov(a), :);
                         vals(a) = mean(z.mae_cm);
                     end
+                    allVals = [allVals vals]; %#ok<AGROW>
                     plot(100 * cov, vals, '-o', 'DisplayName', methods(k), 'LineWidth', 1.3);
                 end
                 xlabel('Retained predictions (%)');
                 ylabel('Macro reference MAE (cm)');
                 title(titles{j});
-                ylim([0 4.5]);
+                pad = .08 * (max(allVals) - min(allVals));
+                ylim([min(allVals) - pad, max(allVals) + pad]);
                 grid on;
                 if j == 1
-                    legend('Location', 'best');
+                    legend('Location', 'southeast');
                 end
             end
-            rng(oldRng);
-            sgtitle('Combined-score shading: pointwise 95% container bootstrap; eight containers per group');
+            sgtitle({'Shading: 95% container-bootstrap interval of the combined score''s paired change from 100% retention', ...
+                     'Eight containers per group; panels use separate y-axis ranges'}, 'FontSize', 11);
         case 6
             C = clip_summary(D);
             roles = ["seen_test", "unseen_test"];
@@ -115,7 +119,7 @@ function r2_plot(R, number)
                 xticklabels(erase(z.clip, 'clip_'));
                 xlabel('Clip number');
                 ylabel('Reference MAE (cm)');
-                title(roles(j), 'Interpreter', 'none');
+                title(role_label(roles(j)), 'Interpreter', 'none');
                 grid on;
                 if j == 1
                     legend('Linear-fill reference', 'Geometry-adjusted proxy');
@@ -230,7 +234,30 @@ function r2_plot(R, number)
             legend('Linear-fill reference', 'Released endpoint correction', 'Known-radius diagnostic', 'Location', 'best');
             grid on;
     end
-    exportgraphics(fig, fullfile(R.root, 'matlab_results', sprintf('figure_%02d.png', number)), 'Resolution', 180);
+    out = fullfile(R.root, 'outputs', 'matlab');
+    if isfield(R, 'out')
+        out = R.out;
+    end
+    if ~exist(out, 'dir')
+        mkdir(out);
+    end
+    % Hide interactive axes toolbars so exported images stay clean.
+    ax = findall(fig, 'Type', 'axes');
+    for k = 1:numel(ax)
+        if isprop(ax(k), 'Toolbar') && ~isempty(ax(k).Toolbar)
+            ax(k).Toolbar.Visible = 'off';
+        end
+    end
+    exportgraphics(fig, fullfile(out, sprintf('figure_%02d.png', number)), 'Resolution', 180);
+end
+
+function label = role_label(role)
+    % Display names: Test I shares 7/8 containers with score development.
+    role = string(role);
+    label = role;
+    label(role == "development") = "Development";
+    label(role == "seen_test") = "Test I (7/8 development containers)";
+    label(role == "unseen_test") = "Test II (new containers)";
 end
 
 function spectrum(R, clip, top)
