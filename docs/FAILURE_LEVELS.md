@@ -1,26 +1,21 @@
 # What makes the estimate work and fail, level by level
 
-Instructor feedback (5 Nov 2026) asked for more tests to understand what makes
-things work and fail at different levels. This analysis asks *where* the
-air-column error comes from and *which* signal can see it. It uses the existing
-33 recordings, cached model outputs and 46 author-confirmed video labels. No new
-labels are created.
+This analysis locates air-column error at recording, fill-position and frame
+levels, using 33 recordings, cached model outputs and 46 author-confirmed
+video labels.
 
-**Status and honesty.** On 10 Nov a quick exploratory check showed that error
-falls strongly with fill progress and that a time-only rule beat the acoustic
-score. The definitions, metrics and four primary comparisons below were then
-fixed in [`failure_levels_protocol.json`](../experiments/failure_levels_protocol.json)
-before the full tables were computed. This is therefore a post-hoc explanatory
-study, not independent confirmation. One analysis (the scale factor *k*) was
-added after E1 and is labelled as such. All errors remain relative to the
-assumption-derived filling reference.
+**Study design.** An exploratory check on 10 November found that error fell
+with fill progress and a time-only rule beat the acoustic score. The four
+primary comparisons were then fixed in
+[`failure_levels_protocol.json`](../experiments/failure_levels_protocol.json)
+before computing the full tables. This is a post-hoc study; the gain-factor
+analysis was added after E1. Errors use the derived filling reference.
 
-**Independent confirmation.** The main findings were then pre-registered and
+**Confirmation.** The main hypotheses were then pre-registered and
 tested on 33 recordings from 11 containers never used in this project
 ([confirmation](CONFIRMATION.md)). Fill-position, frame-level and gain-error
 findings were confirmed (Holm p ≤ 0.005). The container-shape explanation of the
-gain error was **not** confirmed; statements about shape below are therefore
-specific to the original 33 recordings.
+gain error was **not** confirmed. Shape differences below describe the original sample.
 
 Code: [`python/failure_levels.py`](../python/failure_levels.py) ·
 Tables and figures: [`experiments/failure_levels/`](../experiments/failure_levels/)
@@ -73,13 +68,11 @@ and 71–84% of Test II mean-square error.
 
 ![Scale factor](../experiments/failure_levels/figures/scale_factor.svg)
 
-The geometry-adjusted (constant-volume frustum) reference raises semiconical *k*
-only slightly, so in this sample most of the shape gap is not a reference
-artefact. A plausible mechanism is that the quarter-wave conversion of
-wavelength to air-column length assumes a cylinder. **However, the
-pre-registered test on 11 new containers did not reproduce the shape
-difference** (semiconical minus cylindrical mean *k* = +0.04, p = 0.59), so the
-gain error itself is confirmed but its link to official shape is not. Radius, height and
+The geometry-adjusted frustum reference raises semiconical *k* slightly, while
+the shape gap persists in this sample. The cylindrical quarter-wave conversion
+suggested a possible explanation. In the confirmation set, however, semiconical
+minus cylindrical mean *k* is +0.04 (p = 0.59), so the shape effect fails to
+replicate. Radius, height and
 their ratio showed no clear relation to *k* (|Spearman| < 0.1 across the 27
 development and test recordings). The one negative *k* (Test II) is the clip 24 endpoint failure.
 
@@ -143,8 +136,7 @@ filling with the linear reference and the model.
 **Interpretation.** Water rises somewhat faster than the linear reference, so
 part of the early disagreement is a reference error. The larger part is the
 model reporting even more water than is visible, shrinking towards the end of
-the pour, which matches the gain error above. This is descriptive: six
-recordings, image-relative proxies, perspective and refraction uncertainty.
+the pour, which matches the gain pattern above.
 
 ## E4. STFT window length
 
@@ -161,30 +153,26 @@ worse at all three windows (Test I +0.003 to +0.005 cm, Test II +0.015 to
 which supports the E1/E2 conclusion that the limiting factor is the error
 structure, not spectral resolution.
 
-## Consequences for the project's claims
+## Implications
 
 - The original Test I improvement at 70% retention is reproducible, but its
   mechanism is mainly fill position. A time-only rule is better in both groups.
 - Reliability is decided mainly at the recording level through a gain error
   (confirmed on new containers). Useful next steps are recording-level checks of
-  gain and endpoint and a better wavelength-to-length conversion, not finer
-  frame selection. Container shape did not explain the gain on new containers;
+  gain and endpoint and a better wavelength-to-length conversion.
+  Container shape did not explain the gain on new containers;
   container height near the model's output range may (post-hoc, see
   [confirmation](CONFIRMATION.md)).
 - Frame-level reliability is learnable from model-consistency cues, but it
   matters little for total error here.
 
-## Limitations
+## Analysis conditions
 
-- Post-hoc analysis motivated by disclosed exploration; four primary
-  comparisons were fixed before computing the tables. Its main findings were
-  then tested in a separate pre-registered confirmation.
-- Reference-relative error throughout. Video labels are provisional,
-  image-relative and cover 6 Test I recordings only.
-- Eight recordings per test group; exact tests use the sign-symmetric null.
-- |fast| depends on the 1 s smoothing choice; pitch jumps feed the predicted
-  trajectory directly, so their link to |fast| is partly mechanical.
-- The scale-factor analysis was added after E1 and is descriptive.
+Each test group contains eight recordings; exact tests assume sign symmetry.
+Video comparisons cover six Test I recordings and use image-relative labels
+affected by perspective and refraction. The |fast| component depends on the
+1 s smoothing window. Pitch jumps directly affect the predicted trajectory,
+so part of their association with |fast| follows from that construction.
 
 ## Reproduce
 

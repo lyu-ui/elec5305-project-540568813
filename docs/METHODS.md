@@ -18,8 +18,8 @@ Official Test I is **recording-held-out with 7/8 score-development containers**:
 container_1, 6, 7, 18, 25, 30 and 31 overlap. Only clip_18/container_40 is new
 to the reliability score. The upstream network's "seen" definition and the
 reliability regression's training boundary are different. All eight Test II
-containers are absent from both. Video separation does not imply container
-separation. See the explicit [split audit](STATISTICAL_AUDIT.md#two-different-meanings-of-an-unseen-container).
+containers are absent from both. See the
+[split audit](STATISTICAL_AUDIT.md#two-different-meanings-of-an-unseen-container).
 
 ## Frozen physical estimates
 
@@ -38,9 +38,9 @@ $$\hat L(t)=\frac{\hat\lambda(t)-\hat\lambda(T)}{4}.$$
 
 The primary reference is $L_{ref}(t)=H(1-t/T)$, with $T$ taken from the
 analysis WAV duration. It assumes empty-to-full filling at constant height
-rate. It is not an observed liquid-level label. A constant-volume frustum
-reference is evaluated separately for semiconical containers; it changes
-the reference curve, not the predictions.
+rate. Independent physical level traces are unavailable. A constant-volume
+frustum reference provides a sensitivity comparison for semiconical containers
+using the same predictions.
 
 ## Acoustic representation
 
@@ -54,32 +54,28 @@ the reference curve, not the predictions.
 | Peak separation | At least 100 Hz | Reduce double counting of one main lobe |
 | Model support | Within 50 Hz of predicted pitch | Compare model frequency with the full 0-8 kHz spectrum |
 
-Zero padding makes the plotted frequency grid denser; it does not improve
-the window's true resolving power. The Hann main lobe spans about 100 Hz
-between its first zeros.
+Zero padding gives a denser frequency grid. Resolution is set by the window:
+the Hann main lobe spans about 100 Hz between its first zeros.
 
 The fitted score uses five standardized features: spectral prominence,
 competing-peak amplitude ratio, log-transformed pitch jump in cents,
 normalized spectral entropy, and model-frequency support. Optional odd-mode
-support near 3f and 5f is retained as a diagnostic, not fitted as a sixth
-predictor.
+support near 3f and 5f is computed separately as a diagnostic.
 
 ## Reliability model and evaluation
 
 A ridge regression predicts `log(1 + reference absolute error)` with penalty
 0.1. Standardization and coefficients are fitted on development data only,
-with equal total weight per recording. The score is the negative prediction;
-it is not a calibrated probability. The fixed 0.1 is a baseline regularisation
-choice, not a demonstrated optimum. A separate nested container-validation audit
-compares penalties 0.001 to 100 without changing the historical score.
+with equal total weight per recording. The negative predicted log-error is
+used to rank frames. The baseline penalty is 0.1; a separate nested
+container-validation audit compares penalties from 0.001 to 100.
 
 Evaluation retains 100%, 90%, 80% or 70% of frames within each complete test
-recording. Acoustic scores determine selection; test reference errors do not.
+recording. Acoustic scores determine selection; reference errors are evaluated afterwards.
 Comparators include prominence, model support, the exact expectation of
 uniform random retention, and an explicitly labelled error oracle.
 Per-recording MAEs are averaged equally. The paired uncertainty analysis
-resamples containers 2,000 times with seed 5305; frames are not treated as
-independent experimental units.
+resamples containers as the independent units, 2,000 times with seed 5305.
 
 ## Additional evaluation after review
 
@@ -108,8 +104,7 @@ squared-window normalization.
 
 **LPC:** autocorrelation Yule-Walker fits with orders 8, 16 and 32 are checked
 on a fixed two-resonator control near 650 and 1,400 Hz. A real 6.5-6.6 s
-frame illustrates envelope sensitivity, not validated fundamental accuracy.
+frame illustrates envelope sensitivity.
 
 **Frequency pooling:** a 1,000/1,150 Hz two-tone control compares the narrowband
-STFT with 20 ERB-spaced triangular bands. This is an illustrative pooling
-control, not a cochlear or perceptual experiment.
+STFT with 20 ERB-spaced triangular bands to measure the effect of spectral pooling.

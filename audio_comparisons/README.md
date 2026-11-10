@@ -8,19 +8,17 @@
 In MATLAB, use `R = run_project(true);` after setup. The recorded listening
 observations are in
 [`verification/LISTENING_OBSERVATIONS.json`](../verification/LISTENING_OBSERVATIONS.json).
-These observations are from one informal unblinded comparison, not a
-controlled perceptual study. The audio files are generated locally.
+These observations come from one informal, unblinded comparison.
 
 ## Browser playback
 
 The [project website](https://lyu-ui.github.io/elec5305-project-540568813/#listen)
 contains an original-source preview and four local-file players. Choose the four
-WAVs generated in this directory; the browser creates local object URLs and does
-not upload the files. Keep the playback volume unchanged between versions.
+WAVs generated in this directory for playback on your device. Keep the playback
+volume unchanged between versions.
 Python setup alone produces the WAVs; MATLAB is optional for listening.
 
-The four processed examples are not newly uploaded as public MP3/OGG assets.
-The dataset card/API currently provide no explicit redistribution license; see
+The four processed examples are generated locally. Redistribution terms are
+documented in
 [the dated source review](../THIRD_PARTY_NOTICES.md#audio-publication-review-9-november-2026).
-The original source player loads the file from its upstream host. It is not
-the shared-gain comparison file.
+The source-preview player loads the upstream recording before shared-gain processing.

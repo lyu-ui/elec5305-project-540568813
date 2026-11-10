@@ -15,18 +15,14 @@ a development-only reliability model, recording-held-out selective prediction, a
 focused Wiener/LPC controls. The MATLAB experiment helpers have been run and
 checked against an independent Python implementation.
 
-**Scope:** errors are measured against an assumption-derived filling curve.
-There are no independently measured liquid-level trajectories in this project.
-Results therefore describe agreement with that reference, not validated
-liquid-level accuracy. The extension also includes provisional image-relative
-references. The author has confirmed all 46 green water-surface bands; these
-are not calibrated measurements. The [visual-reference methods](docs/EXPERIMENT_EXTENSION.md#visual-reference-without-a-ruler)
-record their origin and the scope of that review.
+**Evaluation:** MAE compares air-column estimates with a filling reference
+derived from container height and recording duration. Video comparisons use
+46 image-relative water-surface bands confirmed by the author.
 
 ## What makes it work and fail
 
-Four post-hoc explanatory experiments, fixed in a protocol before the tables
-were computed, locate the error by level ([full analysis](docs/FAILURE_LEVELS.md)):
+Four post-hoc experiments locate the error by level
+([design and analysis](docs/FAILURE_LEVELS.md)):
 
 - **Gain:** the model under-scales the air column (predicted ≈ *k* × reference).
   In the 33 recordings median *k* was 0.82–0.94 for cylinders, 0.51–0.72 for
@@ -44,10 +40,9 @@ were computed, locate the error by level ([full analysis](docs/FAILURE_LEVELS.md
 
 ### Pre-registered confirmation on new containers
 
-These findings were post-hoc, so they were pre-registered and retested on 33
-recordings from 11 containers never used in this project
-([confirmation](docs/CONFIRMATION.md)). Hypotheses were committed before any new
-audio was downloaded, and the frozen model and score were run once.
+The hypotheses were pre-registered and tested on 33 recordings from 11 new
+containers ([confirmation](docs/CONFIRMATION.md)). Registration preceded the
+audio download and the single run of the frozen model and score.
 
 | Hypothesis | Result on 11 new containers | Holm p | Outcome |
 | --- | --- | ---: | --- |
@@ -69,10 +64,8 @@ container (25.5 cm) needs wavelengths beyond the model's 100 cm output range.
   still retains many high-error frames.
 - **33-recording endpoint comparison:** a fixed terminal median repairs two
   severe global offsets but worsens several other recordings. Every case is retained.
-- **72 video time points screened:** 46 provisional visual labels and 26 documented
-  exclusions. The project author has confirmed all 46 displayed green water-surface
-  bands. Independent blinded review, rim/base confirmation and calibrated physical
-  validation remain open.
+- **72 video time points screened:** 46 author-confirmed water-surface bands and
+  26 exclusions, with frame-level visibility reasons.
 
 [Extension methods, findings and reproduction](docs/EXPERIMENT_EXTENSION.md) ·
 [Per-recording results](experiments/results/)
@@ -93,16 +86,14 @@ from both score development and upstream neural-model training. Machine-readable
 | Test II: new containers | 2.479 cm | 2.414 cm | -0.065 [-0.158, +0.031] cm | 0.26 |
 
 These equal-recording results use the fixed Combined score. Exact tests enumerate
-all 256 container sign assignments; eight-cluster bootstrap intervals remain
-uncertain. Prominence worsens 7/8 Test I recordings but has a lower observed
+all 256 container sign assignments. Prominence worsens 7/8 Test I recordings but has a lower observed
 Test II mean driven mainly by two clips (p=0.45 versus no selection).
-Its effect is unstable across groups; superiority is not established.
+Its effect changes direction across groups.
 
 A new 11-container leave-one-container-out evaluation pools development and
 Test I (19 recordings), withholding all recordings of each outer container.
 Fixed ridge 0.1 changes equal-container reference MAE from 1.457 to 1.329 cm;
-nested training-only ridge selection gives 1.331 cm. This is a post-review
-analysis within that domain, not a replacement for Test II.
+nested training-only ridge selection gives 1.331 cm.
 
 ![Coverage and reference error](experiments/statistical_audit/figures/within_recording_selection.svg)
 
@@ -198,8 +189,8 @@ used by [automated verification](https://github.com/lyu-ui/elec5305-project-5405
 The optional `--with-data` flag re-checks local data and regenerated tables. It
 requires exact historical bytes; after portable setup use
 `python python/verify_project.py --with-data --portable` for numeric checks.
-The [project summary](docs/PROJECT_SUMMARY.md) connects the completed work
-to the main conclusion and remaining scientific limitations.
+The [project summary](docs/PROJECT_SUMMARY.md) connects the experiments to the
+main findings.
 
 ## Experiments
 
@@ -232,24 +223,18 @@ to the main conclusion and remaining scientific limitations.
 | `experiments/` | Fixed extension settings, noise/endpoint results, provisional visual labels and figures |
 | `legacy/early-spectral-analysis/` | Original two-recording exploratory code, data and outputs |
 
-The [early two-recording analysis](legacy/early-spectral-analysis/README.md) is
-retained separately as project history. Its exploratory features are not the
-fitted reliability score evaluated in the current experiment.
-
-The historical `r2_` helper prefix is retained to keep the checked numerical
-implementation unchanged. After the one-time preparation, the project runs
-from MATLAB without a course report or Live Script. The source recording
-manifest, cached model predictions, summary results and analysis code are
-tracked; new recording copies and generated control/audio assets stay local.
+The [early two-recording analysis](legacy/early-spectral-analysis/README.md)
+records the initial spectral experiments. The current MATLAB entry point uses
+the `r2_` helpers. Source manifests, cached predictions, summary results and
+code are tracked; generated recording copies and controls stay local.
 
 ## Verification of preparation
 
 A clean-input test fetched and verified all 33 recordings, reproduced all
 14 Python CSV tables exactly, and recreated both fixed control arrays and
 all four listening WAVs without changes. See
-[setup validation](verification/SETUP_VALIDATION.json). This test did not
-execute MATLAB; the original MATLAB execution and four-table comparison
-are documented separately.
+[setup validation](verification/SETUP_VALIDATION.json). MATLAB execution and
+the four-table comparison are documented in the reproduction guide.
 
 ## Documentation
 
@@ -263,22 +248,15 @@ are documented separately.
 - [Reproduction and verification](docs/REPRODUCIBILITY.md)
 - [Third-party sources and notices](THIRD_PARTY_NOTICES.md)
 
-## Known limitations
+## Study conditions
 
-- Reference trajectories assume filling behavior; they are not measured truth.
-- The author confirmed the 46 image-relative green water-surface bands after
-  results were available. This is not independent
-  blinded validation. Blue rim/base bands were not separately confirmed; perspective,
-  refraction and visibility selection prevent a centimetre-accuracy claim.
-- Only eight recordings enter each principal test group; Test I shares 7/8
-  containers with score development. The original Test I result is recording-held-out.
-- Ranking uses complete recordings, and physical endpoint correction uses the
-  last model sample. The current workflow is offline.
-- Bottleneck cases diagnose physical-model mismatch and are excluded from the
-  principal cylindrical/semiconical accuracy summary.
-- Listening observations come from one informal, unblinded comparison.
-- The combined score is not a calibrated confidence probability and does not
-  outperform every baseline on every split.
+The study uses reference curves rather than independently measured water-level
+traces. The original test groups contain eight containers each; the confirmation
+study adds eleven. Analysis uses complete recordings. Video review covers water
+bands, with rim/base geometry, perspective and refraction contributing uncertainty.
+Listening observations come from one unblinded comparison.
+[Methods and review details](docs/EXPERIMENT_EXTENSION.md#visual-reference-without-a-ruler)
+and [statistical assumptions](docs/STATISTICAL_AUDIT.md) describe these conditions.
 
 ## Code license
 

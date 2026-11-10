@@ -1,8 +1,8 @@
 # Pre-registered confirmation on new containers
 
-The [level-by-level analysis](FAILURE_LEVELS.md) was post-hoc: its hypotheses
-came from the same 33 recordings it tested. This experiment tests the main
-findings again on data that played no part in forming them.
+This experiment tests the hypotheses from the post-hoc
+[level-by-level analysis](FAILURE_LEVELS.md) on 33 recordings from 11 new
+containers.
 
 ## What was fixed in advance
 
@@ -69,25 +69,22 @@ score aimed at frame-level error does help that level, but the level is small.
 **Not confirmed: the shape explanation.** In the original 33 recordings,
 semiconical containers had much lower *k* than cylindrical ones. On the new
 containers, the officially cylindrical group had the slightly *lower* mean *k*.
-The gain error is real, but this data does not support container shape as its
-main cause. The geometry statements in the earlier analysis are revised
-accordingly.
+Gain below one replicates across the new containers; the proposed association
+with official shape does not.
 
-**Post-hoc observation (not part of the confirmation).** The lowest *k*
+**Post-hoc observation.** The lowest *k*
 (0.23) and largest error (9.5 cm) belong to container 36, which is 25.5 cm
 tall. When empty, its air column needs a quarter-wave wavelength of about
 111 cm, but the model's output grid ends at 100 cm, and predictions saturate
-near 98 cm. Tall containers therefore exceed the model's output range. This
-was noticed after the results and needs its own test.
+near 98 cm. This suggests a follow-up test of container height against the
+model's output range.
 
-## Limitations
+## Analysis conditions
 
-- Errors remain relative to the assumption-derived linear reference.
+- Errors use the height-and-duration linear reference defined in [Methods](METHODS.md).
 - Eleven containers; the shape comparison has five and six containers.
 - Official shape labels include two "cylindrical" containers with tapered radii
   (ratios 1.21 and 1.50), which may blur a shape contrast.
-- Run once on one machine; the adapter check bounds platform effects on model
-  outputs.
 
 ## Reproduce
 

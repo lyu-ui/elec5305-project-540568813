@@ -1,8 +1,7 @@
 # Demonstrating the completed study
 
-The demonstration applies the existing development-fitted score to one fixed
-recording. It does not fit another model, choose parameters using test error,
-or introduce a new validation sample. It is an offline research prototype.
+The demonstration applies the frozen development-fitted score to one complete
+recording and displays the spectrum, physical estimate and selected frames.
 
 ## Preparation
 
@@ -33,9 +32,8 @@ physical estimate and retained frames, and the frozen reliability score.
 | `clip_18` | An intermediate held-out example | 1.800 cm |
 | `clip_24` | Endpoint failure despite a plausible ridge over much of the clip | 5.950 cm |
 
-These examples were selected after evaluation to explain the results. They
-do not establish a new test set. The reference assumes filling behavior;
-it is not measured water height.
+These examples were selected after evaluation to illustrate three outcomes.
+Errors use the filling reference defined in [Methods](METHODS.md).
 
 Default ranking retains 70% of frames (rounded up). To explore the existing
 coverage trade-off, use `--retention 0.9`. The JSON also reports coverage and
@@ -43,13 +41,11 @@ error for the unchanged development threshold. Within-clip ranking and a
 fixed threshold are different selection rules; their coverage need not match.
 
 The demo reads only pitch/physical predictions and acoustic features before
-selection. Reference errors are calculated afterwards. A high score is not a
-probability or a guarantee that a physical estimate is correct. In clip 24,
-even many high-ranked frames inherit the global endpoint error.
+selection. Reference errors are calculated afterwards. In clip 24, many
+high-ranked frames inherit the global endpoint error.
 
-Only the 33 manifest recordings are accepted. An arbitrary new recording
-requires new neural inference and validation of its input format and domain;
-this demonstration does not claim to supply a validated general water sensor.
+The command accepts the 33 manifest recordings. Adding a recording requires
+neural inference and input-format checks.
 
 ## Listening
 
@@ -62,8 +58,8 @@ r2_listen(R,'comparison');
 ```
 
 The second command sequence plays the original A/B recordings and then the
-four shared-gain processing examples. The observed listening results and
-their limitations are described in [Results](RESULTS.md).
+four shared-gain processing examples. Listening observations are described
+in [Results](RESULTS.md).
 
 ## A short walkthrough
 
@@ -72,7 +68,7 @@ their limitations are described in [Results](RESULTS.md).
 3. Open the three case plots. Explain that an obvious resonance can coexist with a bad physical offset.
 4. Show the coverage/error results and split boundary: Test I shares 7/8 containers with score development. Test II improvement is inconclusive. Then show container LOCO and global threshold curves.
 5. Play the noise comparison and explain why waveform SNR and natural sound quality differ.
-6. Finish with the limitation: independent water-level measurements are needed to validate actual sensing accuracy.
+6. Show the confirmation experiment: 11 new containers reproduce the fill-position and gain findings. Explain how these results motivate recording-level improvements.
 
 ## Acceptance checks
 
@@ -83,8 +79,8 @@ python python/verify_selection.py
 ```
 
 The first command checks published files, split constraints, cached physical
-calculations, summary aggregation, the statistical audit and 18 behavior tests.
-It does not download data and saves `outputs/verification/project_check.json`.
+calculations, summary aggregation, the statistical audit and 25 behavior tests.
+It uses the saved results and writes `outputs/verification/project_check.json`.
 The other two commands check the analysis WAVs and metadata selection after
 setup. Use `verify_inputs.py --portable` after portable setup: it accepts
 platform-dependent float32 bytes after format and length checks. The optional

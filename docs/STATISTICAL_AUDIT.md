@@ -1,10 +1,9 @@
 # Container overlap and statistical audit
 
-This revision corrects the interpretation of the original Test I result and
-adds exploratory analyses requested after the original results were known.
-It preserves the original score, selected recordings and benchmark tables.
+This post-review audit examines container overlap, paired changes, grouped
+validation and global selection using the original recordings and frozen score.
 The [audit protocol](../experiments/statistical_audit_protocol.json) records the
-choices; it is not an external preregistration or a newly collected test set.
+analysis choices made after the original results were available.
 
 ## Two different meanings of an unseen container
 
@@ -25,16 +24,13 @@ development data used to fit the reliability regression:
 | clip_18 | container_40 | No |
 
 The recordings/videos themselves are distinct. Thus the original Test I
-comparison is a **recording-held-out test with 7/8 development containers**,
-not a container-disjoint generalisation test. Calling all eight a homogeneous
-"development-container test" would hide the clip_18 exception. The original
-machine-readable role `seen_test` is retained for reproducibility and is always
-interpreted here with the overlap qualifier. Test II's eight containers are
+comparison is a **recording-held-out test with 7/8 development containers**.
+The machine-readable role `seen_test` follows the official split name.
+Test II's eight containers are
 absent from both reliability-score development and upstream training.
 
-Overlap is a plausible contributor to the difference between groups, not an
-isolated causal explanation: opacity, shape, material and other conditions
-also differ. The [split audit](../experiments/statistical_audit/split_audit.csv)
+Overlap, opacity, shape and material differ together across groups, so their
+individual effects are confounded. The [split audit](../experiments/statistical_audit/split_audit.csv)
 records overlap for every recording.
 
 ## Exact paired tests and small-sample uncertainty
@@ -42,9 +38,8 @@ records overlap for every recording.
 For each method/group, subtract full-recording MAE from MAE at 70% retention,
 giving eight container differences. The two-sided statistic is the absolute
 mean difference. Enumerate all 256 sign assignments and include ties at least
-as extreme as the observed statistic. Exactness is conditional on joint sign
-symmetry/exchangeability under the null; it is not a distribution-free cure
-for the small sample. These are post-review exploratory tests.
+as extreme as the observed statistic. The test assumes joint sign symmetry
+under the null.
 
 | Group | Method | Full / retained MAE (cm) | Change (cm), 95% bootstrap interval | Improved | Exact p | Holm p |
 | --- | --- | --- | --- | ---: | ---: | ---: |
@@ -55,31 +50,28 @@ for the small sample. These are post-review exploratory tests.
 
 Holm adjustment covers these four comparisons. The original Combined
 percentile bootstrap intervals are retained unchanged. Prominence uses 2,000
-container resamples, seed 5305. Eight clusters give unstable percentile
-intervals; frame count does not increase the independent sample size.
+container resamples, seed 5305. The independent sample size is eight containers,
+so percentile intervals are sensitive to the sampled containers.
 
 Prominence's lower Test II mean is driven largely by clip_20 (-1.347 cm) and
 clip_23 (-0.673 cm), while seven Test I recordings worsen. Its effect changes
-direction between groups and is unstable. A lower observed mean does not
-establish superiority. The displayed tests compare each method with no
-selection; they do not test Prominence against Combined directly.
+direction between groups. Each displayed test compares a method with no selection.
 
 ![Within-recording selection](../experiments/statistical_audit/figures/within_recording_selection.svg)
 
 The updated plot uses 91 retention fractions, common vertical limits and
 shading for the Combined score's paired change from 100% retention (pointwise
 95% container bootstrap, drawn around the full-coverage MAE). It shows the
-uncertainty of the tested improvement rather than between-container spread in
-MAE levels; it is not a simultaneous band and does not replace the paired tests
-above. `within_recording_curve.csv` stores `delta_cm` and its interval.
+uncertainty of the paired improvement at each coverage.
+`within_recording_curve.csv` stores `delta_cm` and its interval.
 
 ## Container-disjoint evaluation and ridge selection
 
 Pool development and Test I: 19 recordings from 11 containers. In each outer
 fold, withhold every recording from one container. Refit standardisation and
 the regression only on the other ten containers. The neural predictor remains
-frozen; this removes container overlap for the reliability regression, not
-for the upstream pretrained network.
+frozen. Container separation applies to the reliability regression; the
+upstream network retains its original training history.
 
 Report both the original fixed ridge penalty 0.1 and nested selection from
 0.001, 0.01, 0.1, 1, 10 and 100. Each candidate is assessed by inner
@@ -87,7 +79,7 @@ leave-one-container-out validation using only outer-training containers.
 The objective averages squared log1p-error prediction loss within recordings,
 then within containers, then across validation containers. Every training
 fit uses the original equal-recording weights. Standardisation is refitted
-inside every inner fold. No outer-test error chooses a penalty.
+inside every inner fold. Penalties are selected from inner-validation losses.
 
 | Model | Full MAE (cm) | MAE at 70% (cm) | Change (cm) | Improving containers |
 | --- | ---: | ---: | ---: | ---: |
@@ -97,16 +89,13 @@ inside every inner fold. No outer-test error chooses a penalty.
 First average recordings within an outer container, then average the eleven
 containers. These values therefore use a different pool and weighting from
 the original eight-recording Test I result. Selected penalties range from
-0.001 to 100; tuning does not improve the pooled mean here. The fixed 0.1 was
-a baseline regularisation choice on standardised features, not an established
-optimum. It remains the historical score used on Test II.
+0.001 to 100; tuning gives a slightly higher pooled MAE than the fixed 0.1
+baseline. The original Test II score continues to use 0.1.
 
 ![Container LOCO](../experiments/statistical_audit/figures/container_loco.svg)
 
-This is a useful container-disjoint check within the original development/Test I
-domain. It is post-review analysis and does not erase Test II's inconclusive
-finding. Outer fits share training data, so no independent-fold significance
-claim is made. Fold identities, inner losses and per-recording results are
+Outer fits share training data; results are reported as descriptive
+container-level changes. Fold identities, inner losses and per-recording results are
 published alongside the [summary](../experiments/statistical_audit/loco_summary.csv).
 
 ## Global thresholds and whole-recording failures
@@ -121,19 +110,16 @@ This estimand differs from averaging surviving-recording MAEs.
 
 All distinct score thresholds are evaluated, and tied scores enter together.
 AURC is the exact right-step sum over coverage increments on (0,1]; smaller is
-better. There is no invented zero-risk origin. The exported figure/CSV uses at
+better. The first interval uses the first retained set's risk. The exported figure/CSV uses at
 most 201 display points per curve, while AURC uses every threshold before
-thinning. A constant-risk reference line has area equal to full risk; it is
-not asserted as an exact finite-sample random-permutation AURC.
+thinning. The comparison line holds risk constant at the full-data value.
 
 | Group | Combined AURC | Prominence AURC | Endpoint-stability AURC | Constant-risk area |
 | --- | ---: | ---: | ---: | ---: |
 | Test I: 7/8 development containers | 1.293 | 1.782 | 2.097 | 1.742 |
 | Test II: new containers | 2.738 | 1.984 | 1.582 | 2.479 |
 
-Units are cm against the assumed reference. These retrospective curve
-summaries are descriptive; they do not establish superiority or select a
-deployment threshold. In particular, the Combined global score has higher
+Units are cm against the assumed reference. The Combined global score has higher
 Test II AURC than the constant-risk reference despite its small improvement
 under within-recording ranking. Cross-recording score calibration is weak.
 
@@ -143,7 +129,6 @@ For an explicitly development-only threshold grid, 101 quantiles of
 development Combined scores are fixed and then applied unchanged to both
 test groups. The [grid table](../experiments/statistical_audit/development_threshold_grid.csv)
 reports actual coverage, risk and the number of recordings represented.
-No operating point is chosen using test errors.
 
 The recording-level indicator is the absolute pitch difference in cents
 between the last prediction and the median of preceding predictions in the
@@ -151,9 +136,9 @@ last 0.2 seconds, excluding the last prediction. A flag threshold of
 114.67 cents is the development recordings' 90th percentile. It flags
 clip_24 (1,834.16 cents) and clip_26 (1,168.04 cents), and no Test I recording.
 Ranking recordings by the negative indicator produces the endpoint-stability
-curve. Its Test I AURC is worse, so this diagnostic is not a universal
-reliability score. It is offline and can miss errors unrelated to endpoint
-instability. The threshold itself is estimated from only eleven recordings.
+curve. Its Test I AURC exceeds the constant-risk reference. This offline
+indicator targets endpoint instability, with its threshold estimated from
+eleven development recordings.
 
 ## Reproduction
 

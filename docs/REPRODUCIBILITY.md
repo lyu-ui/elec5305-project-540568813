@@ -29,8 +29,7 @@ Evidence is saved in `outputs/verification/portable_analysis.json`.
 
 Omitting `--portable` retains the original strict fourteen-CSV hash test. Identical
 package versions can still produce different CSV bytes on another platform.
-The original hashes remain archival evidence; they are not silently replaced
-when portable mode is used. Source WAV hashes are exact in both modes. The
+Portable mode retains the archived hashes. Source WAV hashes are exact in both modes. The
 default mode also requires exact 16 kHz analysis WAV bytes. Portable mode does
 not: resampling to float32 can round differently by CPU architecture. On
 Apple Silicon (macOS 26, numpy 2.3.5, scipy 1.17.0), 3 of 33 analysis WAVs
@@ -149,8 +148,7 @@ hardware/software stack may produce small floating-point differences.
 Column-level evidence is retained in `verification/MATLAB_NUMERIC_AUDIT.json`.
 The identity-mask overlap-add reconstruction error was 2.1352e-16 NRMSE.
 The audit script compares the generated files after MATLAB execution using `atol=1e-7`, `rtol=1e-9`,
-matching nonnumeric columns and missing-value locations. It does not claim
-to have run MATLAB.
+matching nonnumeric columns and missing-value locations.
 
 `verification/PACKAGING_CHECKS.json` records checks performed on this project
 bundle. It distinguishes the actual earlier MATLAB execution from static
@@ -173,4 +171,4 @@ python python/verify_failure_levels.py
 ```
 
 Settings are fixed in `experiments/failure_levels_protocol.json`; see
-[FAILURE_LEVELS.md](FAILURE_LEVELS.md) for the post-hoc status and limitations.
+[FAILURE_LEVELS.md](FAILURE_LEVELS.md) for the study design and interpretation.

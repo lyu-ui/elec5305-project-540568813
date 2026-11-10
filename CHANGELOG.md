@@ -3,8 +3,7 @@
 ## Documentation wording - 10 November 2026
 
 - Consolidated visual-annotation provenance in the methods and linked to it from the overview documents.
-- Simplified repeated wording while retaining the distinction between initial annotation, author confirmation and calibrated measurement.
-- Preserved the frozen protocols, annotation coordinates, review records, results and existing commit history.
+- Revised the documentation and website to lead with findings, group study conditions and remove repeated disclaimers.
 
 ## Split, inference and presentation audit - 9 November 2026
 

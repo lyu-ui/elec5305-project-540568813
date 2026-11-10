@@ -3,8 +3,8 @@
 Source dataset: [Sound of Water](https://huggingface.co/datasets/bpiyush/sound-of-water).
 The project selects a fixed 33-recording subset. The setup script downloads
 the source recordings directly from their original public host and downsamples
-them to 16 kHz mono for local analysis. The source authors recorded and released these sounds; they
-are not new measurements collected by this project.
+them to 16 kHz mono for local analysis. The dataset authors recorded and released
+the source sounds.
 
 | Role | Official split | Recordings | Containers |
 | --- | --- | ---: | ---: |
@@ -13,9 +13,8 @@ are not new measurements collected by this project.
 | New-container test | Test II | 8 | 8 |
 | Shape diagnostics | Test III | 6 | 6 |
 
-There are 25 unique containers across roles, because seen containers can
-recur across official splits. Counts must not be added as if all groups
-contained distinct containers. The shape-diagnostic set includes four
+Containers recur across official splits, giving 25 unique containers across
+roles. The shape-diagnostic set includes four
 bottleneck cases, one cylinder and one pointed semiconical/conical case;
 there is no verified hemispherical recording in this subset.
 
@@ -47,12 +46,12 @@ public project. The fixed seeds and the pinned numerical environment preserve
 the experimental inputs; source and analysis WAVs are checked by SHA-256.
 See [reproduction instructions](REPRODUCIBILITY.md) for the one-time setup.
 
-## Reference-label limitation
+## Reference construction
 
 The height and WAV duration define an empty-to-full linear-height reference.
 For tapered containers, a geometry-adjusted constant-volume curve is a
-sensitivity comparison. Neither curve is an independently measured water
-level. Per-frame errors must be described as *reference errors*.
+sensitivity comparison. Errors against these derived curves are reported as
+*reference errors*. Independent physical water-level traces are unavailable.
 
 ## Recording index
 
