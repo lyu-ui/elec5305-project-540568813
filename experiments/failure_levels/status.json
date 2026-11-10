@@ -1,0 +1,9 @@
+{
+  "status": "computed",
+  "protocol_sha256": "585a5ab568ebf25def4418b18ff83180f1aedd722139c162d547b7a98f8aaa62",
+  "script_sha256": "08288bdae94e8137c80da9935225fec7fb07741457b4ec97e25daa7f5d08544b",
+  "frames": 21494,
+  "recordings": 33,
+  "reference": "Assumption-derived linear filling reference; no new labels.",
+  "design": "Post-hoc explanatory analysis motivated by disclosed exploration; see protocol."
+}

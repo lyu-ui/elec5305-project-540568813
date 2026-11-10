@@ -38,6 +38,14 @@ The paired change is -0.204 cm, with a 95% container-bootstrap interval of
 its -0.065 cm change has an interval of [-0.158, +0.031] cm. Exact sign-flip
 p-values are 0.0078 for Test I and 0.26 for Test II. Test I shares
 7/8 score-development containers, so its benefit is recording-held-out.
+
+The [level-by-level analysis](FAILURE_LEVELS.md) explains these numbers. Offset
+and rate trends carry 83–95% of test mean-square error and frame-level
+fluctuation only 1–4%. The model under-scales the air column, by a median gain
+of 0.82–0.85 for cylinders and 0.51–0.57 for semiconical test containers. The
+score's benefit comes mainly from fill position: dropping the earliest 30% of
+frames is better in 8/8 recordings of both groups (exact p = 0.0078), and
+inside time bins the original score selects worse frames.
 Prominence has a lower observed Test II mean (2.235 cm; p=0.45 versus no
 selection), but worsens 7/8 Test I recordings. Its direction is unstable.
 

@@ -78,6 +78,8 @@ def main() -> None:
     result['experimental_extension'] = validate_extension()
     from verify_statistical_audit import validate as validate_statistical_audit
     result['statistical_audit'] = validate_statistical_audit()
+    from verify_failure_levels import validate as validate_failure_levels
+    result['failure_levels'] = validate_failure_levels()
     subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', str(ROOT/'tests'), '-v'], cwd=ROOT, check=True)
     result['demonstration_behavior_tests'] = 'passed'
     if args.with_data:

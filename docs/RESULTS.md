@@ -97,7 +97,10 @@ diagnosing competing peaks.
 ## What the results establish
 
 Acoustic features help reject some high-reference-error frames, on the recording-held-out Test I subset,
-which shares 7/8 containers with score development. Endpoint correction and physical
+which shares 7/8 containers with score development. The
+[level-by-level analysis](FAILURE_LEVELS.md) shows that this benefit comes mainly
+from fill position: most error is a smooth, geometry-dependent gain error, and a
+time-only rule outperforms the score in both test groups. Endpoint correction and physical
 model mismatch can still defeat local spectral evidence. Independent
 level measurements and additional unseen containers are required before
 claiming deployment accuracy.

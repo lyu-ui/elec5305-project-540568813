@@ -1,0 +1,4 @@
+phase,recordings,labels,reference_gap_pp,model_gap_pp,recordings_reference_gap_positive,recordings_model_gap_positive,reference_outside_visual_interval,model_outside_visual_interval
+early,6,14,5.965346421019972,16.982883878294775,4,6,2,9
+middle,6,16,6.846855399717595,10.340327398847359,5,6,0,7
+late,6,16,4.302413524223092,4.770331633480598,5,4,0,4

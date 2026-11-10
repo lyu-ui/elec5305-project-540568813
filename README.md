@@ -22,6 +22,25 @@ liquid-level accuracy. The extension also includes explicitly provisional,
 AI-assisted image-relative references. The author has confirmed all 46 green
 water-surface bands; these are not calibrated measurements.
 
+## What makes it work and fail
+
+Four post-hoc explanatory experiments, fixed in a protocol before the tables
+were computed, locate the error by level ([full analysis](docs/FAILURE_LEVELS.md)):
+
+- **Geometry:** the model under-scales the air column (predicted ≈ *k* × reference).
+  Median *k* is 0.82–0.94 for cylinders, 0.51–0.72 for semiconical vessels and
+  0.23 for bottlenecks; a geometry-adjusted reference changes this little.
+- **Recording:** offset and rate trends carry 95% (Test I) and 83% (Test II) of
+  mean-square error; frame-level fluctuation only 1–4%.
+- **Fill position:** dropping the earliest 30% of frames beats the acoustic
+  score in 8/8 recordings of both groups (exact p = 0.0078, Holm 0.031). The
+  score mostly tracks fill position and, inside time bins, selects worse frames.
+- **Reference:** visible water is above the linear reference by 4–7 pp, but the
+  model is above the visible water by 17 pp early in the pour.
+- **STFT window:** 20, 40 and 80 ms windows do not change these conclusions.
+
+![Error levels](experiments/failure_levels/figures/error_levels.svg)
+
 ## Extended experiments
 
 - **160 model conditions:** 16 clean controls and 144 noisy runs across all test
@@ -215,6 +234,7 @@ are documented separately.
 
 - [Methods and parameter choices](docs/METHODS.md)
 - [Results, failures and interpretation](docs/RESULTS.md)
+- [What makes it work and fail, level by level](docs/FAILURE_LEVELS.md)
 - [Container overlap, exact tests, nested LOCO and global AURC](docs/STATISTICAL_AUDIT.md)
 - [Noise, endpoint and visual-reference extension](docs/EXPERIMENT_EXTENSION.md)
 - [Data selection and provenance](docs/DATA.md)

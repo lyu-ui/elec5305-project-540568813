@@ -161,3 +161,16 @@ checks and Python reproduction in the packaging environment.
 See [the statistical audit](STATISTICAL_AUDIT.md#reproduction) for container LOCO,
 inner grouped ridge selection, exact paired tests, global risk-coverage curves
 and AURC. These scripts preserve historical benchmark outputs.
+
+## Level-by-level failure analysis
+
+After setup, recompute the error decomposition, time-controlled selection,
+video-label comparison and STFT-window tables and figures:
+
+```bash
+python python/failure_levels.py
+python python/verify_failure_levels.py
+```
+
+Settings are fixed in `experiments/failure_levels_protocol.json`; see
+[FAILURE_LEVELS.md](FAILURE_LEVELS.md) for the post-hoc status and limitations.
