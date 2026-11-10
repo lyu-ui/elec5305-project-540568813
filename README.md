@@ -27,9 +27,9 @@ water-surface bands; these are not calibrated measurements.
 Four post-hoc explanatory experiments, fixed in a protocol before the tables
 were computed, locate the error by level ([full analysis](docs/FAILURE_LEVELS.md)):
 
-- **Geometry:** the model under-scales the air column (predicted ≈ *k* × reference).
-  Median *k* is 0.82–0.94 for cylinders, 0.51–0.72 for semiconical vessels and
-  0.23 for bottlenecks; a geometry-adjusted reference changes this little.
+- **Gain:** the model under-scales the air column (predicted ≈ *k* × reference).
+  In the 33 recordings median *k* was 0.82–0.94 for cylinders, 0.51–0.72 for
+  semiconical vessels and 0.23 for bottlenecks.
 - **Recording:** offset and rate trends carry 95% (Test I) and 83% (Test II) of
   mean-square error; frame-level fluctuation only 1–4%.
 - **Fill position:** dropping the earliest 30% of frames beats the acoustic
@@ -40,6 +40,26 @@ were computed, locate the error by level ([full analysis](docs/FAILURE_LEVELS.md
 - **STFT window:** 20, 40 and 80 ms windows do not change these conclusions.
 
 ![Error levels](experiments/failure_levels/figures/error_levels.svg)
+
+### Pre-registered confirmation on new containers
+
+These findings were post-hoc, so they were pre-registered and retested on 33
+recordings from 11 containers never used in this project
+([confirmation](docs/CONFIRMATION.md)). Hypotheses were committed before any new
+audio was downloaded, and the frozen model and score were run once.
+
+| Hypothesis | Result on 11 new containers | Holm p | Outcome |
+| --- | --- | ---: | --- |
+| Time-only beats the acoustic score | −0.55 cm, 10/11 containers | 0.0049 | Confirmed |
+| Score within time bins worsens frame-level error | +0.009 cm, 11/11 | 0.0020 | Confirmed |
+| Gain *k* below 1 | *k* − 1 = −0.28, 10/11 | 0.0044 | Confirmed |
+| Semiconical *k* below cylindrical *k* | +0.04 (wrong sign) | 0.59 | Not confirmed |
+
+The gain error and the fill-position mechanism replicate; container shape does
+not explain the gain on new containers. A post-hoc observation: the tallest new
+container (25.5 cm) needs wavelengths beyond the model's 100 cm output range.
+
+![Confirmation](experiments/confirmation/figures/confirmation_overview.svg)
 
 ## Extended experiments
 
@@ -235,6 +255,7 @@ are documented separately.
 - [Methods and parameter choices](docs/METHODS.md)
 - [Results, failures and interpretation](docs/RESULTS.md)
 - [What makes it work and fail, level by level](docs/FAILURE_LEVELS.md)
+- [Pre-registered confirmation on new containers](docs/CONFIRMATION.md)
 - [Container overlap, exact tests, nested LOCO and global AURC](docs/STATISTICAL_AUDIT.md)
 - [Noise, endpoint and visual-reference extension](docs/EXPERIMENT_EXTENSION.md)
 - [Data selection and provenance](docs/DATA.md)

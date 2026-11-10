@@ -80,6 +80,8 @@ def main() -> None:
     result['statistical_audit'] = validate_statistical_audit()
     from verify_failure_levels import validate as validate_failure_levels
     result['failure_levels'] = validate_failure_levels()
+    from verify_confirmation import validate as validate_confirmation
+    result['confirmation'] = validate_confirmation()
     subprocess.run([sys.executable, '-m', 'unittest', 'discover', '-s', str(ROOT/'tests'), '-v'], cwd=ROOT, check=True)
     result['demonstration_behavior_tests'] = 'passed'
     if args.with_data:

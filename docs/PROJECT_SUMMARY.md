@@ -46,6 +46,11 @@ of 0.82–0.85 for cylinders and 0.51–0.57 for semiconical test containers. Th
 score's benefit comes mainly from fill position: dropping the earliest 30% of
 frames is better in 8/8 recordings of both groups (exact p = 0.0078), and
 inside time bins the original score selects worse frames.
+
+A [pre-registered confirmation](CONFIRMATION.md) on 33 recordings from 11
+containers never used in the project confirmed the fill-position mechanism, the
+frame-level result and the gain error (Holm p ≤ 0.005), but not the claim that
+semiconical containers have lower gain (p = 0.59).
 Prominence has a lower observed Test II mean (2.235 cm; p=0.45 versus no
 selection), but worsens 7/8 Test I recordings. Its direction is unstable.
 

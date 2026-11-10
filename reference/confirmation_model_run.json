@@ -1,0 +1,15 @@
+{
+  "torch": "2.14.1",
+  "transformers": "4.46.3",
+  "numpy": "2.5.4",
+  "scipy": "1.17.0",
+  "checkpoint_sha256": "2fa3d8cec1488ee65bb5a6e30f1b79716d8243bbe4ddc4c0687ce2a02c84303c",
+  "strict_checkpoint_keys": 215,
+  "adapter_check_max_wavelength_difference_cm": {
+    "clip_01": 0.0002100488281229218,
+    "clip_19": 0.00017071289062187134,
+    "clip_24": 0.0003316093749994309
+  },
+  "tolerance_cm": 0.01,
+  "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O"
+}

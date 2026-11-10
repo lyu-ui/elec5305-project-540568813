@@ -1,0 +1,33 @@
+{
+  "status": "computed",
+  "protocol_sha256": "f8fbccac869f63d87f2c4966fa554c09a19fc8e8eee1f8c03dbf576a79c59252",
+  "script_sha256": "9e0e90c7b088d6af6e8b9fb4c334ac301d2d24267a508f63f86993b650742945",
+  "manifest_sha256": "4bdf86a77a494967a7e162e9617be4581afdb6c0d18aae26b59eb987794d41e7",
+  "recordings_included": 33,
+  "containers": 11,
+  "descriptive": {
+    "D1_levels": {
+      "offset_rate_share": 0.8228806985762191,
+      "frame_share": 0.08999120597527789,
+      "expectation_met": true
+    },
+    "D2_retargeted": {
+      "estimate_cm": -0.020104432765549466,
+      "improved_containers": 11,
+      "exact_p_one_sided": 0.00048828125,
+      "expectation_met": true
+    },
+    "D3_taper": {
+      "spearman": -0.2593037253018226,
+      "expectation_met": true
+    },
+    "D4_original_claim": {
+      "estimate_cm": -0.0715711408855813,
+      "ci_low": -0.16694295246942448,
+      "ci_high": 0.050025338333842456,
+      "improved_containers": 8,
+      "exact_p_two_sided": 0.25390625
+    }
+  },
+  "reference": "Assumption-derived linear filling reference; no new labels."
+}

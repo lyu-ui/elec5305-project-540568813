@@ -1,0 +1,5 @@
+hypothesis,quantity,predicted,containers,estimate,ci_low,ci_high,in_predicted_direction,exact_p_one_sided,null_size,holm_p,confirmed
+H1_fill_position,"time only minus frozen score, total |e| MAE (cm)",less,11,-0.5507325882443711,-1.3053259614512367,-0.11558217329610332,10,0.00244140625,2048,0.0048828125,True
+H2_frame_level,"frozen score within time bins minus no selection, |fast| MAE (cm)",greater,11,0.00860718629618039,0.005760677420694876,0.011898645339767583,11,0.00048828125,2048,0.001953125,True
+H3_gain,k minus 1,less,11,-0.2753893761859001,-0.4113583522562956,-0.14943408451448206,10,0.00146484375,2048,0.00439453125,True
+H4_geometry,mean k semiconical minus cylindrical,less,11,0.039268232982235585,,,0,0.5909090909090909,462,0.5909090909090909,False

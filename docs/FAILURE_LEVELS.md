@@ -15,6 +15,13 @@ study, not independent confirmation. One analysis (the scale factor *k*) was
 added after E1 and is labelled as such. All errors remain relative to the
 assumption-derived filling reference.
 
+**Independent confirmation.** The main findings were then pre-registered and
+tested on 33 recordings from 11 containers never used in this project
+([confirmation](CONFIRMATION.md)). Fill-position, frame-level and gain-error
+findings were confirmed (Holm p ≤ 0.005). The container-shape explanation of the
+gain error was **not** confirmed; statements about shape below are therefore
+specific to the original 33 recordings.
+
 Code: [`python/failure_levels.py`](../python/failure_levels.py) ·
 Tables and figures: [`experiments/failure_levels/`](../experiments/failure_levels/)
 
@@ -22,7 +29,7 @@ Tables and figures: [`experiments/failure_levels/`](../experiments/failure_level
 
 | Level | What decides success or failure | Key evidence |
 | --- | --- | --- |
-| Container geometry | The model under-scales the air column; much more for tapered and bottleneck vessels | Median *k*: cylindrical 0.82–0.94, semiconical 0.51–0.72, bottleneck 0.23 |
+| Gain (geometry in this sample) | The model under-scales the air column; in this sample much more for tapered and bottleneck vessels | Median *k*: cylindrical 0.82–0.94, semiconical 0.51–0.72, bottleneck 0.23. Gain < 1 confirmed on new containers; shape effect not confirmed |
 | Recording | A smooth offset-plus-rate trend carries most error | 95% (Test I) and 83% (Test II) of mean-square error |
 | Fill position | Gain error anchored at full makes early frames worst in centimetres | Dropping the earliest 30% beats the acoustic score, 8/8 recordings in both groups |
 | Frame | Fast fluctuations are a small share; spectral-peak features do not track them | 1–4% of mean-square error in Test I/II; partial Spearman about 0 |
@@ -49,7 +56,7 @@ slow/fast cross term.
 that keeps or rejects individual frames can at most act on a few percent of the
 mean-square error unless it effectively selects by position in the pour.
 
-### Secondary (added after E1): a gain error, set by geometry
+### Secondary (added after E1): a gain error, shape-dependent in this sample
 
 The released endpoint correction forces prediction and reference to zero at the
 final frame. A pure gain error, predicted = *k* × reference, then appears as
@@ -67,10 +74,12 @@ and 71–84% of Test II mean-square error.
 ![Scale factor](../experiments/failure_levels/figures/scale_factor.svg)
 
 The geometry-adjusted (constant-volume frustum) reference raises semiconical *k*
-only slightly, so most of the shape gap is not a reference artefact. The
-model's quarter-wave conversion of wavelength to air-column length behaves like
-a cylinder; tapered and bottleneck air columns resonate differently, so the
-same wavelength change maps to too little length change. Radius, height and
+only slightly, so in this sample most of the shape gap is not a reference
+artefact. A plausible mechanism is that the quarter-wave conversion of
+wavelength to air-column length assumes a cylinder. **However, the
+pre-registered test on 11 new containers did not reproduce the shape
+difference** (semiconical minus cylindrical mean *k* = +0.04, p = 0.59), so the
+gain error itself is confirmed but its link to official shape is not. Radius, height and
 their ratio showed no clear relation to *k* (|Spearman| < 0.1 across the 27
 development and test recordings). The one negative *k* (Test II) is the clip 24 endpoint failure.
 
@@ -156,16 +165,20 @@ structure, not spectral resolution.
 
 - The original Test I improvement at 70% retention is reproducible, but its
   mechanism is mainly fill position. A time-only rule is better in both groups.
-- Reliability is decided mainly at the geometry and recording levels. Useful
-  next steps are shape-aware conversion from wavelength to air-column length
-  and recording-level checks (gain and endpoint), not finer frame selection.
+- Reliability is decided mainly at the recording level through a gain error
+  (confirmed on new containers). Useful next steps are recording-level checks of
+  gain and endpoint and a better wavelength-to-length conversion, not finer
+  frame selection. Container shape did not explain the gain on new containers;
+  container height near the model's output range may (post-hoc, see
+  [confirmation](CONFIRMATION.md)).
 - Frame-level reliability is learnable from model-consistency cues, but it
   matters little for total error here.
 
 ## Limitations
 
 - Post-hoc analysis motivated by disclosed exploration; four primary
-  comparisons were fixed before computing the tables.
+  comparisons were fixed before computing the tables. Its main findings were
+  then tested in a separate pre-registered confirmation.
 - Reference-relative error throughout. Video labels are provisional,
   image-relative and cover 6 Test I recordings only.
 - Eight recordings per test group; exact tests use the sign-symmetric null.
