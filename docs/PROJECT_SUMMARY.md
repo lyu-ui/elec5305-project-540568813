@@ -28,7 +28,7 @@ of the 46 green water-surface bands, not independent blinded validation.
 - Standalone batch analysis, single-recording demonstration, input/result verification and public documentation.
 - Full-model inference under 144 generated-noise conditions plus 16 clean controls.
 - Fixed terminal-window comparisons across all 33 recordings, including worsened cases.
-- All 72 prespecified video frames screened; 46 AI-assisted visual candidates and 26 exclusions. The author confirmed the 46 displayed green water-surface bands.
+- All 72 prespecified video frames screened; 46 provisional visual candidates and 26 exclusions. The author confirmed the 46 displayed green water-surface bands. [Visual-reference methods and review scope](EXPERIMENT_EXTENSION.md#visual-reference-without-a-ruler).
 
 ## Main findings
 

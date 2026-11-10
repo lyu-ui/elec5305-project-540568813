@@ -30,8 +30,9 @@ The visual extension downloads paired public videos from the same dataset.
 Video files and extracted frame images stay local; the repository publishes
 source URLs, hashes, provisional annotation coordinates and derived analysis.
 Optional private review sheets show attributed frame crops for annotation
-inspection. The AI-assisted coordinates are project annotations, not labels
-provided or certified by the dataset authors.
+inspection. These coordinates are project annotations, not labels provided or
+certified by the dataset authors. Their origin and subsequent author review
+are documented in the [visual-reference methods](docs/EXPERIMENT_EXTENSION.md#visual-reference-without-a-ruler).
 
 ## Reference
 

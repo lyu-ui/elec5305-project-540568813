@@ -1,5 +1,11 @@
 # Changelog
 
+## Documentation wording - 10 November 2026
+
+- Consolidated visual-annotation provenance in the methods and linked to it from the overview documents.
+- Simplified repeated wording while retaining the distinction between initial annotation, author confirmation and calibrated measurement.
+- Preserved the frozen protocols, annotation coordinates, review records, results and existing commit history.
+
 ## Split, inference and presentation audit - 9 November 2026
 
 - Corrected Test I interpretation: 7/8 containers overlap reliability-score development; preserved official machine-readable role identifiers.
@@ -20,7 +26,7 @@
 
 - Executed 16 clean controls and 144 Gaussian-noise neural inference conditions with the frozen model and score.
 - Compared fixed terminal medians with the original decoder across all 33 recordings, retaining negative results.
-- Screened all 72 fixed-time paired-video frames; recorded 46 provisional AI visual labels and 26 exclusions.
+- Screened all 72 fixed-time paired-video frames; recorded 46 provisional visual labels and 26 exclusions.
 - Added stage-wise analysis, mechanism examples, container-level uncertainty, source/alignment audits and reproducible checks.
 - Kept the original benchmark and default decoder unchanged. Visual human review and calibrated physical validation remain open.
 

@@ -18,9 +18,10 @@ checked against an independent Python implementation.
 **Scope:** errors are measured against an assumption-derived filling curve.
 There are no independently measured liquid-level trajectories in this project.
 Results therefore describe agreement with that reference, not validated
-liquid-level accuracy. The extension also includes explicitly provisional,
-AI-assisted image-relative references. The author has confirmed all 46 green
-water-surface bands; these are not calibrated measurements.
+liquid-level accuracy. The extension also includes provisional image-relative
+references. The author has confirmed all 46 green water-surface bands; these
+are not calibrated measurements. The [visual-reference methods](docs/EXPERIMENT_EXTENSION.md#visual-reference-without-a-ruler)
+record their origin and the scope of that review.
 
 ## What makes it work and fail
 
@@ -265,8 +266,8 @@ are documented separately.
 ## Known limitations
 
 - Reference trajectories assume filling behavior; they are not measured truth.
-- Image-relative visual annotations are AI-assisted; the author confirmed the 46
-  green water-surface bands after results were available. This is not independent
+- The author confirmed the 46 image-relative green water-surface bands after
+  results were available. This is not independent
   blinded validation. Blue rim/base bands were not separately confirmed; perspective,
   refraction and visibility selection prevent a centimetre-accuracy claim.
 - Only eight recordings enter each principal test group; Test I shares 7/8
