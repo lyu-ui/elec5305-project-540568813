@@ -3,6 +3,7 @@
 Acoustic diagnostics for physical estimates from pouring sounds.
 
 **[Project website](https://lyu-ui.github.io/elec5305-project-540568813/)** ·
+**[Project video](https://drive.google.com/file/d/1_H_tAxw9-tDTQ-Yn-GLZ4jIGlgduS9Cx/view?usp=drive_link)** ·
 [Methods](docs/METHODS.md) · [Results](docs/RESULTS.md) ·
 [Reproduce the experiments](docs/REPRODUCIBILITY.md)
 
